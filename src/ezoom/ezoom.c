@@ -1,0 +1,2818 @@
+/*
+ * Copyright © 2005 Novell, Inc.
+ * Copyright (C) 2007, 2008 Kristian Lyngstøl
+ *
+ * Permission to use, copy, modify, distribute, and sell this software
+ * and its documentation for any purpose is hereby granted without
+ * fee, provided that the above copyright notice appear in all copies
+ * and that both that copyright notice and this permission notice
+ * appear in supporting documentation, and that the name of
+ * Novell, Inc. not be used in advertising or publicity pertaining to
+ * distribution of the software without specific, written prior permission.
+ * Novell, Inc. makes no representations about the suitability of this
+ * software for any purpose. It is provided "as is" without express or
+ * implied warranty.
+ *
+ * NOVELL, INC. DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
+ * INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN
+ * NO EVENT SHALL NOVELL, INC. BE LIABLE FOR ANY SPECIAL, INDIRECT OR
+ * CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+ * OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
+ * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
+ * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ *
+ *
+ * Author(s):
+ *	- Original zoom plug-in; David Reveman <davidr@novell.com>
+ *	- Most features beyond basic zoom;
+ *	  Kristian Lyngstol <kristian@bohemians.org>
+ *
+ * Description:
+ *
+ * This plug-in offers zoom functionality with focus tracking,
+ * fit-to-window actions, mouse panning, zoom area locking. Without
+ * disabling input.
+ *
+ * Note on actual zoom process
+ *
+ * The animation is done in preparePaintScreen, while instant movements
+ * are done by calling updateActualTranslate () after updating the
+ * translations. This causes [xyz]trans to be re-calculated. We keep track
+ * of each head separately.
+ *
+ * Note on input
+ *
+ * We can not redirect input yet, but this plug-in offers two fundamentally
+ * different approaches to achieve input enabled zoom:
+ *
+ * 1.
+ * Always have the zoomed area be in sync with the mouse cursor. This binds
+ * the zoom area to the mouse position at any given time. It allows using
+ * the original mouse cursor drawn by X, and is technically very safe.
+ * First used in Beryl's inputzoom.
+ *
+ * 2.
+ * Hide the real cursor and draw our own where it would be when zoomed in.
+ * This allows us to navigate with the mouse without constantly moving the
+ * zoom area. This is fairly close to what we want in the end when input
+ * redirection is available.
+ *
+ * This second method has one huge issue, which is bugged XFixes. After
+ * hiding the cursor once with XFixes, some mouse cursors will simply be
+ * invisible. The Firefox loading cursor being one of them. 
+ *
+ * An other minor annoyance is that mouse sensitivity seems to increase as
+ * you zoom in, since the mouse isn't really zoomed at all.
+ *
+ * Todo:
+ *  - Different multi head modes
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <sys/time.h>
+#include <time.h>
+
+#include <compiz-core.h>
+#include <compiz-mousepoll.h>
+#include <compiz-focuspoll.h>
+
+// Some Users wish to see better the edges of the screen. Without this, mouse
+// reaches the border of the zoomarea around screen edges, and mouse can become
+// invisible (especially around bottom/right). Zooming out a bit allows to see
+// both the edge and the mouse reaching the edge.
+#define EZOOM_SCREEN_BORDER_OFFSET 0.92
+
+static CompMetadata zoomMetadata;
+
+static int displayPrivateIndex;
+
+typedef enum _ZdOpt
+{
+    DOPT_IN = 0,
+    DOPT_OUT,
+    DOPT_IN_KEY,
+    DOPT_OUT_KEY,
+    DOPT_SPECIFIC_1,
+    DOPT_SPECIFIC_2,
+    DOPT_SPECIFIC_3,
+    DOPT_SPECIFIC_LEVEL_1,
+    DOPT_SPECIFIC_LEVEL_2,
+    DOPT_SPECIFIC_LEVEL_3,
+    DOPT_SPECIFIC_TARGET_FOCUS,
+    DOPT_PAN_LEFT,
+    DOPT_PAN_RIGHT,
+    DOPT_PAN_UP,
+    DOPT_PAN_DOWN,
+    DOPT_FIT_TO_WINDOW,
+    DOPT_CENTER_MOUSE,
+    DOPT_FIT_TO_ZOOM,
+    DOPT_ENSURE_VISIBILITY,
+    DOPT_SET_ZOOM_AREA,
+    DOPT_LOCK_ZOOM,
+    DOPT_ZOOM_BOX,
+    DOPT_NUM
+} ZoomDisplayOptions;
+
+typedef enum _ZsOpt
+{
+    SOPT_FOLLOW_FOCUS = 0,
+    SOPT_FOLLOW_WINDOW_FOCUS,
+    SOPT_SPEED,
+    SOPT_TIMESTEP,
+    SOPT_ZOOM_FACTOR,
+    SOPT_FILTER_LINEAR,
+    SOPT_INSTANT_PAN,
+    SOPT_SYNC_MOUSE,
+    SOPT_FOCUS_DELAY,
+    SOPT_MOUSE_DELAY,
+    SOPT_ALWAYS_CENTER_MOUSE,
+    SOPT_RESTRAIN_ZOOM_TO_SCREEN,
+    SOPT_WARP_MOUSE_TO_FOCUS,
+    SOPT_PAN_FACTOR,
+    SOPT_FOCUS_FIT_WINDOW,
+    SOPT_ALLWAYS_FOCUS_FIT_WINDOW,
+    SOPT_SCALE_MOUSE,
+    SOPT_SCALE_MOUSE_DYNAMIC,
+    SOPT_SCALE_MOUSE_STATIC,
+    SOPT_HIDE_ORIGINAL_MOUSE,
+    SOPT_RESTRAIN_MOUSE,
+    SOPT_RESTRAIN_MARGIN,
+    SOPT_MOUSE_PAN,
+    SOPT_MAXIMUM_ZOOM,
+    SOPT_AUTOSCALE_MIN,
+    SOPT_SPEC_STARTUP,
+    SOPT_NOTIF_ENABLED,
+    SOPT_NOTIF_MIN_DELAY,
+    SOPT_NOTIF_MAX_DELAY,
+    SOPT_NUM
+} ZoomScreenOptions;
+
+typedef enum { 
+    NORTHEAST,
+    NORTHWEST,
+    SOUTHEAST,
+    SOUTHWEST,
+    CENTER
+} ZoomGravity;
+
+typedef enum {
+    NORTH,
+    SOUTH,
+    EAST,
+    WEST
+} ZoomEdge;
+
+typedef struct _CursorTexture
+{
+    Bool       isSet;
+    GLuint     texture;
+    CompScreen *screen;
+    int        width;
+    int        height;
+    int        hotX;
+    int        hotY;
+} CursorTexture;
+
+typedef struct _ZoomDisplay {
+    HandleEventProc handleEvent;
+    MousePollFunc   *mpFunc;
+    FocusPollFunc   *fpFunc;
+
+    int		    screenPrivateIndex;
+    Bool            fixesSupported;
+    int             fixesEventBase;
+    int             fixesErrorBase;
+    Bool            canHideCursor;
+    CompOption      opt[DOPT_NUM];
+} ZoomDisplay;
+
+/* Stores an actual zoom-setup. This can later be used to store/restore
+ * zoom areas on the fly.
+ *
+ * [xy]Translate and newZoom are target values, and [xy]Translate always
+ * ranges from -0.5 to 0.5.
+ *
+ * currentZoom is actual zoomed value
+ *
+ * real[XY]Translate are the currently used values in the same range as
+ * [xy]Translate, and [xy]trans is adjusted for the zoom level in place.
+ * [xyz]trans should never be modified except in updateActualTranslates()
+ *
+ * viewport is a mask of the viewport, or ~0 for "any".
+ */
+typedef struct _ZoomArea {
+    int               output;
+    unsigned long int viewport;
+    GLfloat           currentZoom;
+    GLfloat           newZoom;
+    GLfloat           xVelocity;
+    GLfloat           yVelocity;
+    GLfloat           zVelocity;
+    GLfloat           xTranslate;
+    GLfloat           yTranslate;
+    GLfloat           realXTranslate;
+    GLfloat           realYTranslate;
+    GLfloat           xtrans;
+    GLfloat           ytrans;
+    Bool              locked;
+} ZoomArea;
+
+typedef struct _ZoomScreen {
+    PreparePaintScreenProc preparePaintScreen;
+    DonePaintScreenProc	   donePaintScreen;
+    PaintOutputProc	   paintOutput;
+    PositionPollingHandle  pollMouseHandle;
+    PositionPollingHandle  pollFocusHandle;
+    CompTimeoutHandle      notificationTimeoutHandle;
+    CompOption             opt[SOPT_NUM];
+    ZoomArea               *zooms;
+    int                    nZooms;
+    int                    mouseX;
+    int                    mouseY;
+    int                    focusX;
+    int                    focusY;
+    unsigned long int      grabbed;
+    int	                   grabIndex; // for zoomBox
+    double                 lastMouseChange;
+    double                 lastFocusChange;
+    double                 lastNotificationChange;
+    int                    beforeNotificationX;
+    int                    beforeNotificationY;
+    CursorTexture          cursor;
+    Bool		   nonMouseFocusTracking;
+    Bool                   cursorInfoSelected;
+    Bool                   cursorHidden;
+    Box			   box;
+} ZoomScreen;
+
+static void syncCenterToMouse (CompScreen *s);
+static void updateMouseInterval (CompScreen *s, int x, int y);
+static void updateFocusInterval (CompScreen *s, FocusEventNode *list);
+static void cursorZoomActive (CompScreen *s);
+static void cursorZoomInactive (CompScreen *s);
+static void restrainCursor (CompScreen *s, int out);
+
+static void drawCursor (CompScreen          *s, 
+			CompOutput          *output, 
+			const CompTransform *transform);
+static void convertToZoomedTarget (CompScreen *s,
+				   int	      out,
+				   int	      x,
+				   int	      y,
+				   int	      *resultX,
+				   int	      *resultY);
+static void
+convertToZoomed (CompScreen *s, 
+		 int        out, 
+		 int        x, 
+		 int        y, 
+		 int        *resultX, 
+		 int        *resultY);
+
+#define GET_ZOOM_DISPLAY(d)				      \
+    ((ZoomDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
+
+#define ZOOM_DISPLAY(d)		           \
+    ZoomDisplay *zd = GET_ZOOM_DISPLAY (d)
+
+#define GET_ZOOM_SCREEN(s, zd)				         \
+    ((ZoomScreen *) (s)->base.privates[(zd)->screenPrivateIndex].ptr)
+
+#define ZOOM_SCREEN(s)						        \
+    ZoomScreen *zs = GET_ZOOM_SCREEN (s, GET_ZOOM_DISPLAY (s->display))
+
+#define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
+
+/* Checks if a specific screen grab exist. DO NOT USE THIS.
+ * This is a temporary fix that SHOULD be removed asap.
+ * See comments in drawCursor.
+ */
+
+static inline CompOutput *
+outputDev (CompScreen *screen, unsigned int id)
+{
+    if (id == screen->fullscreenOutput.id)
+	return &screen->fullscreenOutput;
+    else
+	return &screen->outputDev[id];
+}
+
+/* return the zoom area if the output is valid, NULL otherwise */
+static inline ZoomArea *
+outputZoomArea (const CompScreen *s, int out)
+{
+    ZOOM_SCREEN (s);
+
+    if (out == (int) s->fullscreenOutput.id)
+	return &zs->zooms[0]; /* Use ZoomArea 0 for fullscreen output */
+    if (out >= 0 && out < zs->nZooms)
+	return &zs->zooms[out];
+    return NULL;
+}
+
+static inline Bool 
+dontuseScreengrabExist (CompScreen * s, char * grab)
+{
+    int i;
+    for (i = 0; i < s->maxGrab; i++)
+	if (s->grabs[i].active && !strcmp(s->grabs[i].name, grab))
+	    return TRUE;
+    return FALSE;
+}
+
+/* Check if zoom is active on the output specified */
+static inline Bool
+isActive (CompScreen *s, int out)
+{
+    const ZoomArea *za = outputZoomArea (s, out);
+    ZOOM_SCREEN (s);
+
+    if (za && zs->grabbed & (1 << za->output))
+	return TRUE;
+    return FALSE;
+}
+
+/* Check if we are zoomed out and not going anywhere
+ * (similar to isActive but based on actual zoom, not grab)
+ */
+static inline Bool
+isZoomed (CompScreen *s, int out)
+{
+    const ZoomArea *za = outputZoomArea (s, out);
+
+    if (!za)
+	return FALSE;
+
+    if (za->currentZoom != 1.0f || za->newZoom != 1.0f)
+	return TRUE;
+
+    if (za->zVelocity != 0.0f)
+	return TRUE;
+
+    return FALSE;
+}
+
+/* Return current time in seconds */
+static inline double
+getTime (void)
+{
+    struct timespec tp;
+    clock_gettime (CLOCK_MONOTONIC, &tp);
+    return tp.tv_sec + tp.tv_nsec / 1e9;
+}
+
+/* This returns the proper translation correction depending on the desired
+ * centering (exact center, small overflow, or exact screen fit) */
+static float
+getTranslateCorrection (ZoomScreen *zs, float zoom)
+{
+    if (zs->opt[SOPT_ALWAYS_CENTER_MOUSE].value.b)
+    {
+	// Bring to X,Y position the exact zoom center instead of
+	// fitting screen
+	return 1.0;
+    }
+    else if (!zs->opt[SOPT_RESTRAIN_ZOOM_TO_SCREEN].value.b)
+    {
+	// Overflow a bit beyond screen so we can clearly see the corner and the
+	// mouse
+	return (1.0f - zoom) / EZOOM_SCREEN_BORDER_OFFSET;
+    }
+    else
+    {
+	// Keep an exact fit to screen
+	return 1.0f - zoom;
+    }
+}
+
+/* Returns the distance to the defined edge in zoomed pixels.  */
+static int
+distanceToEdge (CompScreen *s, int out, ZoomEdge edge)
+{
+    int        x1,y1,x2,y2;
+    CompOutput *o = outputDev (s, out);
+
+    if (!isActive (s, out))
+	return 0;
+    convertToZoomedTarget (s, out, o->region.extents.x2, 
+			   o->region.extents.y2, &x2, &y2);
+    convertToZoomedTarget (s, out, o->region.extents.x1, 
+			   o->region.extents.y1, &x1, &y1);
+    switch (edge) 
+    {
+	case NORTH: return o->region.extents.y1 - y1;
+	case SOUTH: return y2 - o->region.extents.y2;
+	case EAST: return x2 - o->region.extents.x2;
+	case WEST: return o->region.extents.x1 - x1;
+    }
+    return 0; // Never reached.
+}
+
+/* Update/set translations based on zoom level and real translate.  */
+static void
+updateActualTranslates (ZoomScreen *zs, ZoomArea *za)
+{
+    float translateCorrection;
+    float limit = 0.5 * (1.0f - za->currentZoom);
+
+    translateCorrection = getTranslateCorrection(zs, za->currentZoom);
+
+    za->xtrans = -za->realXTranslate * translateCorrection;
+    za->ytrans =  za->realYTranslate * translateCorrection;
+
+    if (zs->opt[SOPT_RESTRAIN_ZOOM_TO_SCREEN].value.b) {
+	if (za->xtrans < -limit)
+	    za->xtrans = -limit;
+	if (za->xtrans > limit)
+	    za->xtrans = limit;
+	if (za->ytrans < -limit)
+	    za->ytrans = -limit;
+	if (za->ytrans > limit)
+	    za->ytrans = limit;
+    }
+}
+
+/* Returns true if the head in question is currently moving.
+ * Since we don't always bother resetting everything when
+ * canceling zoom, we check for the condition of being completely
+ * zoomed out and not zooming in/out first.
+ */
+static Bool
+isInMovement (CompScreen *s, int out)
+{
+    const ZoomArea *za = outputZoomArea (s, out);
+
+    if (za->currentZoom == 1.0f &&
+	za->newZoom == 1.0f &&
+	za->zVelocity == 0.0f)
+	return FALSE;
+    if (za->currentZoom != za->newZoom ||
+	za->xVelocity || za->yVelocity ||
+	za->zVelocity)
+	return TRUE;
+    if (za->xTranslate != za->realXTranslate ||
+	za->yTranslate != za->realYTranslate)
+	return TRUE;
+    return FALSE;
+}
+
+/* Set the initial values of a zoom area.  */
+static void
+initialiseZoomArea (ZoomArea *za, int out)
+{
+    za->output = out;
+    za->currentZoom = 1.0f;
+    za->newZoom = 1.0f;
+    za->xVelocity = 0.0f;
+    za->yVelocity = 0.0f;
+    za->zVelocity = 0.0f;
+    za->xTranslate = 0.0f;
+    za->yTranslate = 0.0f;
+    za->realXTranslate = 0.0f;
+    za->realYTranslate = 0.0f;
+    za->viewport = ~0;
+    za->locked = FALSE;
+}
+
+/* Adjust the velocity in the z-direction.  */
+static void
+adjustZoomVelocity (CompScreen *s, int out, float chunk)
+{
+    float d, adjust, amount;
+    ZoomArea *za = outputZoomArea (s, out);
+
+    d = (za->newZoom - za->currentZoom) * 75.0f;
+
+    adjust = d * 0.002f;
+    amount = fabs (d);
+    if (amount < 1.0f)
+	amount = 1.0f;
+    else if (amount > 5.0f)
+	amount = 5.0f;
+
+    za->zVelocity = (amount * za->zVelocity + adjust) / (amount + 1.0f);
+
+    if (fabs (d) < 0.1f && fabs (za->zVelocity) < 0.005f)
+    {
+	za->currentZoom = za->newZoom;
+	za->zVelocity = 0.0f;
+    }
+    else
+    {
+	za->currentZoom += (za->zVelocity * chunk) / s->redrawTime;
+    }
+}
+
+/* Adjust the X/Y velocity based on target translation and real
+ * translation. */
+static void
+adjustXYVelocity (CompScreen *s, int out, float chunk)
+{
+    float xdiff, ydiff;
+    float xadjust, yadjust;
+    float amount;
+    ZoomArea *za = outputZoomArea (s, out);
+
+    za->xVelocity /= 1.25f;
+    za->yVelocity /= 1.25f;
+    xdiff = (za->xTranslate - za->realXTranslate) * 75.0f;
+    ydiff = (za->yTranslate - za->realYTranslate) * 75.0f;
+    xadjust = xdiff * 0.002f;
+    yadjust = ydiff * 0.002f;
+    amount = sqrtf (xdiff * xdiff + ydiff * ydiff);
+
+    if (amount < 1.0f)
+	amount = 1.0f;
+    else if (amount > 5.0)
+	amount = 5.0f;
+
+    za->xVelocity = (amount * za->xVelocity + xadjust) / (amount + 1.0f);
+    za->yVelocity = (amount * za->yVelocity + yadjust) / (amount + 1.0f);
+
+    if ((fabs(xdiff) < 0.1f && fabs (za->xVelocity) < 0.005f) &&
+	(fabs(ydiff) < 0.1f && fabs (za->yVelocity) < 0.005f))
+    {
+	za->realXTranslate = za->xTranslate;
+	za->realYTranslate = za->yTranslate;
+	za->xVelocity = 0.0f;
+	za->yVelocity = 0.0f;
+	return;
+    }
+
+    za->realXTranslate += (za->xVelocity * chunk) / s->redrawTime;
+    za->realYTranslate += (za->yVelocity * chunk) / s->redrawTime;
+}
+
+/* Animate the movement (if any) in preparation of a paint screen.  */
+static void
+zoomPreparePaintScreen (CompScreen *s,
+			int	   msSinceLastPaint)
+{
+    ZOOM_SCREEN (s);
+
+    if (zs->grabbed)
+    {
+	int   steps;
+	float amount, chunk;
+
+	amount = msSinceLastPaint * 0.05f * zs->opt[SOPT_SPEED].value.f;
+	steps  = amount / (0.5f * zs->opt[SOPT_TIMESTEP].value.f);
+	if (!steps)
+	       	steps = 1;
+	chunk  = amount / (float) steps;
+	while (steps--)
+	{
+	    int out;
+	    for (out = 0; out < zs->nZooms; out++)
+	    {
+		ZoomArea *za = &zs->zooms[out];
+
+		if (!isInMovement (s, out) || !isActive (s, out))
+		    continue;
+
+		adjustXYVelocity (s, out, chunk);
+		adjustZoomVelocity (s, out, chunk);
+		updateActualTranslates (zs, za);
+		if (!isZoomed (s, out))
+		{
+		    za->xVelocity = za->yVelocity = 0.0f;
+		    zs->grabbed &= ~(1 << za->output);
+		}
+	    }
+	}
+	if (zs->opt[SOPT_SYNC_MOUSE].value.b)
+	    syncCenterToMouse (s);
+    }
+    UNWRAP (zs, s, preparePaintScreen);
+    (*s->preparePaintScreen) (s, msSinceLastPaint);
+    WRAP (zs, s, preparePaintScreen, zoomPreparePaintScreen);
+}
+
+/* Damage screen if we're still moving.  */
+static void
+zoomDonePaintScreen (CompScreen *s)
+{
+    ZOOM_SCREEN (s);
+
+    if (zs->grabbed)
+    {
+	int out;
+	for (out = 0; out < zs->nZooms; out++)
+	{
+	    if (isInMovement (s, out) && isActive (s,out))
+	    {
+		damageScreen (s);
+		break;
+	    }
+	}
+    }
+    UNWRAP (zs, s, donePaintScreen);
+    (*s->donePaintScreen) (s);
+    WRAP (zs, s, donePaintScreen, zoomDonePaintScreen);
+}
+/* Draws a box from the screen coordinates inx1,iny1 to inx2,iny2 */
+static void
+drawBox (CompScreen          *s, 
+	 const CompTransform *transform, 
+	 CompOutput          *output,
+	 Box                 box)
+{
+    CompTransform zTransform = *transform;
+    int           x1,x2,y1,y2;
+    int		  inx1, inx2, iny1, iny2;
+    int	          out = output->id;
+
+    transformToScreenSpace (s, output, -DEFAULT_Z_CAMERA, &zTransform);
+    convertToZoomed (s, out, box.x1, box.y1, &inx1, &iny1);
+    convertToZoomed (s, out, box.x2, box.y2, &inx2, &iny2);
+    
+    x1 = MIN (inx1, inx2);
+    y1 = MIN (iny1, iny2);
+    x2 = MAX (inx1, inx2);
+    y2 = MAX (iny1, iny2);
+    glPushMatrix ();
+    glLoadMatrixf (zTransform.m);
+    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+    glEnable (GL_BLEND);
+    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x4fff);
+    glRecti (x1,y2,x2,y1);
+    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x9fff);
+    glBegin (GL_LINE_LOOP);
+    glVertex2i (x1, y1);
+    glVertex2i (x2, y1);
+    glVertex2i (x2, y2);
+    glVertex2i (x1, y2);
+    glEnd ();
+    glColor4usv (defaultColor);
+    glDisable (GL_BLEND);
+    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+    glPopMatrix ();
+}
+/* Apply the zoom if we are grabbed.
+ * Make sure to use the correct filter.
+ */
+static Bool
+zoomPaintOutput (CompScreen		 *s,
+		 const ScreenPaintAttrib *sAttrib,
+		 const CompTransform	 *transform,
+		 Region		         region,
+		 CompOutput		 *output,
+		 unsigned int		 mask)
+{
+    Bool status;
+    int	 out = output->id;
+    ZOOM_SCREEN (s);
+    
+
+    if (isActive (s, out))
+    {
+	const ZoomArea   *za = outputZoomArea (s, out);
+	ScreenPaintAttrib sa = *sAttrib;
+	int		  saveFilter;
+	CompTransform     zTransform = *transform;
+
+	mask &= ~PAINT_SCREEN_REGION_MASK;
+	mask |= PAINT_SCREEN_CLEAR_MASK;
+
+	matrixScale (&zTransform,
+		     1.0f / za->currentZoom,
+		     1.0f / za->currentZoom,
+		     1.0f);
+	matrixTranslate (&zTransform, 
+			 za->xtrans,
+			 za->ytrans,
+			 0); 
+
+	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
+	saveFilter = s->filter[SCREEN_TRANS_FILTER];
+
+	if (zs->opt[SOPT_FILTER_LINEAR].value.b)
+	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_GOOD;
+	else
+	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
+
+	UNWRAP (zs, s, paintOutput);
+	status =
+	    (*s->paintOutput) (s, &sa, &zTransform, region, output, mask);
+	WRAP (zs, s, paintOutput, zoomPaintOutput);
+	drawCursor (s, output, transform);
+
+	s->filter[SCREEN_TRANS_FILTER] = saveFilter;
+    }
+    else
+    {
+	UNWRAP (zs, s, paintOutput);
+	status = (*s->paintOutput) (s,
+				    sAttrib, 
+				    transform, 
+				    region, 
+				    output,
+				    mask);
+	WRAP (zs, s, paintOutput, zoomPaintOutput);
+    }
+    if (zs->grabIndex)
+	drawBox (s, transform, output, zs->box);
+
+    return status;
+}
+
+/* Makes sure we're not attempting to translate too far.
+ * We are restricted to 0.5 to not go beyond the end
+ * of the screen/head.  */
+static inline void
+constrainZoomTranslate (CompScreen *s)
+{
+    int out;
+    ZOOM_SCREEN (s);
+
+    for (out = 0; out < zs->nZooms; out++)
+    {
+	ZoomArea *za = &zs->zooms[out];
+
+	if (za->xTranslate > 0.5f)
+	    za->xTranslate = 0.5f;
+	else if (za->xTranslate < -0.5f)
+	    za->xTranslate = -0.5f;
+
+	if (za->yTranslate > 0.5f)
+	    za->yTranslate = 0.5f;
+	else if (za->yTranslate < -0.5f)
+	    za->yTranslate = -0.5f;
+    }
+}
+
+/* Functions for adjusting the zoomed area.
+ * These are the core of the zoom plug-in; Anything wanting
+ * to adjust the zoomed area must use setCenter or setZoomArea
+ * and setScale or front ends to them.  */
+
+/* Sets the center of the zoom area to X,Y.
+ * We have to be able to warp the pointer here: If we are moved by
+ * anything except mouse movement, we have to sync the
+ * mouse pointer. This is to allow input, and is NOT necessary
+ * when input redirection is available to us or if we're cheating
+ * and using a scaled mouse cursor to imitate IR.
+ */
+static void
+setCenter (CompScreen *s, int x, int y, Bool instant)
+{
+    int         out = outputDeviceForPoint (s, x,y);
+    CompOutput  *o = outputDev (s, out);
+    ZoomArea    *za = outputZoomArea (s, out);
+    ZOOM_SCREEN (s);
+
+    if (za->locked)
+	return;
+
+    za->xTranslate = (float)
+	((x - o->region.extents.x1) - o->width  / 2) / (o->width);
+    za->yTranslate = (float)
+	((y - o->region.extents.y1) - o->height / 2) / (o->height);
+
+    if (instant || zs->opt[SOPT_INSTANT_PAN].value.b)
+    {
+	za->realXTranslate = za->xTranslate;
+	za->realYTranslate = za->yTranslate;
+	za->yVelocity = 0.0f;
+	za->xVelocity = 0.0f;
+	updateActualTranslates (zs, za);
+    }
+
+    if (zs->opt[SOPT_MOUSE_PAN].value.b)
+	restrainCursor (s, out);
+}
+
+static void
+getCenter (CompScreen *s, int out, int *x, int *y)
+{
+    CompOutput  *o = outputDev (s, out);
+    ZoomArea    *za = outputZoomArea (s, out);
+
+    *x = (int) (za->xTranslate * o->width + o->width / 2 + o->region.extents.x1);
+    *y = (int) (za->yTranslate * o->height + o->height / 2 + o->region.extents.y1);
+}
+
+/* Zooms the area described.
+ * The math could probably be cleaned up, but should be correct now. */
+static void
+setZoomArea (CompScreen *s, 
+	     int        x, 
+	     int        y, 
+	     int        width, 
+	     int        height, 
+	     Bool       instant)
+{
+    int         out = outputDeviceForGeometry (s, x, y, width, height, 0);
+    CompOutput  *o = outputDev (s, out);
+    ZoomArea    *za = outputZoomArea (s, out);
+    ZOOM_SCREEN (s);
+
+    if (za->newZoom == 1.0f)
+	return;
+
+    if (za->locked)
+	return;
+    za->xTranslate =
+	 (float) -((o->width/2) - (x + (width/2) - o->region.extents.x1))
+	/ (o->width);
+    za->xTranslate /= (1.0f - za->newZoom);
+    za->yTranslate =
+	(float) -((o->height/2) - (y + (height/2) - o->region.extents.y1))
+	/ (o->height);
+    za->yTranslate /= (1.0f - za->newZoom);
+    constrainZoomTranslate (s);
+
+    if (instant)
+    {
+	za->realXTranslate = za->xTranslate;
+	za->realYTranslate = za->yTranslate;
+	updateActualTranslates (zs, za);
+    }
+
+    if (zs->opt[SOPT_MOUSE_PAN].value.b)
+	restrainCursor (s, out);
+}
+
+/* Moves the zoom area to the window specified */
+static void
+zoomAreaToWindow (CompWindow *w)
+{
+    int left = w->serverX - w->input.left;
+    int width = w->width + w->input.left + w->input.right;
+    int top = w->serverY - w->input.top;
+    int height = w->height + w->input.top + w->input.bottom;
+    
+    setZoomArea (w->screen, left, top, width, height, FALSE);
+}
+
+/* Pans the zoomed area vertically/horizontally by * value * zs->panFactor
+ * TODO: Fix output. */
+static void
+panZoom (CompScreen *s, int xvalue, int yvalue)
+{
+    int out;
+    ZOOM_SCREEN (s);
+
+    for (out = 0; out < zs->nZooms; out++)
+    {
+	zs->zooms[out].xTranslate +=
+	    zs->opt[SOPT_PAN_FACTOR].value.f * xvalue *
+	    zs->zooms[out].currentZoom;
+	zs->zooms[out].yTranslate +=
+	    zs->opt[SOPT_PAN_FACTOR].value.f * yvalue *
+	    zs->zooms[out].currentZoom;
+    }
+
+    constrainZoomTranslate (s);
+}
+
+/* Enables polling of mouse position, and refreshes currently
+ * stored values.
+ */
+static void
+enableMousePolling (CompScreen *s)
+{
+    ZOOM_SCREEN (s);
+    ZOOM_DISPLAY (s->display);
+    zs->pollMouseHandle =
+	(*zd->mpFunc->addPositionPolling) (s, updateMouseInterval);
+    zs->lastMouseChange = getTime ();
+    (*zd->mpFunc->getCurrentPosition) (s, &zs->mouseX, &zs->mouseY);
+}
+
+/* Enables polling of focus position */
+static void
+enableFocusPolling (CompScreen *s)
+{
+    ZOOM_SCREEN (s);
+    ZOOM_DISPLAY (s->display);
+    if (!zs->opt[SOPT_FOLLOW_FOCUS].value.b)
+	return;
+    if (!zd->fpFunc)
+	return;
+    zs->pollFocusHandle =
+	(*zd->fpFunc->addFocusPolling) (s, updateFocusInterval);
+    zs->lastFocusChange = getTime ();
+}
+
+/* Sets the zoom (or scale) level. 
+ * Cleans up if we are suddenly zoomed out. 
+ */
+static void
+setScale (CompScreen *s, int out, float value)
+{
+    ZoomArea *za = outputZoomArea (s, out);
+    ZOOM_SCREEN(s);
+
+    if (za->locked)
+	return;
+
+    if (value >= 1.0f)
+	value = 1.0f;
+    else
+    {
+	if (!zs->pollMouseHandle)
+	    enableMousePolling (s);
+	if (!zs->pollFocusHandle)
+	    enableFocusPolling (s);
+	zs->grabbed |= (1 << za->output);
+	cursorZoomActive (s);
+    }
+
+    if (value == 1.0f)
+    {
+	za->xTranslate = 0.0f;
+	za->yTranslate = 0.0f;
+	cursorZoomInactive (s);
+    }
+
+    if (value < 1.0f / zs->opt[SOPT_MAXIMUM_ZOOM].value.i)
+	value = 1.0f / zs->opt[SOPT_MAXIMUM_ZOOM].value.i;
+
+    za->newZoom = value;
+    damageScreen(s);
+}
+
+/* Sets the zoom factor to the bigger of the two floats supplied. 
+ * Convenience function for setting the scale factor for an area.
+ */
+static inline void
+setScaleBigger (CompScreen *s, int out, float x, float y)
+{
+    setScale (s, out, x > y ? x : y);
+}
+
+/* Mouse code...
+ * This takes care of keeping the mouse in sync with the zoomed area and
+ * vice versa. 
+ * See heading for description.
+ */
+
+/* Syncs the center, based on translations, back to the mouse.
+ * This should be called when doing non-IR zooming and moving the zoom
+ * area based on events other than mouse movement.
+ */
+static void
+syncCenterToMouse (CompScreen *s)
+{
+    int         x, y;
+    int         out; 
+    CompOutput  *o;
+    const ZoomArea *za;
+    ZOOM_SCREEN (s);
+
+    out = outputDeviceForPoint (s, zs->mouseX, zs->mouseY);
+    o = outputDev (s, out);
+
+    if (!isInMovement (s, out) || zs->nonMouseFocusTracking)
+	return;
+
+    za = outputZoomArea (s, out);
+
+    x = (int) ((za->realXTranslate * o->width) +
+	       (o->width / 2) + o->region.extents.x1);
+    y = (int) ((za->realYTranslate * o->height) +
+	       (o->height / 2) + o->region.extents.y1);
+
+    if ((x != zs->mouseX || y != zs->mouseY)
+	&& zs->grabbed && za->newZoom != 1.0f)
+    {
+	warpPointer (s, x - pointerX , y - pointerY );
+	zs->mouseX = x;
+	zs->mouseY = y;
+    }
+}
+
+/* Convert the point X,Y to where it would be when zoomed.  */
+static void
+convertToZoomed (CompScreen *s, 
+		 int        out, 
+		 int        x, 
+		 int        y, 
+		 int        *resultX, 
+		 int        *resultY)
+{
+    CompOutput  *o = outputDev (s, out);
+    ZoomArea    *za = outputZoomArea (s, out);
+    ZOOM_SCREEN (s);
+
+    float translateCorrection = getTranslateCorrection (zs, za->currentZoom);
+    float xTranslate  = za->realXTranslate * translateCorrection ;
+    float yTranslate  = za->realYTranslate * translateCorrection ;
+    float limit       = 0.5 * (1.0 - za->currentZoom);
+
+    if (zs->opt[SOPT_RESTRAIN_ZOOM_TO_SCREEN].value.b) {
+	if (xTranslate < -limit)
+	    xTranslate = -limit;
+	if (xTranslate > limit)
+	    xTranslate = limit;
+	if (yTranslate < -limit)
+	    yTranslate = -limit;
+	if (yTranslate > limit)
+	    yTranslate = limit;
+    }
+
+    float retX, retY;
+
+    x -= o->region.extents.x1;
+    y -= o->region.extents.y1;
+    retX = x - (xTranslate * o->width) - o->width/2;
+    retX /= za->currentZoom;
+    retX += o->width/2;
+    retX += o->region.extents.x1;
+    retY = y - (yTranslate * o->height) - o->height/2;
+    retY /= za->currentZoom;
+    retY += o->height/2;
+    retY += o->region.extents.y1;
+
+    *resultX = retX;
+    *resultY = retY;
+}
+
+/* Same but use targeted translation, not real */
+static void
+convertToZoomedTarget (CompScreen *s,
+		       int	  out,
+		       int	  x,
+		       int	  y,
+		       int	  *resultX,
+		       int	  *resultY)
+{
+    CompOutput  *o = outputDev (s, out);
+    ZoomArea    *za = outputZoomArea (s, out);
+
+    x -= o->region.extents.x1;
+    y -= o->region.extents.y1;
+
+    float retX, retY;
+
+    retX = x - (za->xTranslate *
+		    (1.0f - za->newZoom) * o->width) - o->width/2;
+    retX /= za->newZoom;
+    retX += o->width/2;
+    retX += o->region.extents.x1;
+    retY = y - (za->yTranslate *
+		    (1.0f - za->newZoom) * o->height) - o->height/2;
+    retY /= za->newZoom;
+    retY += o->height/2;
+    retY += o->region.extents.y1;
+
+    *resultX = retX;
+    *resultY = retY;
+}
+
+/* Make sure the given point + margin is visible;
+ * Translate to make it visible if necessary.
+ * Returns false if the point isn't on a actively zoomed head
+ * or the area is locked. */
+static Bool
+ensureVisibility (CompScreen *s, int x, int y, int margin)
+{
+    int         zoomX, zoomY;
+    int         out;
+    CompOutput  *o;
+
+    out = outputDeviceForPoint (s, x, y);
+    if (!isActive (s, out))
+	return FALSE;
+
+    o = outputDev (s, out);
+    convertToZoomedTarget (s, out, x, y, &zoomX, &zoomY);
+    ZoomArea *za = outputZoomArea (s, out);
+    if (za->locked)
+	return FALSE;
+
+#define FACTOR (za->newZoom / (1.0f - za->newZoom))
+    if (zoomX + margin > o->region.extents.x2)
+	za->xTranslate +=
+	    (FACTOR * (float) (zoomX + margin - o->region.extents.x2)) /
+	    (float) o->width;
+    else if (zoomX - margin < o->region.extents.x1)
+	za->xTranslate +=
+	    (FACTOR * (float) (zoomX - margin - o->region.extents.x1)) /
+	    (float) o->width;
+
+    if (zoomY + margin > o->region.extents.y2)
+	za->yTranslate +=
+	    (FACTOR * (float) (zoomY + margin - o->region.extents.y2)) /
+	    (float) o->height;
+    else if (zoomY - margin < o->region.extents.y1)
+	za->yTranslate +=
+	    (FACTOR * (float) (zoomY - margin - o->region.extents.y1)) /
+	    (float) o->height;
+#undef FACTOR
+    constrainZoomTranslate (s);
+    return TRUE;
+}
+
+/* Attempt to ensure the visibility of an area defined by x1/y1 and x2/y2.
+ * See ensureVisibility () for details.
+ *
+ * This attempts to find the translations that leaves the biggest part of
+ * the area visible. 
+ *
+ * gravity defines what part of the window that should get
+ * priority if it isn't possible to fit all of it.
+ */
+static void
+ensureVisibilityArea (CompScreen  *s, 
+		      int         x1,
+		      int         y1,
+		      int         x2,
+		      int         y2,
+		      int         margin,
+		      ZoomGravity gravity)
+{
+    int        targetX, targetY, targetW, targetH;
+    int        out; 
+    CompOutput *o; 
+    const ZoomArea *za;
+    
+    out = outputDeviceForPoint (s, x1 + (x2-x1/2), y1 + (y2-y1/2));
+    o = outputDev (s, out);
+    za = outputZoomArea (s, out);
+
+#define WIDTHOK (float)(x2-x1) / (float)o->width < za->newZoom
+#define HEIGHTOK (float)(y2-y1) / (float)o->height < za->newZoom
+
+    if (WIDTHOK &&
+	HEIGHTOK) {
+	ensureVisibility (s, x1, y1, margin);
+	ensureVisibility (s, x2, y2, margin);
+	return;
+    }
+
+    switch (gravity)
+    {
+	case NORTHWEST:
+	    targetX = x1;
+	    targetY = y1;
+	    if (WIDTHOK) 
+		targetW = x2 - x1;
+	    else 
+		targetW = o->width * za->newZoom;
+	    if (HEIGHTOK) 
+		targetH = y2 - y1;
+	    else 
+		targetH = o->height * za->newZoom;
+	    break;
+	case NORTHEAST:
+	    targetY = y1;
+	    if (WIDTHOK)
+	    {
+		targetX = x1;
+		targetW = x2-x1;
+	    } 
+	    else
+	    {
+		targetX = x2 - o->width * za->newZoom;
+		targetW = o->width * za->newZoom;
+	    }
+
+	    if (HEIGHTOK)
+		targetH = y2-y1;
+	    else 
+		targetH = o->height * za->newZoom;
+	    break;
+	case SOUTHWEST:
+	    targetX = x1;
+	    if (WIDTHOK)
+		targetW = x2-x1;
+	    else
+		targetW = o->width * za->newZoom;
+	    if (HEIGHTOK)
+	    {
+		targetY = y1;
+		targetH = y2-y1;
+	    } 
+	    else
+	    {
+		targetY = y2 - (o->width * za->newZoom);
+		targetH = o->width * za->newZoom;
+	    }
+	    break;
+	case SOUTHEAST:
+	    if (WIDTHOK)
+	    {
+		targetX = x1;
+		targetW = x2-x1;
+	    } 
+	    else 
+	    {
+		targetW = o->width * za->newZoom;
+		targetX = x2 - targetW;
+	    }
+	    
+	    if (HEIGHTOK)
+	    {
+		targetY = y1;
+		targetH = y2 - y1;
+	    }
+	    else
+	    {
+		targetH = o->height * za->newZoom;
+		targetY = y2 - targetH;
+	    }
+	    break;
+	case CENTER:
+	    setCenter (s, x1 + (x2 - x1 / 2), y1 + (y2 - y1 / 2), FALSE);
+	    return;
+	    break;
+    }
+
+    setZoomArea (s, targetX, targetY, targetW, targetH, FALSE);
+    return ;
+}
+
+/* Ensures that the cursor is visible on the given head.
+ * Note that we check if currentZoom is 1.0f, because that often means that
+ * mouseX and mouseY is not up-to-date (since the polling timer just
+ * started).
+ */
+static void
+restrainCursor (CompScreen *s, int out)
+{
+    int         x1, y1, x2, y2, margin;
+    int         diffX = 0, diffY = 0;
+    int         north, south, east, west;
+    float       z;
+    CompOutput  *o = outputDev (s, out);
+    const ZoomArea *za = outputZoomArea (s, out);
+    ZOOM_SCREEN (s);
+    ZOOM_DISPLAY (s->display);
+
+    z = za->newZoom;
+    margin = zs->opt[SOPT_RESTRAIN_MARGIN].value.i;
+    north = distanceToEdge (s, out, NORTH);
+    south = distanceToEdge (s, out, SOUTH);
+    east = distanceToEdge (s, out, EAST);
+    west = distanceToEdge (s, out, WEST);
+
+    if (za->currentZoom == 1.0f)
+    {
+	zs->lastMouseChange = getTime ();
+	(*zd->mpFunc->getCurrentPosition) (s, &zs->mouseX, &zs->mouseY);
+    }
+
+    convertToZoomedTarget (s, out, zs->mouseX - zs->cursor.hotX, 
+			   zs->mouseY - zs->cursor.hotY, &x1, &y1);
+    convertToZoomedTarget 
+	(s, out, 
+	 zs->mouseX - zs->cursor.hotX + zs->cursor.width, 
+	 zs->mouseY - zs->cursor.hotY + zs->cursor.height,
+	 &x2, &y2);
+
+    if ((x2 - x1 > o->region.extents.x2 - o->region.extents.x1) ||
+       (y2 - y1 > o->region.extents.y2 - o->region.extents.y1))
+	return;
+    if (x2 > o->region.extents.x2 - margin && east > 0)
+	diffX = x2 - o->region.extents.x2 + margin;
+    else if (x1 < o->region.extents.x1 + margin && west > 0)
+	diffX = x1 - o->region.extents.x1 - margin;
+
+    if (y2 > o->region.extents.y2 - margin && south > 0)
+	diffY = y2 - o->region.extents.y2 + margin;
+    else if (y1 < o->region.extents.y1 + margin && north > 0) 
+	diffY = y1 - o->region.extents.y1 - margin;
+
+    if (abs(diffX)*z > 0  || abs(diffY)*z > 0)
+	warpPointer (s,
+		(int) (zs->mouseX - pointerX) -  (int) ((float)diffX * z),
+		(int) (zs->mouseY - pointerY) -  (int) ((float)diffY * z));
+}
+
+/* Check if the cursor is still visible.
+ * We also make sure to activate/deactivate cursor scaling here
+ * so we turn on/off the pointer if it moves from one head to another.
+ * FIXME: Detect an actual output change instead of spamming.
+ * FIXME: The second ensureVisibility (sync with restrain).
+ */
+static void
+cursorMoved (CompScreen *s)
+{
+    int         out;
+    ZOOM_SCREEN (s);
+
+    out = outputDeviceForPoint (s, zs->mouseX, zs->mouseY);
+    if (isActive (s, out))
+    {
+	if (zs->opt[SOPT_RESTRAIN_MOUSE].value.b)
+	    restrainCursor (s, out);
+
+	if (zs->opt[SOPT_MOUSE_PAN].value.b)
+	{
+	    ensureVisibilityArea (s, 
+				  zs->mouseX - zs->cursor.hotX,
+				  zs->mouseY - zs->cursor.hotY,
+				  zs->mouseX + zs->cursor.width -
+				  zs->cursor.hotX,
+				  zs->mouseY + zs->cursor.height - 
+				  zs->cursor.hotY,
+				  zs->opt[SOPT_RESTRAIN_MARGIN].value.i,
+				  NORTHWEST);
+	}
+
+	cursorZoomActive (s);
+    }
+    else
+    {
+	cursorZoomInactive (s);
+    }
+}
+
+/* Update the mouse position.
+ * Based on the zoom engine in use, we will have to move the zoom area.
+ * This might have to be added to a timer.
+ */
+static void
+updateMousePosition (CompScreen *s, int x, int y)
+{
+    double localTime = getTime ();
+    ZOOM_SCREEN(s);
+    int out; 
+
+    if (localTime - zs->lastNotificationChange <= zs->opt[SOPT_NOTIF_MIN_DELAY].value.f)
+	return;
+    else if (zs->notificationTimeoutHandle)
+    {
+	compRemoveTimeout (zs->notificationTimeoutHandle);
+	zs->notificationTimeoutHandle = 0;
+    }
+
+    zs->mouseX = x;
+    zs->mouseY = y;
+    out = outputDeviceForPoint (s, zs->mouseX, zs->mouseY);
+
+    if (zs->opt[SOPT_SYNC_MOUSE].value.b)
+    {
+	if (zs->opt[SOPT_WARP_MOUSE_TO_FOCUS].value.b) {
+	    CompOutput *o = outputDev (s, out);
+	    int        zoomedMouseX, zoomedMouseY;
+	    Bool       pointerInZoom;
+
+	    convertToZoomed (s, out, zs->mouseX, zs->mouseY,
+			     &zoomedMouseX, &zoomedMouseY);
+	    pointerInZoom = zoomedMouseX >= o->region.extents.x1
+			 && zoomedMouseX <  o->region.extents.x1 + o->width
+			 && zoomedMouseY >= o->region.extents.y1
+			 && zoomedMouseY <  o->region.extents.y1 + o->height;
+
+	    if (zs->lastMouseChange <= zs->lastFocusChange &&
+		zs->nonMouseFocusTracking && !pointerInZoom)
+	    {
+		const ZoomArea *za = outputZoomArea (s, out);
+
+		// Mouse taking back control of focus, but is out of zoom, wrap
+		// it back to focus
+		// FocusTracking is always centered
+		warpPointer (s,
+		    za->realXTranslate * o->width
+			+ o->width / 2 + o->region.extents.x1 - pointerX,
+		    za->realYTranslate * o->height
+			+ o->height / 2 + o->region.extents.y1 - pointerY);
+		setCenter (s, pointerX, pointerY, TRUE);
+	    }
+	    else
+	    {
+	        if (!isInMovement (s, out))
+		{
+		    setCenter (s, zs->mouseX, zs->mouseY, TRUE);
+		}
+	    }
+	    zs->lastMouseChange = localTime;
+	}
+	// respect a timing in case user has merely grazed his mouse
+	else if (localTime - zs->lastFocusChange > zs->opt[SOPT_MOUSE_DELAY].value.f && !isInMovement (s, out))
+	{
+	    setCenter (s, zs->mouseX, zs->mouseY, TRUE);
+	    zs->lastMouseChange = localTime;
+	}
+	zs->nonMouseFocusTracking = FALSE;
+    }
+    cursorMoved (s);
+    damageScreen (s);
+}
+
+static void
+updateFocusPosition (CompScreen *s, int x, int y, int width, int height)
+{
+    double localTime = getTime ();
+    ZOOM_SCREEN(s);
+
+    if (localTime - zs->lastNotificationChange <= zs->opt[SOPT_NOTIF_MIN_DELAY].value.f)
+	return;
+    else if (zs->notificationTimeoutHandle)
+    {
+	compRemoveTimeout (zs->notificationTimeoutHandle);
+	zs->notificationTimeoutHandle = 0;
+    }
+
+    int out = outputDeviceForPoint (s, x, y);
+    if (localTime - zs->lastMouseChange > zs->opt[SOPT_FOCUS_DELAY].value.f)
+    {
+	const CompOutput *o = outputDev (s, out);
+	const ZoomArea *za = outputZoomArea (s, out);
+	int zoomAreaWidth  = o->width  * za->newZoom;
+	int zoomAreaHeight = o->height * za->newZoom;
+	int posX = x + width / 2;
+	int posY = y + height / 2;
+	if (width > zoomAreaWidth)
+	{
+	    // target rectangle is too big for the zoom area, aim at
+	    // the top-left corner of the target
+	    posX -= (width - zoomAreaWidth) / 2;
+	}
+	if (height > zoomAreaHeight)
+	{
+	    posY -= (height - zoomAreaHeight) / 2;
+	}
+	setCenter (s, posX, posY, FALSE);
+	zs->focusX = posX;
+	zs->focusY = posY;
+	zs->nonMouseFocusTracking = TRUE;
+	zs->lastFocusChange = localTime;
+    }
+    damageScreen (s);
+}
+
+static CompBool
+restoreLastNonNotificationPosition (void *data)
+{
+    CompScreen *s = data;
+    ZOOM_SCREEN(s);
+    setCenter (s, zs->beforeNotificationX, zs->beforeNotificationY, FALSE);
+    zs->notificationTimeoutHandle = 0;
+    return FALSE;
+}
+
+static void
+updateNotificationPosition (CompScreen *s, int x, int y, int width, int height)
+{
+    ZOOM_SCREEN(s);
+    int out = outputDeviceForPoint (s, x, y);
+
+    if (zs->notificationTimeoutHandle)
+    {
+	compRemoveTimeout (zs->notificationTimeoutHandle);
+	zs->notificationTimeoutHandle = 0;
+    }
+    else
+	getCenter (s, out, &zs->beforeNotificationX, &zs->beforeNotificationY);
+
+    const CompOutput *o = outputDev (s, out);
+    const ZoomArea *za = outputZoomArea (s, out);
+    int zoomAreaWidth  = o->width  * za->newZoom;
+    int zoomAreaHeight = o->height * za->newZoom;
+    int posX = x + width / 2;
+    int posY = y + height / 2;
+    if (width > zoomAreaWidth)
+    {
+	// target rectangle is too big for the zoom area, aim at
+	// the top-left corner of the target
+	posX -= (width - zoomAreaWidth) / 2;
+    }
+    if (height > zoomAreaHeight)
+    {
+	posY -= (height - zoomAreaHeight) / 2;
+    }
+    setCenter (s, posX, posY, FALSE);
+    zs->nonMouseFocusTracking = TRUE;
+
+    zs->lastNotificationChange = getTime ();
+    zs->notificationTimeoutHandle = compAddTimeout (zs->opt[SOPT_NOTIF_MAX_DELAY].value.f * 1000,
+						    zs->opt[SOPT_NOTIF_MAX_DELAY].value.f * 1000 + 500,
+						    restoreLastNonNotificationPosition,
+						    s);
+
+    damageScreen (s);
+}
+
+/* Timeout handler to poll the mouse. Returns false (and thereby does not
+ * get re-added to the queue) when zoom is not active. */
+static void
+updateMouseInterval (CompScreen *s, int x, int y)
+{
+    ZOOM_SCREEN (s);
+
+    updateMousePosition(s, x, y);
+
+    if (!zs->grabbed)
+    {
+	ZOOM_DISPLAY (s->display);
+	if (zs->pollMouseHandle)
+		(*zd->mpFunc->removePositionPolling) (s, zs->pollMouseHandle);
+	zs->pollMouseHandle = 0;
+	cursorMoved (s);
+    }
+}
+
+/* Timeout handler to focusPoll. */
+static void
+updateFocusInterval (CompScreen *s, FocusEventNode *list)
+{
+    FocusEventNode *nonnotif = NULL;
+    for (FocusEventNode *cur = list; cur; cur = cur->next)
+    {
+	ZOOM_SCREEN (s);
+	if (strcmp (cur->type, "notification") == 0)
+	{
+	    if (zs->opt[SOPT_NOTIF_ENABLED].value.b)
+		updateNotificationPosition (s, cur->x, cur->y, cur->width, cur->height);
+	} else {
+	    nonnotif = cur;
+	}
+    }
+    if (nonnotif)
+	updateFocusPosition (s, nonnotif->x, nonnotif->y, nonnotif->width, nonnotif->height);
+
+    ZOOM_SCREEN (s);
+    if (!zs->grabbed)
+    {
+	ZOOM_DISPLAY (s->display);
+	if (zs->pollFocusHandle)
+		(*zd->fpFunc->removeFocusPolling) (s, zs->pollFocusHandle);
+	zs->pollFocusHandle = 0;
+    }
+}
+
+/* Free a cursor */
+static void
+freeCursor (CursorTexture * cursor)
+{
+    if (!cursor->isSet)
+	return;
+	
+    makeScreenCurrent (cursor->screen);
+    cursor->isSet = FALSE;
+    glDeleteTextures (1, &cursor->texture);
+    cursor->texture = 0;
+}
+
+/* Translate into place and draw the scaled cursor.  */
+static void
+drawCursor (CompScreen          *s, 
+	    CompOutput          *output, 
+	    const CompTransform *transform)
+{
+    int         out = output->id;
+    ZOOM_SCREEN (s);
+
+    if (zs->cursor.isSet)
+    {
+	CompTransform sTransform = *transform;
+	float	      scaleFactor;
+	int           ax, ay, x, y;
+	
+	/* This is a hack because these transformations are wrong when
+	 * we're working exposed. Expo is capable of telling where the
+	 * real mouse is despite zoom, so we don't have to disable the
+	 * zoom. We do, however, have to show the original pointer.
+	 */
+	if (dontuseScreengrabExist (s, "expo"))
+	{
+	    cursorZoomInactive (s);
+	    return;
+	}
+
+	transformToScreenSpace (s, output, -DEFAULT_Z_CAMERA, &sTransform);
+	convertToZoomed (s, out, zs->mouseX, zs->mouseY, &ax, &ay);
+        glPushMatrix ();
+	glLoadMatrixf (sTransform.m);
+	glTranslatef ((float) ax, (float) ay, 0.0f);
+	if (zs->opt[SOPT_SCALE_MOUSE_DYNAMIC].value.b) 
+	    scaleFactor = 1.0f / outputZoomArea (s, out)->currentZoom;
+	else 
+	    scaleFactor = 1.0f / zs->opt[SOPT_SCALE_MOUSE_STATIC].value.f;
+	glScalef (scaleFactor,
+		  scaleFactor,
+		  1.0f);
+	x = -zs->cursor.hotX;
+	y = -zs->cursor.hotY;
+
+	glEnable (GL_BLEND);
+	glBindTexture (GL_TEXTURE_RECTANGLE_ARB, zs->cursor.texture);
+	glEnable (GL_TEXTURE_RECTANGLE_ARB);
+
+	glBegin (GL_QUADS);
+	glTexCoord2d (0, 0);
+	glVertex2f (x, y);
+	glTexCoord2d (0, zs->cursor.height);
+	glVertex2f (x, y + zs->cursor.height);
+	glTexCoord2d (zs->cursor.width, zs->cursor.height);
+	glVertex2f (x + zs->cursor.width, y + zs->cursor.height);
+	glTexCoord2d (zs->cursor.width, 0);
+	glVertex2f (x + zs->cursor.width, y);
+	glEnd ();
+	glDisable (GL_BLEND);
+	glBindTexture (GL_TEXTURE_RECTANGLE_ARB, 0);
+	glDisable (GL_TEXTURE_RECTANGLE_ARB);
+	glPopMatrix ();
+    }
+}
+
+/* Create (if necessary) a texture to store the cursor,
+ * fetch the cursor with XFixes. Store it.  */
+static void
+zoomUpdateCursor (CompScreen * s, CursorTexture * cursor)
+{
+    unsigned char *pixels;
+    int           i;
+    Display       *dpy = s->display->display;
+    ZOOM_SCREEN   (s);
+
+    if (!cursor->isSet)
+    {
+	cursor->isSet = TRUE;
+	cursor->screen = s;
+	makeScreenCurrent (s);
+	glEnable (GL_TEXTURE_RECTANGLE_ARB);
+	glGenTextures (1, &cursor->texture);
+	glBindTexture (GL_TEXTURE_RECTANGLE_ARB, cursor->texture);
+
+	if (zs->opt[SOPT_FILTER_LINEAR].value.b &&
+	    s->display->textureFilter != GL_NEAREST)
+	{
+	    glTexParameteri (GL_TEXTURE_RECTANGLE_ARB,
+			     GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	    glTexParameteri (GL_TEXTURE_RECTANGLE_ARB,
+			     GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	}
+	else
+	{
+	    glTexParameteri (GL_TEXTURE_RECTANGLE_ARB,
+			     GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	    glTexParameteri (GL_TEXTURE_RECTANGLE_ARB,
+			     GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	}
+	glTexParameteri (GL_TEXTURE_RECTANGLE_ARB,
+			 GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameteri (GL_TEXTURE_RECTANGLE_ARB,
+			 GL_TEXTURE_WRAP_T, GL_CLAMP);
+    } else {
+	makeScreenCurrent (cursor->screen);
+	glEnable (GL_TEXTURE_RECTANGLE_ARB);
+    }
+
+    XFixesCursorImage *ci = XFixesGetCursorImage(dpy);
+    /* Hack to avoid changing to an invisible (bugged)cursor image.
+     * Example: The animated Firefox cursors.
+     */
+    if (ci->width <= 1 && ci->height <= 1)
+    {
+	XFree (ci);
+	return;
+    }
+
+
+    cursor->width = ci->width;
+    cursor->height = ci->height;
+    cursor->hotX = ci->xhot;
+    cursor->hotY = ci->yhot;
+    pixels = malloc(ci->width * ci->height * 4);
+
+    if (!pixels) 
+    {
+	XFree (ci);
+	return;
+    }
+
+    for (i = 0; i < ci->width * ci->height; i++)
+    {
+	unsigned long pix = ci->pixels[i];
+	pixels[i * 4] = pix & 0xff;
+	pixels[(i * 4) + 1] = (pix >> 8) & 0xff;
+	pixels[(i * 4) + 2] = (pix >> 16) & 0xff;
+	pixels[(i * 4) + 3] = (pix >> 24) & 0xff;
+    }
+
+    glBindTexture (GL_TEXTURE_RECTANGLE_ARB, cursor->texture);
+    glTexImage2D (GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGBA, cursor->width,
+		  cursor->height, 0, GL_BGRA, GL_UNSIGNED_BYTE, pixels);
+    glBindTexture (GL_TEXTURE_RECTANGLE_ARB, 0);
+    glDisable (GL_TEXTURE_RECTANGLE_ARB);
+    XFree (ci);
+    free (pixels);
+}
+
+/* We are no longer zooming the cursor, so display it.  */
+static void
+cursorZoomInactive (CompScreen *s)
+{
+    ZOOM_DISPLAY (s->display);
+    ZOOM_SCREEN (s);
+
+    if (!zd->fixesSupported)
+	return;
+
+    if (zs->cursorInfoSelected)
+    {
+	zs->cursorInfoSelected = FALSE;
+	XFixesSelectCursorInput (s->display->display, s->root, 0);
+    }
+
+    if (zs->cursor.isSet)
+    {
+	freeCursor (&zs->cursor);
+    }
+
+    if (zs->cursorHidden)
+    {
+	zs->cursorHidden = FALSE;
+	XFixesShowCursor (s->display->display, s->root);
+    }
+}
+
+/* Cursor zoom is active: We need to hide the original,
+ * register for Cursor notifies and display the new one.
+ * This can be called multiple times, not just on initial
+ * activation.
+ */
+static void
+cursorZoomActive (CompScreen *s)
+{
+    ZOOM_DISPLAY (s->display);
+    ZOOM_SCREEN (s);
+
+    if (!zd->fixesSupported)
+	return;
+    if (!zs->opt[SOPT_SCALE_MOUSE].value.b)
+	return;
+
+    if (!zs->cursorInfoSelected)
+    {
+	zs->cursorInfoSelected = TRUE;
+        XFixesSelectCursorInput (s->display->display, s->root,
+				 XFixesDisplayCursorNotifyMask);
+	zoomUpdateCursor (s, &zs->cursor);
+    }
+    if (zd->canHideCursor && !zs->cursorHidden &&
+	zs->opt[SOPT_HIDE_ORIGINAL_MOUSE].value.b)
+    {
+	zs->cursorHidden = TRUE;
+	XFixesHideCursor (s->display->display, s->root);
+    }
+}
+
+/* Set the zoom area
+ * This is an interface for scripting. 
+ * int32:x1: left x coordinate
+ * int32:y1: top y coordinate
+ * int32:x2: right x
+ * int32:y2: bottom y 
+ * x2 and y2 can be omitted to assume x1==x2+1 y1==y2+1
+ * boolean:scale: True if we should modify the zoom level, false to just
+ *                adjust the movement/translation.
+ * boolean:restrain: True to warp the pointer so it's visible. 
+ */
+static Bool
+setZoomAreaAction (CompDisplay     *d,
+		   CompAction      *action,
+		   CompActionState state,
+		   CompOption      *option,
+		   int		   nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+
+    if (s)
+    {
+	int        x1, y1, x2, y2, out;
+	Bool       scale, restrain;
+	CompOutput *o; 
+
+	x1 = getIntOptionNamed (option, nOption, "x1", -1);
+	y1 = getIntOptionNamed (option, nOption, "y1", -1);
+	x2 = getIntOptionNamed (option, nOption, "x2", -1);
+	y2 = getIntOptionNamed (option, nOption, "y2", -1);
+	scale = getBoolOptionNamed (option, nOption, "scale", FALSE);
+	restrain = getBoolOptionNamed (option, nOption, "restrain", FALSE);
+
+	if (x1 < 0 || y1 < 0)
+	    return FALSE;
+
+	if (x2 < 0)
+	    x2 = x1 + 1;
+
+	if (y2 < 0)
+	    y2 = y1 + 1;
+
+	out = outputDeviceForPoint (s, x1, y1);
+#define WIDTH (x2 - x1)
+#define HEIGHT (y2 - y1)
+	setZoomArea (s, x1, y1, WIDTH, HEIGHT, FALSE);
+	o = outputDev (s, out);
+	if (scale && WIDTH && HEIGHT)
+	    setScaleBigger (s, out, (float) WIDTH/o->width, 
+			    (float) HEIGHT/o->height);
+#undef WIDTH
+#undef HEIGHT
+	if (restrain)
+	    restrainCursor (s, out);
+    }
+    return TRUE;
+}
+
+/* Ensure visibility of an area defined by x1->x2/y1->y2
+ * int:x1: left X coordinate
+ * int:x2: right X Coordinate
+ * int:y1: top Y coordinate
+ * int:y2: bottom Y coordinate
+ * bool:scale: zoom out if necessary to ensure visibility
+ * bool:restrain: Restrain the mouse cursor
+ * int:margin: The margin to use (default: 0)
+ * if x2/y2 is omitted, it is ignored.
+ */
+static Bool
+ensureVisibilityAction (CompDisplay     *d,
+			CompAction      *action,
+			CompActionState state,
+			CompOption      *option,
+			int		nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+
+    if (s)
+    {
+	int        x1, y1, x2, y2, margin, out;
+	Bool       scale, restrain;
+	CompOutput *o;
+
+	x1 = getIntOptionNamed (option, nOption, "x1", -1);
+	y1 = getIntOptionNamed (option, nOption, "y1", -1);
+	x2 = getIntOptionNamed (option, nOption, "x2", -1);
+	y2 = getIntOptionNamed (option, nOption, "y2", -1);
+	margin = getBoolOptionNamed (option, nOption, "margin", 0);
+	scale = getBoolOptionNamed (option, nOption, "scale", FALSE);
+	restrain = getBoolOptionNamed (option, nOption, "restrain", FALSE);
+	if (x1 < 0 || y1 < 0)
+	    return FALSE;
+	if (x2 < 0)
+	    y2 = y1 + 1;
+	out = outputDeviceForPoint (s, x1, y1);
+	ensureVisibility (s, x1, y1, margin);
+	if (x2 >= 0 && y2 >= 0)
+	    ensureVisibility (s, x2, y2, margin);
+	o = outputDev (s, out);
+#define WIDTH (x2 - x1)
+#define HEIGHT (y2 - y1)
+	if (scale && WIDTH && HEIGHT)
+	    setScaleBigger (s, out, (float) WIDTH/o->width, 
+			    (float) HEIGHT/o->height);
+#undef WIDTH
+#undef HEIGHT
+	if (restrain)
+	    restrainCursor (s, out);
+    }
+    return TRUE;
+}
+
+static Bool
+zoomBoxActivate (CompDisplay     *d,
+		 CompAction      *action,
+		 CompActionState state,
+		 CompOption      *option,
+		 int		 nOption)
+{
+    CompScreen *s;
+    int        xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+
+    if (s)
+    {
+	ZOOM_SCREEN (s);
+	zs->grabIndex = pushScreenGrab (s, None, "ezoom");
+	zs->box.x1 = pointerX;
+	zs->box.y1 = pointerY;
+	zs->box.x2 = pointerX;
+	zs->box.y2 = pointerY;
+	if (state & CompActionStateInitButton)
+	    action->state |= CompActionStateTermButton;
+    return TRUE;
+    }
+    return FALSE;
+}
+
+static Bool
+zoomBoxDeactivate (CompDisplay     *d,
+		   CompAction      *action,
+		   CompActionState state,
+		   CompOption      *option,
+		   int	           nOption)
+{
+    CompScreen *s;
+
+    for (s = d->screens; s; s = s->next)
+    {
+	int x, y, width, height;
+	ZOOM_SCREEN (s);
+
+	if (zs->grabIndex)
+	{
+	    int        out;
+	    CompOutput *o;
+
+	    removeScreenGrab (s, zs->grabIndex, NULL);
+	    zs->grabIndex = 0;
+
+	    zs->box.x2 = pointerX;
+	    zs->box.y2 = pointerY;
+	    
+	    x = MIN (zs->box.x1, zs->box.x2);
+	    y = MIN (zs->box.y1, zs->box.y2);
+	    width = MAX (zs->box.x1, zs->box.x2) - x;
+	    height = MAX (zs->box.y1, zs->box.y2) - y;
+
+	    out = outputDeviceForGeometry (s, x,y,width,height,0);
+	    o = outputDev (s, out);
+	    setScaleBigger (s, out, (float) width/o->width, (float)
+			    height/o->height);
+	    setZoomArea (s, x,y,width,height,FALSE);
+	}
+    }
+    return FALSE;
+}
+
+/* Zoom in to the area pointed to by the mouse.
+ */
+static Bool
+zoomIn (CompDisplay     *d,
+	CompAction      *action,
+	CompActionState state,
+	CompOption      *option,
+	int		nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+
+    if (s)
+    {
+	int out = outputDeviceForPoint (s, pointerX, pointerY);
+	const ZoomArea *za = outputZoomArea (s, out);
+	ZOOM_SCREEN (s);
+
+	if (zs->opt[SOPT_SYNC_MOUSE].value.b && !isInMovement (s, out)
+	    && (!zs->nonMouseFocusTracking
+	        || za->currentZoom == 1.0f))
+	    setCenter (s, pointerX, pointerY, TRUE);
+
+	setScale (s, out,
+		  za->newZoom / zs->opt[SOPT_ZOOM_FACTOR].value.f);
+    }
+    return TRUE;
+}
+
+/* Locks down the current zoom area
+ */
+static Bool
+lockZoomAction (CompDisplay     *d,
+		CompAction      *action,
+		CompActionState state,
+		CompOption      *option,
+		int		nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+
+    if (s)
+    {
+	int out = outputDeviceForPoint (s, pointerX, pointerY);
+	ZoomArea *za = outputZoomArea (s, out);
+	za->locked = !za->locked;
+    }
+    return TRUE;
+}
+
+/* Zoom to a specific level.
+ * target defines the target zoom level.
+ * First set the scale level and mark the display as grabbed internally (to
+ * catch the FocusIn event). Either target the focused window or the mouse,
+ * depending on settings.
+ * FIXME: A bit of a mess...
+ */
+static Bool
+zoomSpecific (CompDisplay     *d,
+	      CompAction      *action,
+	      CompActionState state,
+	      CompOption      *option,
+	      int	      nOption,
+	      float	      target)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+
+    if (s)
+    {
+	int          x, y;
+	int          out = outputDeviceForPoint (s, pointerX, pointerY);
+	CompWindow   *w;
+	ZOOM_DISPLAY (d);
+
+	if (target == 1.0f && outputZoomArea (s, out)->newZoom == 1.0f)
+	    return FALSE;
+	if (otherScreenGrabExist (s, NULL))
+	    return FALSE;
+
+	setScale (s, out, target);
+
+	w = findWindowAtDisplay(d, d->activeWindow);
+	if (zd->opt[DOPT_SPECIFIC_TARGET_FOCUS].value.b
+	    && w && w->screen->root == s->root)
+	{
+	    zoomAreaToWindow (w);
+	}
+	else
+	{
+	    x = getIntOptionNamed (option, nOption, "x", 0);
+	    y = getIntOptionNamed (option, nOption, "y", 0);
+	    setCenter (s, x, y, FALSE);
+	}
+    }
+    return TRUE;
+}
+
+static Bool
+zoomSpecific1 (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
+{
+    ZOOM_DISPLAY (d);
+
+    return zoomSpecific (d, action, state, option, nOption,
+			 1.0f / zd->opt[DOPT_SPECIFIC_LEVEL_1].value.f);
+}
+
+static Bool
+zoomSpecific2 (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
+{
+    ZOOM_DISPLAY (d);
+
+    return zoomSpecific (d, action, state, option, nOption,
+			 1.0f / zd->opt[DOPT_SPECIFIC_LEVEL_2].value.f);
+}
+
+static Bool
+zoomSpecific3 (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
+{
+    ZOOM_DISPLAY (d);
+
+    return zoomSpecific (d, action, state, option, nOption,
+			 1.0f / zd->opt[DOPT_SPECIFIC_LEVEL_3].value.f);
+}
+
+/* Zooms to fit the active window to the screen without cutting
+ * it off and targets it.
+ */
+static Bool
+zoomToWindow (CompDisplay     *d,
+	      CompAction      *action,
+	      CompActionState state,
+	      CompOption      *option,
+	      int	      nOption)
+{
+    int        width, height, out;
+    Window     xid;
+    CompScreen *s;
+    CompWindow *w;
+    CompOutput *o;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+
+    if (!s)
+	return TRUE;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+    w = findWindowAtDisplay (d, xid);
+    if (!w || w->screen->root != s->root)
+	return TRUE;
+    width = w->width + w->input.left + w->input.right;
+    height = w->height + w->input.top + w->input.bottom;
+    out = outputDeviceForWindow (w);
+    o = outputDev (s, out);
+    setScaleBigger (s, out, (float) width/o->width, 
+		    (float) height/o->height);
+    zoomAreaToWindow (w);
+    return TRUE;
+}
+
+static Bool
+zoomPanLeft (CompDisplay     *d,
+	     CompAction      *action,
+	     CompActionState state,
+	     CompOption      *option,
+	     int	     nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+    if (!s)
+	return TRUE;
+
+    panZoom (s, -1, 0);
+    return TRUE;
+}
+static Bool
+zoomPanRight (CompDisplay     *d,
+	      CompAction      *action,
+	      CompActionState state,
+	      CompOption      *option,
+	      int	      nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+    if (!s)
+	return TRUE;
+    panZoom (s, 1, 0);
+    return TRUE;
+}
+static Bool
+zoomPanUp (CompDisplay     *d,
+	   CompAction      *action,
+	   CompActionState state,
+	   CompOption      *option,
+	   int		   nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+    if (!s)
+	return TRUE;
+    panZoom (s, 0, -1);
+    return TRUE;
+}
+
+static Bool
+zoomPanDown (CompDisplay     *d,
+	     CompAction      *action,
+	     CompActionState state,
+	     CompOption      *option,
+	     int	     nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+    if (!s)
+	return TRUE;
+    panZoom (s, 0, 1);
+    return TRUE;
+}
+
+/* Centers the mouse based on zoom level and translation.
+ */
+static Bool
+zoomCenterMouse (CompDisplay     *d,
+		 CompAction      *action,
+		 CompActionState state,
+		 CompOption      *option,
+		 int		 nOption)
+{
+    int        out;
+    CompScreen *s;
+    Window     xid;
+    const CompOutput *o;
+    const ZoomArea *za;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+    if (!s)
+	return TRUE;
+
+    out = outputDeviceForPoint (s, pointerX, pointerY);
+    o = outputDev (s, out);
+    za = outputZoomArea (s, out);
+    warpPointer (s,
+		 (int) (o->width/2 +
+			o->region.extents.x1 - pointerX)
+		 + ((float) o->width *
+			-za->xtrans),
+		 (int) (o->height/2 +
+			o->region.extents.y1 - pointerY)
+		 + ((float) o->height *
+			za->ytrans));
+    return TRUE;
+}
+
+/* Resize a window to fit the zoomed area.
+ * This could probably do with some moving-stuff too.
+ * IE: Move the zoom area afterwards. And ensure
+ * the window isn't resized off-screen.
+ */
+static Bool
+zoomFitWindowToZoom (CompDisplay     *d,
+		     CompAction      *action,
+		     CompActionState state,
+		     CompOption      *option,
+		     int	     nOption)
+{
+    int            out;
+    unsigned int   mask = CWWidth | CWHeight;
+    Window         xid;
+    CompScreen     *s;
+    XWindowChanges xwc;
+    CompWindow     *w;
+    ZoomArea       *za;
+    const CompOutput *o;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+    w = findWindowAtDisplay (d, xid);
+    if (!w)
+	return TRUE;
+
+    s = w->screen;
+    out = outputDeviceForWindow (w);
+    o = outputDev (s, out);
+    za = outputZoomArea (s, out);
+    xwc.x = w->serverX;
+    xwc.y = w->serverY;
+    xwc.width = (int) (o->width * za->currentZoom -
+		       (int) ((w->input.left + w->input.right)));
+    xwc.height = (int) (o->height * za->currentZoom -
+			(int) ((w->input.top + w->input.bottom)));
+
+    constrainNewWindowSize (w, 
+			    xwc.width, 
+			    xwc.height, 
+			    &xwc.width,
+			    &xwc.height);
+
+    if (xwc.width == w->serverWidth)
+	mask &= ~CWWidth;
+
+    if (xwc.height == w->serverHeight)
+	mask &= ~CWHeight;
+
+    if (w->mapNum && (mask & (CWWidth | CWHeight)))
+	sendSyncRequest (w);
+
+    configureXWindow (w, mask, &xwc);
+    return TRUE;
+}
+
+static Bool
+zoomOut (CompDisplay     *d,
+	 CompAction      *action,
+	 CompActionState state,
+	 CompOption      *option,
+	 int	         nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	int out = outputDeviceForPoint (s, pointerX, pointerY);
+	ZOOM_SCREEN (s);
+
+	setScale (s, out,
+		  outputZoomArea (s, out)->newZoom *
+		  zs->opt[SOPT_ZOOM_FACTOR].value.f);
+    }
+
+    return TRUE;
+}
+
+
+/* Focus-track related event handling.
+ * The lastMapped is a hack to ensure that newly mapped windows are
+ * caught even if the grab that (possibly) triggered them affected
+ * the mode. Windows created by a key binding (like creating a terminal
+ * on a key binding) tends to trigger FocusIn events with mode other than
+ * Normal. This works around this problem.
+ * FIXME: Cleanup.
+ * TODO: Avoid maximized windows.
+ */
+static void
+focusTrack (CompDisplay *d,
+	    XEvent *event)
+{
+    int           out;
+    static Window lastMapped = 0;
+    CompWindow    *w;
+    ZoomScreen    *zs;
+
+    if (event->type == MapNotify)
+    {
+	lastMapped = event->xmap.window;
+	return;
+    }
+    else if (event->type != FocusIn)
+	return;
+
+    if ((event->xfocus.mode != NotifyNormal)
+	&& (lastMapped != event->xfocus.window))
+	return;
+
+    lastMapped = 0;
+    w = findWindowAtDisplay(d, event->xfocus.window);
+    if (w == NULL || w->id == d->activeWindow)
+	return;
+
+    zs = GET_ZOOM_SCREEN (w->screen, GET_ZOOM_DISPLAY (d));
+ 
+    if (getTime () - zs->lastMouseChange < zs->opt[SOPT_FOCUS_DELAY].value.f ||
+	!zs->opt[SOPT_FOLLOW_WINDOW_FOCUS].value.b)
+	return;
+
+    out = outputDeviceForWindow (w);
+    if (!isActive (w->screen, out) &&
+	!zs->opt[SOPT_ALLWAYS_FOCUS_FIT_WINDOW].value.b)
+	return;
+    if (zs->opt[SOPT_FOCUS_FIT_WINDOW].value.b)
+    {
+	const CompOutput *o = outputDev (w->screen, out);
+	int width = w->width + w->input.left + w->input.right;
+	int height = w->height + w->input.top + w->input.bottom;
+	float scale = MAX ((float) width/o->width,
+			   (float) height/o->height);
+	if (scale > 1.0f / zs->opt[SOPT_AUTOSCALE_MIN].value.i)
+		setScale (w->screen, out, scale);
+    }
+    zoomAreaToWindow (w);
+}
+
+/* Event handler. Pass focus-related events on and handle XFixes events. */
+static void
+zoomHandleEvent (CompDisplay *d,
+		 XEvent      *event)
+{
+    CompScreen *s;
+    XMotionEvent *mev;
+    ZOOM_DISPLAY(d);
+
+    switch (event->type) {
+	case MotionNotify:
+	    mev =  (XMotionEvent *) event;
+	    s = findScreenAtDisplay (d, mev->root);
+	    if (s)
+	    {
+		ZOOM_SCREEN (s);
+		if (zs->grabIndex)
+		{
+		    zs->box.x2 = pointerX;
+		    zs->box.y2 = pointerY;
+		    damageScreen(s);
+		}
+	    }
+	    break;
+	case FocusIn:
+	case MapNotify:
+	    focusTrack (d, event);
+	    break;
+	default:
+	    if (event->type == zd->fixesEventBase + XFixesCursorNotify)
+	    {
+		XFixesCursorNotifyEvent *cev = (XFixesCursorNotifyEvent *)
+		    event;
+		s = findScreenAtDisplay (d, cev->window);
+		if (s)
+		{
+		    ZOOM_SCREEN(s);
+		    if (zs->cursor.isSet)
+			zoomUpdateCursor (s, &zs->cursor);
+		}
+	    }
+	    break;
+    }
+    UNWRAP (zd, d, handleEvent);
+    (*d->handleEvent) (d, event);
+    WRAP (zd, d, handleEvent, zoomHandleEvent);
+}
+
+/* Settings etc., boring stuff */
+static const CompMetadataOptionInfo zoomDisplayOptionInfo[] = {
+    { "zoom_in_button", "button", 0, zoomIn, 0 },
+    { "zoom_out_button", "button", 0, zoomOut, 0 },
+    { "zoom_in_key", "key", 0, zoomIn, 0 },
+    { "zoom_out_key", "key", 0, zoomOut, 0 },
+    { "zoom_specific_1_key", "key", 0, zoomSpecific1, 0 },
+    { "zoom_specific_2_key", "key", 0, zoomSpecific2, 0 },
+    { "zoom_specific_3_key", "key", 0, zoomSpecific3, 0 },
+    { "zoom_spec1", "float", "<min>1.0</min><max>10.0</max><default>1.0</default>", 0, 0 },
+    { "zoom_spec2", "float", "<min>1.0</min><max>10.0</max><default>2.0</default>", 0, 0 },
+    { "zoom_spec3", "float", "<min>1.0</min><max>10.0</max><default>5.0</default>", 0, 0 },
+    { "spec_target_focus", "bool", "<default>true</default>", 0, 0 },
+    { "pan_left_key", "key", 0, zoomPanLeft, 0 },
+    { "pan_right_key", "key", 0, zoomPanRight, 0 },
+    { "pan_up_key", "key", 0, zoomPanUp, 0 },
+    { "pan_down_key", "key", 0, zoomPanDown, 0 },
+    { "fit_to_window_key", "key", 0, zoomToWindow, 0 },
+    { "center_mouse_key", "key", 0, zoomCenterMouse, 0 },
+    { "fit_to_zoom_key", "key", 0, zoomFitWindowToZoom, 0 },
+    { "ensure_visibility", "action", 0, ensureVisibilityAction, 0}, 
+    { "set_zoom_area", "action", 0, setZoomAreaAction, 0}, 
+    { "lock_zoom_key", "key", 0, lockZoomAction, 0},
+    { "zoom_box_button", "button", 0, zoomBoxActivate, zoomBoxDeactivate},
+};
+
+static const CompMetadataOptionInfo zoomScreenOptionInfo[] = {
+    { "follow_focus", "bool", 0, 0, 0 },
+    { "follow_window_focus", "bool", 0, 0, 0 },
+    { "speed", "float", "<min>0.01</min>", 0, 0 },
+    { "timestep", "float", "<min>0.1</min>", 0, 0 },
+    { "zoom_factor", "float", "<min>1.01</min>", 0, 0 },
+    { "filter_linear", "bool", 0, 0, 0 },
+    { "instant_pan", "bool", 0, 0, 0 },
+    { "sync_mouse", "bool", 0, 0, 0 },
+    { "follow_focus_delay", "float", "<min>0</min>", 0, 0 },
+    { "follow_mouse_delay", "float", "<min>0</min>", 0, 0 },
+    { "always_center_mouse", "bool", 0, 0, 0 },
+    { "restrain_zoom_to_screen", "bool", 0, 0, 0 },
+    { "warp_mouse_to_focus", "bool", 0, 0, 0 },
+    { "pan_factor", "float", "<min>0.001</min><default>0.1</default>", 0, 0 },
+    { "focus_fit_window", "bool", "<default>false</default>", 0, 0 },
+    { "always_focus_fit_window", "bool", "<default>false</default>", 0, 0 },
+    { "scale_mouse", "bool", "<default>true</default>", 0, 0 },
+    { "scale_mouse_dynamic", "bool", "<default>true</default>", 0, 0 },
+    { "scale_mouse_static", "float", "<default>0.8</default>", 0, 0 },
+    { "hide_original_mouse", "bool", "<default>true</default>", 0, 0 },
+    { "restrain_mouse", "bool", "<default>false</default>", 0, 0 },
+    { "restrain_margin", "int", "<default>5</default>", 0, 0 },
+    { "mouse_pan", "bool", "<default>false</default>", 0, 0 },
+    { "maximum_zoom", "int", "<max>50</max>", 0, 0 },
+    { "autoscale_min", "int", "<max>50</max>", 0, 0 },
+    { "zoom_spec_startup", "float", 0, 0, 0},
+    { "notifications_enabled", "bool", 0, 0, 0 },
+    { "notifications_min_delay", "float",
+      "<default>2</default><min>0</min><max>60</max><precision>0.1</precision>", 0, 0 },
+    { "notifications_max_delay", "float",
+      "<default>7</default><min>0.1</min><max>60</max><precision>0.1</precision>", 0, 0 },
+};
+
+static CompOption *
+zoomGetScreenOptions (CompPlugin *plugin,
+		      CompScreen *screen,
+		      int	 *count)
+{
+    ZOOM_SCREEN (screen);
+
+    *count = NUM_OPTIONS (zs);
+    return zs->opt;
+}
+
+static Bool
+zoomSetScreenOption (CompPlugin      *plugin,
+		     CompScreen      *screen,
+		     const char	     *name,
+		     CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index, i;
+
+    ZOOM_SCREEN (screen);
+
+    o = compFindOption (zs->opt, NUM_OPTIONS (zs), name, &index);
+    if (!o)
+	return FALSE;
+
+    Bool ret = compSetScreenOption (screen, o, value);
+
+    if (index == SOPT_SPEC_STARTUP)
+	for (i = 0; i < zs->nZooms; i ++ )
+	    setScale(screen, i, 1.0f / zs->opt[SOPT_SPEC_STARTUP].value.f);
+
+    return ret;
+}
+
+static CompOption *
+zoomGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
+		       int	   *count)
+{
+    ZOOM_DISPLAY (display);
+    *count = NUM_OPTIONS (zd);
+    return zd->opt;
+}
+
+static Bool
+zoomSetDisplayOption (CompPlugin      *plugin,
+		      CompDisplay     *display,
+		      const char      *name,
+		      CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+    ZOOM_DISPLAY (display);
+
+    o = compFindOption (zd->opt, NUM_OPTIONS (zd), name, &index);
+    if (!o)
+	return FALSE;
+
+    return compSetDisplayOption (display, o, value);
+}
+
+
+static Bool
+zoomInitDisplay (CompPlugin  *p,
+		 CompDisplay *d)
+{
+    int         minor, major;
+    int		index, indexfocus;
+    int		i;
+    ZoomDisplay *zd;
+
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
+	return FALSE;
+
+    if (!checkPluginABI ("mousepoll", MOUSEPOLL_ABIVERSION))
+	return FALSE;
+
+    if (!getPluginDisplayIndex (d, "mousepoll", &index))
+	return FALSE;
+
+    zd = malloc (sizeof (ZoomDisplay));
+    if (!zd)
+	return FALSE;
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &zoomMetadata,
+					     zoomDisplayOptionInfo,
+					     zd->opt,
+					     DOPT_NUM))
+    {
+	free (zd);
+	return FALSE;
+    }
+
+    for (i = 0; i < NUM_OPTIONS (zd); i++)
+    {
+	CompOption *opt = &zd->opt[i];
+	if (isActionOption(opt))
+	    opt->value.action.ignoreGrabs = TRUE;
+    }
+
+    zd->mpFunc = d->base.privates[index].ptr;
+
+    if (getPluginABI ("focuspoll") &&
+	checkPluginABI ("focuspoll", FOCUSPOLL_ABIVERSION) &&
+        getPluginDisplayIndex (d, "focuspoll", &indexfocus))
+	zd->fpFunc = d->base.privates[indexfocus].ptr;
+    else
+	zd->fpFunc = NULL;
+
+    zd->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (zd->screenPrivateIndex < 0)
+    {
+	compFiniDisplayOptions (d, zd->opt, DOPT_NUM);
+	free (zd);
+	return FALSE;
+    }
+
+    zd->fixesSupported = 
+	XFixesQueryExtension(d->display, 
+			     &zd->fixesEventBase,
+			     &zd->fixesErrorBase);
+
+    XFixesQueryVersion(d->display, &major, &minor);
+    if (major >= 4)
+	zd->canHideCursor = TRUE;
+    else
+	zd->canHideCursor = FALSE;
+
+    WRAP (zd, d, handleEvent, zoomHandleEvent);
+    d->base.privates[displayPrivateIndex].ptr = zd;
+    return TRUE;
+}
+
+static void
+zoomFiniDisplay (CompPlugin  *p,
+		 CompDisplay *d)
+{
+    ZOOM_DISPLAY (d);
+    freeScreenPrivateIndex (d, zd->screenPrivateIndex);
+    UNWRAP (zd, d, handleEvent);
+    compFiniDisplayOptions (d, zd->opt, DOPT_NUM);
+    free (zd);
+}
+
+static Bool
+zoomInitScreen (CompPlugin *p,
+		CompScreen *s)
+{
+    int          i;
+    ZoomScreen   *zs;
+    ZOOM_DISPLAY (s->display);
+
+    zs = malloc (sizeof (ZoomScreen));
+    if (!zs)
+	return FALSE;
+
+    if (!compInitScreenOptionsFromMetadata (s,
+					    &zoomMetadata,
+					    zoomScreenOptionInfo,
+					    zs->opt,
+					    SOPT_NUM))
+    {
+	free (zs);
+	return FALSE;
+    }
+ 
+    zs->grabIndex = 0;
+    zs->nZooms = s->nOutputDev;
+    zs->zooms = malloc (sizeof (ZoomArea) * zs->nZooms);
+    for (i = 0; i < zs->nZooms; i ++ )
+    {
+	/* zs->grabbed is a mask ... Thus this limit */
+	if (i > sizeof (long int) * 8)
+	    break;
+	initialiseZoomArea (&zs->zooms[i], i);
+    }
+    zs->lastMouseChange = 0;
+    zs->lastFocusChange = 0;
+    zs->lastNotificationChange = 0;
+    zs->nonMouseFocusTracking = FALSE;
+    zs->grabbed = 0;
+    zs->mouseX = -1;
+    zs->mouseY = -1;
+    zs->cursorInfoSelected = FALSE;
+    zs->cursor.isSet = FALSE;
+    zs->cursorHidden = FALSE;
+    zs->pollMouseHandle = 0;
+    zs->pollFocusHandle = 0;
+    zs->notificationTimeoutHandle = 0;
+    zs->beforeNotificationX = 0;
+    zs->beforeNotificationY = 0;
+
+    WRAP (zs, s, preparePaintScreen, zoomPreparePaintScreen);
+    WRAP (zs, s, donePaintScreen, zoomDonePaintScreen);
+    WRAP (zs, s, paintOutput, zoomPaintOutput);
+
+    s->base.privates[zd->screenPrivateIndex].ptr = zs;
+    return TRUE;
+}
+
+static void
+zoomFiniScreen (CompPlugin *p,
+		CompScreen *s)
+{
+    ZOOM_DISPLAY (s->display);
+    ZOOM_SCREEN (s);
+
+    UNWRAP (zs, s, preparePaintScreen);
+    UNWRAP (zs, s, donePaintScreen);
+    UNWRAP (zs, s, paintOutput);
+    if (zs->pollMouseHandle)
+	    (*zd->mpFunc->removePositionPolling) (s, zs->pollMouseHandle);
+    if (zs->pollFocusHandle)
+	    (*zd->fpFunc->removeFocusPolling) (s, zs->pollFocusHandle);
+    if (zs->notificationTimeoutHandle)
+	compRemoveTimeout (zs->notificationTimeoutHandle);
+
+    if (zs->zooms)
+	free (zs->zooms);
+
+    damageScreen (s); // If we are unloaded and zoomed in.
+    cursorZoomInactive (s);
+    compFiniScreenOptions (s, zs->opt, SOPT_NUM);
+    free (zs);
+}
+
+static CompBool
+zoomInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
+	(InitPluginObjectProc) zoomInitDisplay,
+	(InitPluginObjectProc) zoomInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+zoomFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
+	(FiniPluginObjectProc) zoomFiniDisplay,
+	(FiniPluginObjectProc) zoomFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static Bool
+zoomInit (CompPlugin *p)
+{
+    if (!compInitPluginMetadataFromInfo (&zoomMetadata,
+					 p->vTable->name,
+					 zoomDisplayOptionInfo,
+					 DOPT_NUM,
+					 zoomScreenOptionInfo,
+					 SOPT_NUM))
+	return FALSE;
+
+    displayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&zoomMetadata);
+	return FALSE;
+    }
+    compAddMetadataFromFile (&zoomMetadata, p->vTable->name);
+    return TRUE;
+}
+
+static CompOption *
+zoomGetObjectOptions (CompPlugin *plugin,
+		      CompObject *object,
+		      int	 *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
+	(GetPluginObjectOptionsProc) zoomGetDisplayOptions,
+	(GetPluginObjectOptionsProc) zoomGetScreenOptions
+    };
+    
+    *count = 0;
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     NULL, (plugin, object, count));
+}
+
+static CompBool
+zoomSetObjectOption (CompPlugin      *plugin,
+		     CompObject      *object,
+		     const char      *name,
+		     CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
+	(SetPluginObjectOptionProc) zoomSetDisplayOption,
+	(SetPluginObjectOptionProc) zoomSetScreenOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
+}
+
+static void
+zoomFini (CompPlugin *p)
+{
+    freeDisplayPrivateIndex (displayPrivateIndex);
+    compFiniMetadata (&zoomMetadata);
+}
+
+static CompMetadata *
+zoomGetMetadata (CompPlugin *plugin)
+{
+    return &zoomMetadata;
+}
+
+CompPluginVTable zoomVTable = {
+    "ezoom",
+    zoomGetMetadata,
+    zoomInit,
+    zoomFini,
+    zoomInitObject,
+    zoomFiniObject,
+    zoomGetObjectOptions,
+    zoomSetObjectOption
+};
+
+CompPluginVTable *
+getCompPluginInfo20070830 (void)
+{
+    return &zoomVTable;
+}

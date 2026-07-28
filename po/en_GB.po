@@ -1,0 +1,2698 @@
+# English (United Kingdom) translation for compiz-plugins-main
+# Copyright (C) 2008 launchpad.net/compiz
+# This file is distributed under the same license as the compiz-plugins-main package.
+# David Lodge <dave@cirt.net>.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: compiz-plugins-main\n"
+"Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-plugins-main/"
+"issues\n"
+"POT-Creation-Date: 2017-01-12 18:19+0300\n"
+"PO-Revision-Date: 2008-05-26 15:47+0200\n"
+"Last-Translator: David Lodge <dave@cirt.net>\n"
+"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Animations"
+msgstr "Animations"
+
+msgid "Use various animations as window effects"
+msgstr "Use various animations as window effects"
+
+msgid "Open Animation"
+msgstr "Open Animation"
+
+msgid "Animation Selection"
+msgstr "Animation Selection"
+
+msgid "Open Effect"
+msgstr "Open Effect"
+
+msgid "The animation effect shown when creating a window."
+msgstr "The animation effect shown when creating a window."
+
+msgid "Duration"
+msgstr "Duration"
+
+msgid "Animation duration in milliseconds for open effect."
+msgstr "Animation duration in milliseconds for open effect."
+
+msgid "Window Match"
+msgstr "Window Match"
+
+msgid "The windows that will be animated."
+msgstr "The windows that will be animated."
+
+msgid "Options"
+msgstr "Options"
+
+msgid ""
+"Comma separated list of option value assignments to override effect "
+"settings, e.g.: fire_color=#0080ffff, fire_particles=700, fire_smoke=1"
+msgstr ""
+"Comma separated list of option value assignments to override effect "
+"settings, e.g.: fire_color=#0080ffff, fire_particles=700, fire_smoke=1"
+
+msgid "Random Effects"
+msgstr "Random Effects"
+
+msgid "Pool"
+msgstr "Pool"
+
+msgid ""
+"Pool of effects to be chosen from if Random effect is selected. Click reset "
+"to use all effects."
+msgstr ""
+"Pool of effects to be chosen from if Random effect is selected. Click reset "
+"to use all effects."
+
+msgid "Close Animation"
+msgstr "Close Animation"
+
+msgid "Close Effect"
+msgstr "Close Effect"
+
+msgid "The animation effect shown when closing a window."
+msgstr "The animation effect shown when closing a window."
+
+msgid "Animation duration in milliseconds for close effect."
+msgstr "Animation duration in milliseconds for close effect."
+
+msgid "Minimize Animation"
+msgstr "Minimise Animation"
+
+msgid "Minimize Effect"
+msgstr "Minimise Effect"
+
+msgid "The animation effect shown when minimizing a window."
+msgstr "The animation effect shown when minimising a window."
+
+msgid "Animation duration in milliseconds for minimize effect."
+msgstr "Animation duration in milliseconds for minimise effect."
+
+msgid "Shade Animation"
+msgstr "Shade Animation"
+
+msgid "Shade Effect"
+msgstr "Shade Effect"
+
+msgid "The animation effect shown when shading a window."
+msgstr "The animation effect shown when shading a window."
+
+msgid "Animation duration in milliseconds for shade effect."
+msgstr "Animation duration in milliseconds for shade effect."
+
+msgid "Window that should animate with this effect when shaded."
+msgstr "Window that should animate with this effect when shaded."
+
+msgid "Focus Animation"
+msgstr "Focus Animation"
+
+msgid "Focus Effect"
+msgstr "Focus Effect"
+
+msgid "The animation effect shown when focusing a window."
+msgstr "The animation effect shown when focusing a window."
+
+msgid "Animation duration in milliseconds for focus effect."
+msgstr "Animation duration in milliseconds for focus effect."
+
+msgid "Window that should animate with this effect when focused."
+msgstr "Window that should animate with this effect when focused."
+
+msgid "Effect Settings"
+msgstr "Effect Settings"
+
+msgid "Curved Fold"
+msgstr "Curved Fold"
+
+msgid "Curved Fold Amplitude Multiplier"
+msgstr "Curved Fold Amplitude Multiplier"
+
+msgid ""
+"Fold amplitude (size) is multiplied by this number. Negative values fold "
+"outward."
+msgstr ""
+"Fold amplitude (size) is multiplied by this number. Negative values fold "
+"outward."
+
+msgid "Zoom to TaskBar on Minimize"
+msgstr "Zoom to TaskBar on Minimise"
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Curved Fold "
+"effect."
+msgstr ""
+"Whether the window should zoom to taskbar when minimised with Curved Fold "
+"effect."
+
+msgid "Dodge"
+msgstr "Dodge"
+
+msgid "Dodge Gap Ratio"
+msgstr "Dodge Gap Ratio"
+
+msgid "Ratio of gaps between dodge start times to focus duration."
+msgstr "Ratio of gaps between dodge start times to focus duration."
+
+msgid "Dream"
+msgstr "Dream"
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Dream effect."
+msgstr ""
+"Whether the window should zoom to taskbar when minimised with Dream effect."
+
+msgid "Glide 1"
+msgstr "Glide 1"
+
+msgid "Away Position"
+msgstr "Away Position"
+
+msgid ""
+"Closeness of window to camera at the end of the animation (1.0: Close to "
+"camera, -2.0: Away from camera)."
+msgstr ""
+"Closeness of window to camera at the end of the animation (1.0: Close to "
+"camera, -2.0: Away from camera)."
+
+msgid "Away Angle"
+msgstr "Away Angle"
+
+msgid "Angle of window at the end of the animation."
+msgstr "Angle of window at the end of the animation."
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Glide 1 effect."
+msgstr ""
+"Whether the window should zoom to taskbar when minimised with Glide 1 effect."
+
+msgid "Glide 2"
+msgstr "Glide 2"
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Glide 2 effect."
+msgstr ""
+"Whether the window should zoom to taskbar when minimised with Glide 2 effect."
+
+msgid "Horizontal Folds"
+msgstr "Horizontal Folds"
+
+msgid "Horizontal Folds Amplitude Multiplier"
+msgstr "Horizontal Folds Amplitude Multiplier"
+
+msgid "Number of Horizontal Folds"
+msgstr "Number of Horizontal Folds"
+
+msgid ""
+"The number of horizontal folds that occur in the Horizontal Fold animation."
+msgstr ""
+"The number of horizontal folds that occur in the Horizontal Fold animation."
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Horizontal "
+"Folds effect."
+msgstr ""
+"Whether the window should zoom to taskbar when minimised with Horizontal "
+"Folds effect."
+
+msgid "Magic Lamp"
+msgstr "Magic Lamp"
+
+msgid "Magic Lamp Open/Close Moving End"
+msgstr "Magic Lamp Open/Close Moving End"
+
+msgid "On open/close, move magic lamp ending point with the mouse pointer."
+msgstr "On open/close, move magic lamp ending point with the mouse pointer."
+
+msgid "Magic Lamp Grid Y Resolution"
+msgstr "Magic Lamp Grid Y Resolution"
+
+msgid ""
+"Vertex grid resolution for Magic Lamp (Y dimension only). This is the number "
+"of points used to define the curves. The higher the number, the smoother the "
+"curves. However there will be a loss of performance (CPU usage increases)."
+msgstr ""
+"Vertex grid resolution for Magic Lamp (Y dimension only). This is the number "
+"of points used to define the curves. The higher the number, the smoother the "
+"curves. However there will be a loss of performance (CPU usage increases)."
+
+msgid "Magic Lamp Max Waves"
+msgstr "Magic Lamp Max Waves"
+
+msgid "The maximum number of waves for Magic Lamp."
+msgstr "The maximum number of waves for Magic Lamp."
+
+msgid "Magic Lamp Min Wave Amplitude"
+msgstr "Magic Lamp Min Wave Amplitude"
+
+msgid "The minimum amplitude (size of the waves) Magic Lamp will have."
+msgstr "The minimum amplitude (size of the waves) Magic Lamp will have."
+
+msgid "Magic Lamp Max Wave Amplitude"
+msgstr "Magic Lamp Max Wave Amplitude"
+
+msgid "The maximum amplitude (size of the waves) Magic Lamp will have."
+msgstr "The maximum amplitude (size of the waves) Magic Lamp will have."
+
+msgid "Magic Lamp Open Start Width"
+msgstr "Magic Lamp Open Start Width"
+
+msgid ""
+"Starting width of open effect and ending width of close effect for Magic "
+"Lamp."
+msgstr ""
+"Starting width of open effect and ending width of close effect for Magic "
+"Lamp."
+
+msgid "Roll Up"
+msgstr "Roll Up"
+
+msgid "Rollup Fixed Interior"
+msgstr "Rollup Fixed Interior"
+
+msgid "Fixed window interior during the Rollup animation."
+msgstr "Fixed window interior during the Rollup animation."
+
+msgid "Sidekick"
+msgstr "Sidekick"
+
+msgid "Sidekick Number of Rotations"
+msgstr "Sidekick Number of Rotations"
+
+#, no-c-format
+msgid "Number of rotations for Sidekick (plus or minus 10% for randomness)."
+msgstr "Number of rotations for Sidekick (plus or minus 10% for randomness)."
+
+msgid "Sidekick Springiness"
+msgstr "Sidekick Springiness"
+
+msgid "How spring-like the Sidekick animation should be."
+msgstr "How spring-like the Sidekick animation should be."
+
+msgid "Zoom from Center"
+msgstr "Zoom from Centre"
+
+msgid "Zoom from center when playing the Sidekick animation."
+msgstr "Zoom from center when playing the Sidekick animation."
+
+msgid "Off"
+msgstr "Off"
+
+msgid "Minimize/Unminimize Only"
+msgstr "Minimise/Restore Only"
+
+msgid "Open/Close Only"
+msgstr "Open/Close Only"
+
+msgid "On"
+msgstr "On"
+
+msgid "Vacuum"
+msgstr "Vacuum"
+
+msgid "Vacuum Open/Close Moving End"
+msgstr "Vacuum Open/Close Moving End"
+
+msgid "On open/close, move vacuum ending point with the mouse pointer."
+msgstr "On open/close, move vacuum ending point with the mouse pointer."
+
+msgid "Vacuum Grid Y Resolution"
+msgstr "Vacuum Grid Y Resolution"
+
+msgid ""
+"Vertex grid resolution for Vacuum (Y dimension only). This is the number of "
+"points used to define the curves. The higher the number, the smoother the "
+"curves. However there will be a loss of performance (CPU usage increases)."
+msgstr ""
+"Vertex grid resolution for Vacuum (Y dimension only). This is the number of "
+"points used to define the curves. The higher the number, the smoother the "
+"curves. However there will be a loss of performance (CPU usage increases)."
+
+msgid "Vacuum Open Start Width"
+msgstr "Vacuum Open Start Width"
+
+msgid ""
+"Starting width of open effect and ending width of close effect for Vacuum."
+msgstr ""
+"Starting width of open effect and ending width of close effect for Vacuum."
+
+msgid "Wave"
+msgstr "Wave"
+
+msgid "Wave Width"
+msgstr "Wave Width"
+
+msgid "The width of the wave relative to the window height."
+msgstr "The width of the wave relative to the window height."
+
+msgid "Wave Amplitude Multiplier"
+msgstr "Wave Amplitude Multiplier"
+
+msgid ""
+"Wave amplitude (size) is multiplied by this number. Negative values fold "
+"outward."
+msgstr ""
+"Wave amplitude (size) is multiplied by this number. Negative values fold "
+"outward."
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Zoom from center when playing the Zoom animation."
+msgstr "Zoom from centre when playing the Zoom animation."
+
+msgid "Zoom Springiness"
+msgstr "Zoom Springiness"
+
+msgid "How spring-like the Zoom animation should be."
+msgstr "How spring-like the Zoom animation should be."
+
+msgid "Random Animations For All Events"
+msgstr "Random Animations For All Events"
+
+msgid ""
+"All effects are chosen randomly, ignoring the selected effect. If None is "
+"selected for an event, that event won't be animated."
+msgstr ""
+"All effects are chosen randomly, ignoring the selected effect. If None is "
+"selected for an event, that event won't be animated."
+
+msgid "Animation Time Step"
+msgstr "Animation Time Step"
+
+msgid ""
+"The amount of time in milliseconds between each render of the animation. The "
+"higher the number, the jerkier the movements become."
+msgstr ""
+"The amount of time in milliseconds between each render of the animation. The "
+"higher the number, the jerkier the movements become."
+
+msgid "None"
+msgstr "None"
+
+msgid "Random"
+msgstr "Random"
+
+msgid "Fade"
+msgstr "Fade"
+
+msgid "Color filter"
+msgstr "Colour filter"
+
+msgid "Filter colors for accessibility purposes"
+msgstr "Filter colours for accessibility purposes"
+
+msgid "Toggle window filtering"
+msgstr "Toggle window filtering"
+
+msgid "Toggle filtering for currently focused window."
+msgstr "Toggle filtering for currently focused window."
+
+msgid "Toggle screen filtering"
+msgstr "Toggle screen filtering"
+
+msgid "Toggle filtering for every window on the screen."
+msgstr "Toggle filtering for every window on the screen."
+
+msgid "Switch filter"
+msgstr "Switch filter"
+
+msgid ""
+"Select filter to use from filters list : either apply all filters or only "
+"one specific filter (triggering this action switches filters one by one and "
+"eventually comes back to the \"all filters\" mode)."
+msgstr ""
+"Select filter to use from filters list : either apply all filters or only "
+"one specific filter (triggering this action switches filters one by one and "
+"eventually comes back to the \"all filters\" mode)."
+
+msgid "Filter window decorations"
+msgstr "Filter window decorations"
+
+msgid ""
+"Window decorations (borders and titlebar) will be filtered as well as window "
+"contents if enabled."
+msgstr ""
+"Window decorations (borders and titlebar) will be filtered as well as window "
+"contents if enabled."
+
+msgid "Filtered windows"
+msgstr "Filtered windows"
+
+msgid "Windows to be filtered by default."
+msgstr "Windows to be filtered by default."
+
+msgid "Exclude windows"
+msgstr "Exclude windows"
+
+msgid "Windows to exclude from filtering."
+msgstr "Windows to exclude from filtering."
+
+msgid "Filters files"
+msgstr "Filters files"
+
+msgid ""
+"List of plain text filter files that should be applied when filtering "
+"windows or screen."
+msgstr ""
+"List of plain text filter files that should be applied when filtering "
+"windows or screen."
+
+msgid "Expo"
+msgstr "Expo"
+
+msgid "Expo Plugin"
+msgstr "Expo Plugin"
+
+msgid "Bindings"
+msgstr "Bindings"
+
+msgid "Expo key"
+msgstr "Expo key"
+
+msgid "Engage wall expo mode key binding"
+msgstr "Engage wall expo mode key binding"
+
+msgid "Expo button"
+msgstr "Expo button"
+
+msgid "Engage wall expo mode button binding"
+msgstr "Engage wall expo mode button binding"
+
+msgid "Expo edge"
+msgstr "Expo edge"
+
+msgid "Engage wall expo mode edge binding"
+msgstr "Engage wall expo mode edge binding"
+
+msgid "Double click time"
+msgstr "Double click time"
+
+msgid "Timeframe to execute a double click"
+msgstr "Timeframe to execute a double click"
+
+msgid "Drag&amp;drop"
+msgstr "Drag &amp; drop"
+
+msgid "Button binding for drag &amp; drop of windows"
+msgstr "Button binding for drag &amp; drop of windows"
+
+msgid "Exit expo"
+msgstr "Exit expo"
+
+msgid "Button binding to exit expo"
+msgstr "Button binding to exit expo"
+
+msgid "Next viewport"
+msgstr "Next viewport"
+
+msgid "Button binding to switch to next viewport in expo"
+msgstr "Button binding to switch to next viewport in expo"
+
+msgid "Previous viewport"
+msgstr "Previous viewport"
+
+msgid "Behaviour"
+msgstr "Behaviour"
+
+msgid "Zoom time"
+msgstr "Zoom time"
+
+msgid "Duration of the zoomout animation"
+msgstr "Duration of the zoomout animation"
+
+msgid "Immediate moves"
+msgstr "Immediate moves"
+
+msgid ""
+"Selects if windows movements in expo mode should be immediate - this among "
+"other things disables wobbliness"
+msgstr ""
+"Selects if windows movements in expo mode should be immediate - this among "
+"other things disables wobbliness"
+
+msgid "Expo Animation"
+msgstr "Expo Animation"
+
+msgid "Animation used when switching to expo mode"
+msgstr "Animation used when switching to expo mode"
+
+msgid "Fade + Zoom"
+msgstr "Fade + Zoom"
+
+msgid "Vortex"
+msgstr "Vortex"
+
+msgid "Appearance"
+msgstr "Appearance"
+
+msgid "Deformation"
+msgstr "Deformation"
+
+msgid "Deformation of the expo wall"
+msgstr "Deformation of the expo wall"
+
+msgid "Tilt"
+msgstr "Tilt"
+
+msgid "Curve"
+msgstr "Curve"
+
+msgid "Distance"
+msgstr "Distance"
+
+msgid "Distance of the expo wall"
+msgstr "Distance of the expo wall"
+
+msgid "Viewport distance"
+msgstr "Viewport distance"
+
+msgid "Distance between viewports"
+msgstr "Distance between viewports"
+
+msgid "Aspect Ratio"
+msgstr "Aspect Ratio"
+
+msgid "Expo mode aspect ratio"
+msgstr "Expo mode aspect ratio"
+
+msgid "Curve strength"
+msgstr "Curve strength"
+
+msgid "Strength of the deformation in curve mode"
+msgstr "Strength of the deformation in curve mode"
+
+msgid "Hide panels/docks in expo"
+msgstr "Hide panels/docks in expo"
+
+msgid "Hide panels/docks in expo."
+msgstr "Hide panels/docks in expo."
+
+msgid "Mipmaps"
+msgstr "Mipmaps"
+
+msgid "Generate mipmaps in expo mode"
+msgstr "Generate mipmaps in expo mode"
+
+msgid "Multi Output Mode"
+msgstr "Multi Output Mode"
+
+msgid ""
+"Selects how the expo wall is displayed if multiple output devices are used."
+msgstr ""
+"Selects how the expo wall is displayed if multiple output devices are used."
+
+msgid "One big wall"
+msgstr "One big wall"
+
+msgid "One wall per output"
+msgstr "One wall per output"
+
+msgid "Brightness"
+msgstr "Brightness"
+
+msgid "Inactive viewport brightness."
+msgstr "Inactive viewport brightness."
+
+msgid "Saturation"
+msgstr "Saturation"
+
+msgid "Inactive viewport saturation."
+msgstr "Inactive viewport saturation."
+
+msgid "Reflection"
+msgstr "Reflection"
+
+msgid "Show a reflection of the viewports on the ground"
+msgstr "Show a reflection of the viewports on the ground"
+
+msgid "Ground color(near)"
+msgstr "Ground colour(near)"
+
+msgid "Color of the ground (near)."
+msgstr "Colour of the ground (near)."
+
+msgid "Ground color(far)"
+msgstr "Ground colour (far)"
+
+msgid "Color of the ground (far)."
+msgstr "Colour of the ground (far)."
+
+msgid "Reflection ground size"
+msgstr "Reflection ground size"
+
+msgid "Reflection ground size."
+msgstr "Reflection ground size."
+
+msgid "Reflection Scale"
+msgstr "Reflection Scale"
+
+msgid "Scale factor of the expo wall reflection"
+msgstr "Scale factor of the expo wall reflection"
+
+msgid "Enhanced Zoom Desktop"
+msgstr "Enhanced Zoom Desktop"
+
+msgid "Enhanced zoom functions for the visually impaired and other users"
+msgstr "Enhanced zoom functions for the visually impaired and other users"
+
+msgid "Zoom In/Out"
+msgstr "Zoom In/Out"
+
+msgid "Zoom In"
+msgstr "Zoom In"
+
+msgid "Zoom Out"
+msgstr "Zoom Out"
+
+msgid "Zoom Box"
+msgstr "Zoom Box"
+
+msgid "Zoom in on a boxed area"
+msgstr "Zoom in on a boxed area"
+
+msgid "Mouse Behaviour"
+msgstr "Mouse Behaviour"
+
+msgid "Center the mouse"
+msgstr "Centre the mouse"
+
+msgid "Puts the mouse in the middle of the screen (Regardless of zoom level)"
+msgstr "Puts the mouse in the middle of the screen (Regardless of zoom level)"
+
+msgid "Specific Zoom"
+msgstr "Specific Zoom"
+
+msgid "Zoom Specific Level 1"
+msgstr "Zoom Specific Level 1"
+
+msgid "Zoom to the specific zoom level 1"
+msgstr "Zoom to the specific zoom level 1"
+
+msgid "Specific zoom factor 1"
+msgstr "Specific zoom factor 1"
+
+msgid "Zoom level to go to when triggering hotkey 1"
+msgstr "Zoom level to go to when triggering hotkey 1"
+
+msgid "Zoom Specific Level 2"
+msgstr "Zoom Specific Level 2"
+
+msgid "Zoom to the specific zoom level 2"
+msgstr "Zoom to the specific zoom level 2"
+
+msgid "Specific zoom factor 2"
+msgstr "Specific zoom factor 2"
+
+msgid "Zoom level to go to when triggering hotkey 2"
+msgstr "Zoom level to go to when triggering hotkey 2"
+
+msgid "Zoom Specific Level 3"
+msgstr "Zoom Specific Level 3"
+
+msgid "Zoom to the specific zoom level 3"
+msgstr "Zoom to the specific zoom level 3"
+
+msgid "Specific zoom factor 3"
+msgstr "Specific zoom factor 3"
+
+msgid "Zoom level to go to when triggering hotkey 3"
+msgstr "Zoom level to go to when triggering hotkey 3"
+
+msgid "Target Focused Window on Specific level"
+msgstr "Target Focused Window on Specific level"
+
+msgid ""
+"Enable this to target the focused window when jumping to a specific zoom "
+"level. Disable to target mouse."
+msgstr ""
+"Enable this to target the focused window when jumping to a specific zoom "
+"level. Disable to target mouse."
+
+msgid "Zoom Area Movement"
+msgstr "Zoom Area Movement"
+
+msgid "Toggle zoom area lock"
+msgstr "Toggle zoom area lock"
+
+msgid "Toggles a lock on the zoom area so it doesn't change on various events"
+msgstr "Toggles a lock on the zoom area so it doesn't change on various events"
+
+msgid "Panning"
+msgstr "Panning"
+
+msgid "Pan Zoom Left"
+msgstr "Pan Zoom Left"
+
+msgid "Pan (move) the zoom area left"
+msgstr "Pan (move) the zoom area left"
+
+msgid "Pan Zoom Right"
+msgstr "Pan Zoom Right"
+
+msgid "Pan (move) the zoom area right"
+msgstr "Pan (move) the zoom area right"
+
+msgid "Pan Zoom Up"
+msgstr "Pan Zoom Up"
+
+msgid "Pan (move) the zoom area up"
+msgstr "Pan (move) the zoom area up"
+
+msgid "Pan Zoom Down"
+msgstr "Pan Zoom Down"
+
+msgid "Pan (move) the zoom area down"
+msgstr "Pan (move) the zoom area down"
+
+msgid "Fitting"
+msgstr "Fitting"
+
+msgid "Fit the window to the zoom level"
+msgstr "Fit the window to the zoom level"
+
+msgid "Resize the window so it matches the current zoom level."
+msgstr "Resize the window so it matches the current zoom level."
+
+msgid "Fit zoomed area to window"
+msgstr "Fit zoomed area to window"
+
+msgid ""
+"Zooms in/out so the focused window is zoomed to the maximum while still "
+"being fully visible."
+msgstr ""
+"Zooms in/out so the focused window is zoomed to the maximum while still "
+"being fully visible."
+
+msgid "Zoom factor"
+msgstr "Zoom factor"
+
+msgid "Zoom in/out by this factor. Higher value means quicker zooming."
+msgstr "Zoom in/out by this factor. Higher value means quicker zooming."
+
+msgid "Minimum zoom factor"
+msgstr "Minimum zoom factor"
+
+msgid ""
+"The minimum allowed zoom factor. A value of 0.5 equals 2x zoom, a value of "
+"0.25 equals 4x zoom."
+msgstr ""
+"The minimum allowed zoom factor. A value of 0.5 equals 2x zoom, a value of "
+"0.25 equals 4x zoom."
+
+msgid "Sync Mouse"
+msgstr "Synchronise Mouse"
+
+msgid ""
+"Always keep the zoomed area in sync with where the mouse is, and vice versa. "
+"Use this if you don't intend to draw a scaled pointer or hide the original "
+"pointer. The zoomed area will move as you move your mouse."
+msgstr ""
+"Always keep the zoomed area synchronised with where the mouse is, and vice "
+"versa. Use this if you don't intend to draw a scaled pointer or hide the "
+"original pointer. The zoomed area will move as you move your mouse."
+
+msgid "Scale the mouse pointer"
+msgstr "Scale the mouse pointer"
+
+msgid "Enable this to get a gradually larger mouse pointer as you zoom in"
+msgstr "Enable this to get a gradually larger mouse pointer as you zoom in"
+
+msgid "Dynamic mouse pointer scale"
+msgstr "Dynamic mouse pointer scale"
+
+msgid ""
+"When scaling the mouse pointer, this option makes the scale adjust according "
+"to the current level of zoom."
+msgstr ""
+"When scaling the mouse pointer, this option makes the scale adjust according "
+"to the current level of zoom."
+
+msgid "Static mouse pointer scale"
+msgstr "Static mouse pointer scale"
+
+msgid ""
+"When not using a dynamic mouse pointer scale, this is the scale factor for "
+"the mouse pointer."
+msgstr ""
+"When not using a dynamic mouse pointer scale, this is the scale factor for "
+"the mouse pointer."
+
+msgid "Hide original mouse pointer"
+msgstr "Hide original mouse pointer"
+
+msgid "Hides the original mouse pointer when zoomed in and scaling the mouse"
+msgstr "Hides the original mouse pointer when zoomed in and scaling the mouse"
+
+msgid "Restrain the mouse to the zoom area"
+msgstr "Restrain the mouse to the zoom area"
+
+msgid ""
+"Attempt to keep the zoomed mouse visible by warping it when it is moved "
+"outside the zoom area."
+msgstr ""
+"Attempt to keep the zoomed mouse visible by warping it when it is moved "
+"outside the zoom area."
+
+msgid "Mouse panning"
+msgstr "Mouse panning"
+
+msgid "Pan the zoom area when the mouse cursor moves outside the visible area."
+msgstr ""
+"Pan the zoom area when the mouse cursor moves outside the visible area."
+
+msgid "Mouse Restrain Margin"
+msgstr "Mouse Restrain Margin"
+
+msgid "The size of the margin to add when attempting to restrain the mouse."
+msgstr "The size of the margin to add when attempting to restrain the mouse."
+
+msgid "Pan Factor"
+msgstr "Pan Factor"
+
+msgid ""
+"Move the zoomed area this much whenever you pan the zoomed area with keys."
+msgstr ""
+"Move the zoomed area this much whenever you pan the zoomed area with keys."
+
+msgid "Focus Tracking"
+msgstr "Focus Tracking"
+
+msgid "Enable focus tracking"
+msgstr "Enable focus tracking"
+
+msgid "Move the zoom area when focus changes."
+msgstr "Move the zoom area when focus changes."
+
+msgid "Fit zoom level to window on focus change"
+msgstr "Fit zoom level to window on focus change"
+
+msgid ""
+"Fit the zoomed area to the window when the zoomed area moves as a result of "
+"focus tracking."
+msgstr ""
+"Fit the zoomed area to the window when the zoomed area moves as a result of "
+"focus tracking."
+
+msgid "Autoscale threshold"
+msgstr "Autoscale threshold"
+
+msgid ""
+"Only change zoom level (scale) on focus change if the target value is higher "
+"than this. Prevents zooming too far in on small popups etc."
+msgstr ""
+
+msgid "Always fit to window on focus track"
+msgstr "Always fit to window on focus track"
+
+msgid ""
+"Fit the zoomed area to the window when the zoomed area moves as a result of "
+"focus tracking. Even when not initially zoomed in."
+msgstr ""
+"Fit the zoomed area to the window when the zoomed area moves as a result of "
+"focus tracking. Even when not initially zoomed in."
+
+msgid "Follow Focus Delay"
+msgstr "Follow Focus Delay"
+
+msgid ""
+"Only attempt to center newly focused windows if the mouse hasn't moved in "
+"this amount of seconds. Use this to avoid jumping when using sloppy focus."
+msgstr ""
+"Only attempt to centre newly focused windows if the mouse hasn't moved in "
+"this amount of seconds. Use this to avoid jumping when using sloppy focus."
+
+msgid "Animation"
+msgstr "Animation"
+
+msgid "Speed"
+msgstr "Speed"
+
+msgid "Zoom Speed"
+msgstr "Zoom Speed"
+
+msgid "Timestep"
+msgstr "Timestep"
+
+msgid "Zoom Timestep"
+msgstr "Zoom Timestep"
+
+msgid "Filter Linear"
+msgstr "Filter Linear"
+
+msgid "Use linear filter when zoomed in"
+msgstr "Use linear filter when zoomed in"
+
+msgid "JPEG"
+msgstr "JPEG"
+
+msgid "JPEG image format plugin"
+msgstr "JPEG image format plugin"
+
+msgid "Compression Quality"
+msgstr "Compression Quality"
+
+msgid "Quality of compression when saving JPEG images"
+msgstr "Quality of compression when saving JPEG images"
+
+msgid "Magnifier"
+msgstr "Magnifier"
+
+msgid "Magnifier box"
+msgstr "Magnifier box"
+
+msgid "Initiate"
+msgstr "Initiate"
+
+msgid "General"
+msgstr "General"
+
+msgid "Mode"
+msgstr "Mode"
+
+msgid "Mode."
+msgstr "Mode."
+
+msgid "Simple"
+msgstr "Simple"
+
+msgid "Image overlay"
+msgstr "Image overlay"
+
+msgid "Fisheye"
+msgstr "Fisheye"
+
+msgid "Zoom factor for keyboard initiated magnifier."
+msgstr "Zoom factor for keyboard initiated magnifier."
+
+msgid "Keep fully on screen"
+msgstr "Keep fully on screen"
+
+msgid "Keep fully on screen."
+msgstr "Keep fully on screen."
+
+msgid "Width"
+msgstr "Width"
+
+msgid "Box width."
+msgstr "Box width."
+
+msgid "Height"
+msgstr "Height"
+
+msgid "Box height."
+msgstr "Box height."
+
+msgid "Border width"
+msgstr "Border width"
+
+msgid "Border widtht."
+msgstr "Border width."
+
+msgid "Border color"
+msgstr "Border colour"
+
+msgid "Magnifier image"
+msgstr "Magnifier image"
+
+msgid "Magnifier image."
+msgstr "Magnifier image."
+
+msgid "Clip mask"
+msgstr "Clip mask"
+
+msgid "Clip mask."
+msgstr "Clip mask."
+
+msgid "X offset of the cursor"
+msgstr "X offset of the cursor"
+
+msgid "X offset of the cursor."
+msgstr "X offset of the cursor."
+
+msgid "Y offset of the cursor"
+msgstr "Y offset of the cursor"
+
+msgid "Y offset of the cursor."
+msgstr "Y offset of the cursor."
+
+msgid "Radius"
+msgstr "Radius"
+
+msgid "Radius of the magnification area."
+msgstr "Radius of the magnification area."
+
+msgid "Mouse position polling"
+msgstr "Mouse position polling"
+
+msgid "Updates the mouse pointer position from the xserver"
+msgstr "Updates the mouse pointer position from the X server"
+
+msgid "Misc"
+msgstr "Misc"
+
+msgid "Mouse Poll Interval"
+msgstr "Mouse Poll Interval"
+
+msgid ""
+"How often to poll the mouse position, in miliseconds. Reduce this to reduce "
+"choppy behavior."
+msgstr ""
+"How often to poll the mouse position, in milliseconds. Reduce this to reduce "
+"choppy behavior."
+
+msgid "Negative"
+msgstr "Negative"
+
+msgid "Used to set a window or screen negative"
+msgstr "Used to set a window or screen negative"
+
+msgid "Toggle Window Negative"
+msgstr "Toggle Window Negative"
+
+msgid "Toggle active window negative"
+msgstr "Toggle window negative"
+
+msgid "Toggle Screen Negative"
+msgstr "Toggle Screen Negative"
+
+msgid "Toggle screen negative"
+msgstr "Toggle screen negative"
+
+msgid "Neg Windows"
+msgstr "Negative Windows"
+
+msgid "Windows to be negative by default"
+msgstr "Windows to be negative by default"
+
+msgid "Exclude Windows"
+msgstr "Exclude Windows"
+
+msgid "Windows to exclude from negating"
+msgstr "Windows to exclude from negating"
+
+msgid "Opacify"
+msgstr "Opacify"
+
+msgid "Make windows easily visible by hovering the mouse over them"
+msgstr "Make windows easily visible by hovering the mouse over them"
+
+msgid "Toggle Opacify"
+msgstr "Toggle Opacify"
+
+msgid ""
+"Use this to enable/disable Opacify on the fly. Previously opacified windows "
+"will not be reset once you disable it like this."
+msgstr ""
+"Use this to enable/disable Opacify on the fly. Previously opacified windows "
+"will not be reset once you disable it like this."
+
+msgid "Misc. Options"
+msgstr "Misc. Options"
+
+msgid "Reset opacity to original values when toggling"
+msgstr "Reset opacity to original values when toggling"
+
+msgid ""
+"Reset the opacity of all windows modified by opacify when toggling Opacify "
+"with the defined key-combination."
+msgstr ""
+"Reset the opacity of all windows modified by opacify when toggling Opacify "
+"with the defined key-combination."
+
+msgid "Delay until Opacification"
+msgstr "Delay until Opacification"
+
+msgid ""
+"The delay (in ms) before Opacify changes opacity after the active window has "
+"changed."
+msgstr ""
+"The delay (in ms) before Opacify changes opacity after the active window has "
+"changed."
+
+msgid "Toggle Opacify on by default"
+msgstr "Toggle Opacify on by default"
+
+msgid ""
+"With this enabled, opacify will be on when you load Opacify, which is "
+"usually when you start Compiz."
+msgstr ""
+"With this enabled, opacify will be on when you load Opacify, which is "
+"usually when you start Compiz."
+
+msgid "Only increase opacity if a window is blocking"
+msgstr "Only increase opacity if a window is blocking"
+
+msgid ""
+"Only increase the opacity on the targeted window if it has one or more "
+"windows blocking it from view."
+msgstr ""
+"Only increase the opacity on the targeted window if it has one or more "
+"windows blocking it from view."
+
+msgid "Bypass delay when the new active window is the focused window."
+msgstr "Bypass delay when the new active window is the focused window."
+
+msgid ""
+"Do not wait if the window we are hovering is the focused window. This allows "
+"us to instantly see the focused window. You probably want to disable this if "
+"you are not using 'Click to Focus'."
+msgstr ""
+"Do not wait if the window we are hovering is the focused window. This allows "
+"us to instantly see the focused window. You probably want to disable this if "
+"you are not using 'Click to Focus'."
+
+msgid ""
+"Bypass delay when Opacify is reducing the opacity on one or more windows "
+"already."
+msgstr ""
+"Bypass delay when Opacify is reducing the opacity on one or more windows "
+"already."
+
+msgid ""
+"This enables you to let Opacify instantly opacify new windows when you're "
+"already making one or more windows invisible. Makes for faster behavior "
+"while looking through layers of hidden windows."
+msgstr ""
+"This enables you to let Opacify instantly opacify new windows when you're "
+"already making one or more windows invisible. Makes for faster behavior "
+"while looking through layers of hidden windows."
+
+msgid "Windows that should be opacified."
+msgstr "Windows that should be opacified."
+
+msgid "Opacity Levels"
+msgstr "Opacity Levels"
+
+msgid "Active Opacity"
+msgstr "Active Opacity"
+
+msgid ""
+"The minimum opacity percentage to ensure a targeted window has. A target "
+"window will have either this opacity or the preset opacity, whichever is "
+"higher."
+msgstr ""
+"The minimum opacity percentage to ensure a targeted window has. A target "
+"window will have either this opacity or the preset opacity, whichever is "
+"higher."
+
+msgid "Passive Opacity"
+msgstr "Passive Opacity"
+
+msgid ""
+"The maximum opacity percentage a window blocking the current targeted window "
+"can have. A blocking window will have either this opacity or the preset "
+"opacity, whichever is lower."
+msgstr ""
+"The maximum opacity percentage a window blocking the current targeted window "
+"can have. A blocking window will have either this opacity or the preset "
+"opacity, whichever is lower."
+
+msgid "Put"
+msgstr "Put"
+
+msgid "Put window"
+msgstr "Put window"
+
+msgid "Put On Viewport"
+msgstr "Put On Viewport"
+
+msgid "Move window to a certain viewport"
+msgstr "Move window to a certain viewport"
+
+msgid "Put to arbitrary viewport"
+msgstr "Put to arbitrary viewport"
+
+msgid "Put On Viewport 1"
+msgstr "Put On Viewport 1"
+
+msgid "Move window to viewport 1"
+msgstr "Move window to viewport 1"
+
+msgid "Put On Viewport 2"
+msgstr "Put On Viewport 2"
+
+msgid "Move window to viewport 2"
+msgstr "Move window to viewport 2"
+
+msgid "Put On Viewport 3"
+msgstr "Put On Viewport 3"
+
+msgid "Move window to viewport 3"
+msgstr "Move window to viewport 3"
+
+msgid "Put On Viewport 4"
+msgstr "Put On Viewport 4"
+
+msgid "Move window to viewport 4"
+msgstr "Move window to viewport 4"
+
+msgid "Put On Viewport 5"
+msgstr "Put On Viewport 5"
+
+msgid "Move window to viewport 5"
+msgstr "Move window to viewport 5"
+
+msgid "Put On Viewport 6"
+msgstr "Put On Viewport 6"
+
+msgid "Move window to viewport 6"
+msgstr "Move window to viewport 6"
+
+msgid "Put On Viewport 7"
+msgstr "Put On Viewport 7"
+
+msgid "Move window to viewport 7"
+msgstr "Move window to viewport 7"
+
+msgid "Put On Viewport 8"
+msgstr "Put On Viewport 8"
+
+msgid "Move window to viewport 8"
+msgstr "Move window to viewport 8"
+
+msgid "Put On Viewport 9"
+msgstr "Put On Viewport 9"
+
+msgid "Move window to viewport 9"
+msgstr "Move window to viewport 9"
+
+msgid "Put On Viewport 10"
+msgstr "Put On Viewport 10"
+
+msgid "Move window to viewport 10"
+msgstr "Move window to viewport 10"
+
+msgid "Put On Viewport 11"
+msgstr "Put On Viewport 11"
+
+msgid "Move window to viewport 11"
+msgstr "Move window to viewport 11"
+
+msgid "Put On Viewport 12"
+msgstr "Put On Viewport 12"
+
+msgid "Move window to viewport 12"
+msgstr "Move window to viewport 12"
+
+msgid "Put to adjacent viewport"
+msgstr "Put to adjacent viewport"
+
+msgid "Viewport Left"
+msgstr "Viewport Left"
+
+msgid "Move window to the viewport on the left"
+msgstr "Move window to the viewport on the left"
+
+msgid "Viewport Right"
+msgstr "Viewport Right"
+
+msgid "Move window to the viewport on the right"
+msgstr "Move window to the viewport on the right"
+
+msgid "Viewport Top"
+msgstr "Viewport Top"
+
+msgid "Move window to the viewport on the top"
+msgstr "Move window to the viewport on the top"
+
+msgid "Viewport Bottom"
+msgstr "Viewport Bottom"
+
+msgid "Move window to the viewport on the bottom"
+msgstr "Move window to the viewport on the bottom"
+
+msgid "Put within viewport"
+msgstr "Put within viewport"
+
+msgid "Put Center"
+msgstr "Put Centre"
+
+msgid "Move window to the center"
+msgstr "Move window to the centre"
+
+msgid "Put Left"
+msgstr "Put Left"
+
+msgid "Move window to the left edge"
+msgstr "Move window to the left edge"
+
+msgid "Put Right"
+msgstr "Put Right"
+
+msgid "Move window to the right edge"
+msgstr "Move window to the right edge"
+
+msgid "Put Top"
+msgstr "Put Top"
+
+msgid "Move window to the top edge"
+msgstr "Move window to the top edge"
+
+msgid "Put Bottom"
+msgstr "Put Bottom"
+
+msgid "Move window to the bottom edge"
+msgstr "Move window to the bottom edge"
+
+msgid "Put Top Left"
+msgstr "Put Top Left"
+
+msgid "Move window to the top left corner"
+msgstr "Move window to the top left corner"
+
+msgid "Put Top Right"
+msgstr "Put Top Right"
+
+msgid "Move window to the top right corner"
+msgstr "Move window to the top right corner"
+
+msgid "Put Bottom Left"
+msgstr "Put Bottom Left"
+
+msgid "Move window to the bottom left corner"
+msgstr "Move window to the bottom left corner"
+
+msgid "Put Bottom Right"
+msgstr "Put Bottom Right"
+
+msgid "Move window to the bottom right corner"
+msgstr "Move window to the bottom right corner"
+
+msgid "Restore Position"
+msgstr "Restore Position"
+
+msgid "Move window to the last position"
+msgstr "Move window to the last position"
+
+msgid "Put Pointer"
+msgstr "Put Pointer"
+
+msgid "Move window to the pointer position"
+msgstr "Move window to the pointer position"
+
+msgid "Put To Next Output"
+msgstr "Put To Next Output"
+
+msgid "Move window to the next output device"
+msgstr "Move window to the next output device"
+
+msgid "Move window arbitrarily by passing x, y and type."
+msgstr "Move window arbitrarily by passing x, y and type."
+
+msgid "Padding"
+msgstr "Padding"
+
+msgid "Pad Left"
+msgstr "Pad Left"
+
+msgid "Number of pixels from the left edge where the window will come to rest"
+msgstr "Number of pixels from the left edge where the window will come to rest"
+
+msgid "Pad Right"
+msgstr "Pad Right"
+
+msgid "Number of pixels from the right edge where the window will come to rest"
+msgstr ""
+"Number of pixels from the right edge where the window will come to rest"
+
+msgid "Pad Top"
+msgstr "Pad Top"
+
+msgid "Number of pixels from the top edge where the window will come to rest"
+msgstr "Number of pixels from the top edge where the window will come to rest"
+
+msgid "Pad Bottom"
+msgstr "Pad Bottom"
+
+msgid ""
+"Number of pixels from the bottom edge where the window will come to rest"
+msgstr ""
+"Number of pixels from the bottom edge where the window will come to rest"
+
+msgid "Unfocus Window"
+msgstr "Unfocus Window"
+
+msgid "Unfocus windows that are moved off the viewport"
+msgstr "Unfocus windows that are moved off the viewport"
+
+msgid "Window Center"
+msgstr "Window Centre"
+
+msgid "Put pointer uses the center of the window"
+msgstr "Put pointer uses the centre of the window"
+
+msgid "Avoid Offscreen"
+msgstr "Avoid Offscreen"
+
+msgid "Avoids putting window borders offscreen"
+msgstr "Avoids putting window borders offscreen"
+
+msgid "Animation speed"
+msgstr "Animation speed"
+
+msgid "Animation timestep"
+msgstr "Animation timestep"
+
+msgid "Resize Info"
+msgstr "Resize Info"
+
+msgid "Display info on resize similar to marco"
+msgstr "Display info on resize similar to marco"
+
+msgid "Fade Time"
+msgstr "Fade Time"
+
+msgid "Fade time (in ms) for popup window"
+msgstr "Fade time (in ms) for popup window"
+
+msgid "Show resize info for all windows."
+msgstr "Show resize info for all windows."
+
+msgid ""
+"Show resize info for all windows as opposed to just windows with a resize "
+"increment of greater than 1."
+msgstr ""
+"Show resize info for all windows as opposed to just windows with a resize "
+"increment of greater than 1."
+
+msgid "Font family"
+msgstr "Font family"
+
+msgid "Name of the font to display resize info."
+msgstr "Name of the font to display resize info."
+
+msgid "Text color."
+msgstr "Text colour."
+
+msgid "Color of text on resize popup."
+msgstr "Colour of text on resize popup."
+
+msgid "Gradient Color 1"
+msgstr "Gradient Colour 1"
+
+msgid "Color 1 of the gradient background."
+msgstr "First colour of the gradient background."
+
+msgid "Gradient Color 2"
+msgstr "Gradient Colour 2"
+
+msgid "Color 2 of the gradient background."
+msgstr "Second colour of the gradient background."
+
+msgid "Gradient Color 3"
+msgstr "Gradient Colour 3"
+
+msgid "Color 3 of the gradient background."
+msgstr "Third colour of the gradient background."
+
+msgid "Border"
+msgstr "Border"
+
+msgid "Border color of the gradient background."
+msgstr "Border colour of the gradient background."
+
+msgid "Ring Switcher"
+msgstr "Ring Switcher"
+
+msgid "Key bindings"
+msgstr "Key bindings"
+
+msgid "Next Window"
+msgstr "Next Window"
+
+msgid "Show switcher if not visible and select next window."
+msgstr "Show switcher if not visible and select next window."
+
+msgid "Previous Window"
+msgstr "Previous Window"
+
+msgid "Show switcher if not visible and select previous window."
+msgstr "Show switcher if not visible and select previous window."
+
+msgid "Next Window (All Workspaces)"
+msgstr "Next Window (All Workspaces)"
+
+msgid "Show switcher if not visible and select next window out of all windows."
+msgstr ""
+"Show switcher if not visible and select next window out of all windows."
+
+msgid "Previous Window (All Workspaces)"
+msgstr "Previous Window (All Workspaces)"
+
+msgid ""
+"Show switcher if not visible and select previous window out of all windows."
+msgstr ""
+"Show switcher if not visible and select previous window out of all windows."
+
+msgid "Next Window (Group)"
+msgstr "Next Window (Group)"
+
+msgid ""
+"Show switcher if not visible and select next window of the current "
+"application."
+msgstr ""
+"Show switcher if not visible and select next window of the current "
+"application."
+
+msgid "Previous Window (Group)"
+msgstr "Previous Window (Group)"
+
+msgid ""
+"Show switcher if not visible and select previous window of the current "
+"application."
+msgstr ""
+"Show switcher if not visible and select previous window of the current "
+"application."
+
+msgid "Ring speed"
+msgstr "Ring speed"
+
+msgid "Ring timestep"
+msgstr "Ring timestep"
+
+msgid "Inactive Window Opacity"
+msgstr "Inactive Window Opacity"
+
+msgid ""
+"Amount of opacity (in percent) for windows in the ring which are not selected"
+msgstr ""
+"Amount of opacity (in percent) for windows in the ring which are not selected"
+
+msgid "Ring Windows"
+msgstr "Ring Windows"
+
+msgid "Windows that should be shown in ring"
+msgstr "Windows that should be shown in ring"
+
+msgid "Overlay Icon"
+msgstr "Overlay Icon"
+
+msgid "Overlay an icon on windows in the ring"
+msgstr "Overlay an icon on windows in the ring"
+
+msgid "Emblem"
+msgstr "Emblem"
+
+msgid "Big"
+msgstr "Big"
+
+msgid "Darken Background"
+msgstr "Darken Background"
+
+msgid "Darken background when showing the ring"
+msgstr "Darken background when showing the ring"
+
+msgid "Show Minimized"
+msgstr "Show Minimised"
+
+msgid "Show windows that are minimized, shaded or in show desktop mode."
+msgstr "Show windows that are minimised, shaded or in show desktop mode."
+
+msgid "Allow Mouse Selection"
+msgstr "Allow Mouse Selection"
+
+msgid ""
+"Allow the selection of windows by just clicking on them while the switcher "
+"is active."
+msgstr ""
+"Allow the selection of windows by just clicking on them while the switcher "
+"is active."
+
+msgid "Ring appearance"
+msgstr "Ring appearance"
+
+msgid "Rotate Ring Clockwise on Next"
+msgstr "Rotate Ring Clockwise on Next"
+
+msgid "Rotate ring clockwise for next window instead of counterclockwise"
+msgstr "Rotate ring clockwise for next window instead of anti-clockwise"
+
+msgid "Ring Width"
+msgstr "Ring Width"
+
+msgid "Ring width (in percent of the screen width)"
+msgstr "Ring width (in percent of the screen width)"
+
+msgid "Ring Height"
+msgstr "Ring Height"
+
+msgid "Ring height (in percent of the screen height)"
+msgstr "Ring height (in percent of the screen height)"
+
+msgid "Thumbnail Width"
+msgstr "Thumbnail Width"
+
+msgid "Maximum horizontal size of a thumbnail in the ring"
+msgstr "Maximum horizontal size of a thumbnail in the ring"
+
+msgid "Thumbnail Height"
+msgstr "Thumbnail Height"
+
+msgid "Maximum vertical size of a thumbnail in the ring"
+msgstr "Maximum vertical size of a thumbnail in the ring"
+
+msgid "Minimum Brightness Factor"
+msgstr "Minimum Brightness Factor"
+
+msgid ""
+"Changes the minimum brightness factor for windows in the ring. The farer "
+"away windows are, the less bright are they."
+msgstr ""
+"Changes the minimum brightness factor for windows in the ring: the farer "
+"away windows are, the less bright are they."
+
+msgid "Minimum Scale Factor"
+msgstr "Minimum Scale Factor"
+
+msgid ""
+"Changes the minimum scale factor for windows in the ring. The farer away "
+"windows are, the smaller are they."
+msgstr ""
+"Changes the minimum scale factor for windows in the ring: the farer away "
+"windows are, the smaller are they."
+
+msgid "Window title display"
+msgstr "Window title display"
+
+msgid "Show Window Title"
+msgstr "Show Window Title"
+
+msgid "Show window title of currently selected window."
+msgstr "Show window title of currently selected window."
+
+msgid "Name of the font to display title."
+msgstr ""
+
+msgid "Bold Font"
+msgstr "Bold Font"
+
+msgid "Selects if the window title should be displayed in bold font or not."
+msgstr "Selects if the window title should be displayed in bold font or not."
+
+msgid "Font Size"
+msgstr "Font Size"
+
+msgid "Font size for the window title"
+msgstr "Font size for the window title"
+
+msgid "Background Color"
+msgstr "Background Colour"
+
+msgid "Background color for the window title"
+msgstr "Background colour for the window title"
+
+msgid "Font Color"
+msgstr "Font Colour"
+
+msgid "Font color for the window title"
+msgstr "Font colour for the window title"
+
+msgid "Text Placement"
+msgstr "Text Placement"
+
+msgid "Selects where to place the window title."
+msgstr "Selects where to place the window title."
+
+msgid "Centered on screen"
+msgstr "Centred on screen"
+
+msgid "Above ring"
+msgstr "Above ring"
+
+msgid "Below ring"
+msgstr "Below ring"
+
+msgid "Scale Addons"
+msgstr "Scale Addons"
+
+msgid "Some useful additions to the scale plugin"
+msgstr "Some useful additions to the scale plugin"
+
+msgid "Close Window"
+msgstr "Close Window"
+
+msgid "Close windows while in scale mode"
+msgstr "Close windows while in scale mode"
+
+msgid "Close window while in scale mode"
+msgstr "Close window while in scale mode"
+
+msgid "Pull Window"
+msgstr "Pull Window"
+
+msgid "Pull window to current viewport while in scale mode"
+msgstr "Pull window to current viewport while in scale mode"
+
+msgid "Zoom Window"
+msgstr "Zoom Window"
+
+msgid "Zoom window while in scale mode"
+msgstr "Zoom window while in scale mode"
+
+msgid "Window Title"
+msgstr "Window Title"
+
+msgid "Window Title Display"
+msgstr "Window Title Display"
+
+msgid "Window title display in scale mode"
+msgstr "Window title display in scale mode"
+
+msgid "No display"
+msgstr "No display"
+
+msgid "Highlighted window only"
+msgstr "Highlighted window only"
+
+msgid "All windows"
+msgstr "All windows"
+
+msgid "Use bold font for window title display"
+msgstr "Use bold font for window title display"
+
+msgid "Font size for window title display"
+msgstr "Font size for window title display"
+
+msgid "Title Border Size"
+msgstr "Title Border Size"
+
+msgid "Size of the border around the window title"
+msgstr "Size of the border around the window title"
+
+msgid "Font color of the window title"
+msgstr "Font colour of the window title"
+
+msgid "Background color of the window title"
+msgstr "Background colour of the window title"
+
+msgid "Window Highlight"
+msgstr "Window Highlight"
+
+msgid "Draw Window Highlight"
+msgstr "Draw Window Highlight"
+
+msgid "Highlights the hovered window with the given color"
+msgstr "Highlights the hovered window with the given colour"
+
+msgid "Highlight Color"
+msgstr "Highlight Colour"
+
+msgid "Color used for highlighting the hovered window"
+msgstr "Colour used for highlighting the hovered window"
+
+msgid "Window Layout Mode"
+msgstr "Window Layout Mode"
+
+msgid "Selects the mode to layout the windows in scale mode"
+msgstr "Selects the mode to layout the windows in scale mode"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Organic - EXPERIMENTAL"
+msgstr "Organic - EXPERIMENTAL"
+
+msgid "Window Pull"
+msgstr "Window Pull"
+
+msgid "Constrain Pull To Screen"
+msgstr "Constrain Pull To Screen"
+
+msgid ""
+"Make sure windows are fully visible after pulling them to another viewport"
+msgstr ""
+"Make sure windows are fully visible after pulling them to another viewport"
+
+msgid "Exit Scale On Pull"
+msgstr "Exit Scale On Pull"
+
+msgid "Exit scale mode after a window has been pulled."
+msgstr "Exit scale mode after a window has been pulled."
+
+msgid "Session Management"
+msgstr "Session Management"
+
+msgid "Talk to session manager and save/load window state"
+msgstr "Talk to session manager and save/load window state"
+
+msgid "Save Legacy Apps"
+msgstr "Save Legacy Applications"
+
+msgid ""
+"Also try to save and restore legacy apps that don't support the X session "
+"management protocol. This setting only should be used in KDE, as only KDE's "
+"session manager also saves those applications."
+msgstr ""
+"Also try to save and restore legacy apps that don't support the X session "
+"management protocol. This setting only should be used in KDE, as only KDE's "
+"session manager also saves those applications."
+
+msgid "Windows to ignore"
+msgstr "Windows to ignore"
+
+msgid "Matching windows will not be handled by the session plugin"
+msgstr ""
+
+msgid "Shift Switcher"
+msgstr "Shift Switcher"
+
+msgid "Shift Switcher Plugin"
+msgstr "Shift Switcher Plugin"
+
+msgid "Initiate switcher."
+msgstr "Initiate switcher."
+
+msgid "Initiate (All Workspaces)"
+msgstr "Initiate (All Workspaces)"
+
+msgid "Initiate switcher (All Workspaces)."
+msgstr "Initiate switcher (All Workspaces)."
+
+msgid "Terminate"
+msgstr "Terminate"
+
+msgid "Terminate switcher."
+msgstr "Terminate switcher."
+
+msgid "Fade speed"
+msgstr "Fade speed"
+
+msgid "Fade in/out speed"
+msgstr "Fade in/out speed"
+
+msgid "Shift speed"
+msgstr "Shift speed"
+
+msgid "Shift animation speed"
+msgstr "Shift animation speed"
+
+msgid "Shift timestep"
+msgstr "Shift timestep"
+
+msgid "Shift Windows"
+msgstr "Shift Windows"
+
+msgid "Windows that should be shown in the shift switcher"
+msgstr "Windows that should be shown in the shift switcher"
+
+msgid "Mouse speed"
+msgstr "Mouse speed"
+
+msgid "Mouse movement speed"
+msgstr "Mouse movement speed"
+
+msgid "Click duration"
+msgstr "Click duration"
+
+msgid "Maximum click duration in miliseconds."
+msgstr "Maximum click duration in milliseconds."
+
+msgid "Switcher mode"
+msgstr "Switcher mode"
+
+msgid "Switcher mode."
+msgstr "Switcher mode."
+
+msgid "Cover"
+msgstr "Cover"
+
+msgid "Flip"
+msgstr "Flip"
+
+msgid "Max window size"
+msgstr "Max window size"
+
+msgid "Maximum window size (in percent of the screen width)"
+msgstr "Maximum window size (in percent of the screen width)"
+
+msgid "Background intensity"
+msgstr "Background intensity"
+
+msgid "Background intensity."
+msgstr "Background intensity."
+
+msgid "Hide non Desktop windows"
+msgstr "Hide non-Desktop windows"
+
+msgid "Hide all non Desktop windows during switching"
+msgstr "Hide all non-Desktop windows during switching"
+
+msgid "Intensity"
+msgstr "Intensity"
+
+msgid "Reflection intensity"
+msgstr "Reflection intensity"
+
+msgid "Flip angle"
+msgstr "Flip angle"
+
+msgid "Rotation angle of the flip animation"
+msgstr "Rotation angle of the flip animation"
+
+msgid "Cover offset"
+msgstr "Cover offset"
+
+msgid "Cover movement offset."
+msgstr "Cover movement offset."
+
+msgid "Overlay an icon on windows in the shift switcher"
+msgstr "Overlay an icon on windows in the shift switcher"
+
+msgid "Generate mipmaps"
+msgstr "Generate mipmaps"
+
+msgid ""
+"Selects how the switcher is displayed if multiple output devices are used."
+msgstr ""
+"Selects how the switcher is displayed if multiple output devices are used."
+
+msgid "Disabled"
+msgstr "Disabled"
+
+msgid "On activated output"
+msgstr "On activated output"
+
+msgid "One big switcher"
+msgstr "One big switcher"
+
+msgid "Above"
+msgstr "Above"
+
+msgid "Below"
+msgstr "Below"
+
+msgid "Snapping Windows"
+msgstr "Snapping Windows"
+
+msgid "Enables windows edges resistance"
+msgstr "Enables windows edges resistance"
+
+msgid "Avoid Snap Modifier"
+msgstr "Avoid Snap Modifier"
+
+msgid "Use this bindings to avoid snapping."
+msgstr "Use these bindings to avoid snapping."
+
+msgid "Shift"
+msgstr "Shift"
+
+msgid "Alt"
+msgstr "Alt"
+
+msgid "Control"
+msgstr "Control"
+
+msgid "Meta"
+msgstr "Meta"
+
+msgid "Super"
+msgstr "Super"
+
+msgid "Hyper"
+msgstr "Hyper"
+
+msgid "Snap Type"
+msgstr "Snap Type"
+
+msgid "Choose 'Resistance', 'Attraction' or 'Full Mode'."
+msgstr "Choose 'Resistance', 'Attraction' or 'Full Mode'."
+
+msgid "Edge resistance"
+msgstr "Edge resistance"
+
+msgid "Edge attraction"
+msgstr "Edge attraction"
+
+msgid "Edges"
+msgstr "Edges"
+
+msgid "Snap to 'Screen Edges', 'Windows Edges' or 'Both'."
+msgstr "Snap to 'Screen Edges', 'Windows Edges' or 'Both'."
+
+msgid "Screen edges"
+msgstr "Screen edges"
+
+msgid "Window edges"
+msgstr "Window edges"
+
+msgid "Edge Resistance Distance"
+msgstr "Edge Resistance Distance"
+
+msgid "The distance until edge resistance takes place."
+msgstr "The distance until edge resistance takes place."
+
+msgid "Edge Attraction Distance"
+msgstr "Edge Attraction Distance"
+
+msgid "The distance until edge attraction takes place."
+msgstr "The distance until edge attraction takes place."
+
+msgid "Static Application Switcher"
+msgstr "Static Application Switcher"
+
+msgid "Next window"
+msgstr "Next window"
+
+msgid "Popup switcher if not visible and select next window"
+msgstr "Popup switcher if not visible and select next window."
+
+msgid "Prev window"
+msgstr "Previous window"
+
+msgid "Popup switcher if not visible and select previous window"
+msgstr "Popup switcher if not visible and select previous window."
+
+msgid "Next window (All windows)"
+msgstr "Next window (All windows)"
+
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Popup switcher if not visible and select next window out of all windows."
+
+msgid "Prev window (All windows)"
+msgstr "Previous window (All windows)"
+
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Popup switcher if not visible and select previous window out of all windows."
+
+msgid "Next window (Group)"
+msgstr "Next window (Group)"
+
+msgid ""
+"Popup switcher if not visible and select next window of the current "
+"application."
+msgstr ""
+"Popup switcher if not visible and select next window of the current "
+"application."
+
+msgid "Prev window (Group)"
+msgstr "Previous window (Group)"
+
+msgid ""
+"Popup switcher if not visible and select previous window of the current "
+"application."
+msgstr ""
+"Popup switcher if not visible and select previous window of the current "
+"application."
+
+msgid "Next window (No popup)"
+msgstr "Next window (No popup)"
+
+msgid "Select next window without showing the popup window."
+msgstr "Select next window without showing the popup window."
+
+msgid "Prev window (No popup)"
+msgstr "Previous Window (no popup)"
+
+msgid "Select previous window without showing the popup window."
+msgstr "Select previous window without showing the popup window."
+
+msgid "Next Panel"
+msgstr "Next Panel"
+
+msgid "Select next panel type window."
+msgstr "Select next panel type window."
+
+msgid "Prev Panel"
+msgstr "Previous Panel"
+
+msgid "Select previous panel type window."
+msgstr "Select previous panel type window."
+
+msgid "Switcher speed"
+msgstr "Switcher speed"
+
+msgid "Switcher timestep"
+msgstr "Switcher timestep"
+
+msgid "Switcher windows"
+msgstr "Switcher windows"
+
+msgid "Windows that should be shown in switcher"
+msgstr "Windows that should be shown in the switcher"
+
+msgid "Show minimized windows"
+msgstr "Show minimised windows"
+
+msgid "Auto Change Viewport"
+msgstr "Auto Change Viewport"
+
+msgid "Change to the viewport of the selected window while switching"
+msgstr "Change to the viewport of the selected window while switching"
+
+msgid "Popup Window Delay"
+msgstr "Popup Window Delay"
+
+msgid "Time (in s) the popup window should be delayed before appearing"
+msgstr "Time (in s) the popup window should be delayed before appearing"
+
+msgid "Allow selection of windows from the switcher window with the mouse"
+msgstr "Allow selection of windows from the switcher window with the mouse"
+
+msgid "Amount of saturation in percent"
+msgstr "Amount of saturation in percent"
+
+msgid "Amount of brightness in percent"
+msgstr "Amount of brightness in percent"
+
+msgid "Opacity"
+msgstr "Opacity"
+
+msgid "Amount of opacity in percent"
+msgstr "Amount of opacity in percent"
+
+msgid "Icon"
+msgstr "Icon"
+
+msgid "Show icon next to thumbnail"
+msgstr "Show icon next to thumbnail"
+
+msgid "Mipmap"
+msgstr "Mipmap"
+
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr "Generate mipmaps when possible for higher quality scaling"
+
+msgid "Row Alignment"
+msgstr "Row Alignment"
+
+msgid "Alignment for rows that are not fully filled"
+msgstr "Alignment for rows that are not fully filled"
+
+msgid "Left"
+msgstr "Left"
+
+msgid "Centered"
+msgstr "Centred"
+
+msgid "Right"
+msgstr "Right"
+
+msgid "Selected Window Highlight"
+msgstr "Selected Window Highlight"
+
+msgid "Highlight Mode"
+msgstr "Highlight Mode"
+
+msgid "Mode for highlighting the currently selected window"
+msgstr "Mode for highlighting the currently selected window"
+
+msgid "Bring Selected To Front"
+msgstr "Bring Selected To Front"
+
+msgid "Show Rectangle"
+msgstr "Show Rectangle"
+
+msgid "Minimized Window Highlight Rectangle"
+msgstr "Minimised Window Highlight Rectangle"
+
+msgid "Where to draw highlight rectangle for minimized windows"
+msgstr "Where to draw highlight rectangle for minimised windows"
+
+msgid "Taskbar Entry"
+msgstr "Taskbar Entry"
+
+msgid "Original Window Position"
+msgstr "Original Window Position"
+
+msgid "Color of highlight rectangle"
+msgstr "Colour of highlight rectangle"
+
+msgid "Highlight Border Color"
+msgstr "Highlight Border Colour"
+
+msgid "Color of highlight rectangle border"
+msgstr "Colour of highlight rectangle border"
+
+msgid "Highlight Border Inlay Color"
+msgstr "Highlight Border Inlay Colour"
+
+msgid "Color of inlay in highlight rectangle border"
+msgstr "Colour of inlay in highlight rectangle border"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Render text to texture"
+msgstr "Render text to texture"
+
+msgid "Window Previews"
+msgstr "Window Previews"
+
+msgid "Window thumbnails at the taskbar"
+msgstr "Window thumbnails at the taskbar"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Thumbnail Window Size"
+msgstr "Thumbnail Window Size"
+
+msgid "Thumbnail window size."
+msgstr "Thumbnail window size."
+
+msgid "Show Delay"
+msgstr "Show Delay"
+
+msgid "Time (in ms) before Thumbnail is shown."
+msgstr "Time (in ms) before Thumbnail is shown."
+
+msgid "Thumbnail Border Size"
+msgstr "Thumbnail Border Size"
+
+msgid "Size of Thumbnail Border."
+msgstr "Size of Thumbnail Border."
+
+msgid "Thumbnail Border Glow Color"
+msgstr "Thumbnail Border Glow Colour"
+
+msgid "Thumbnail Background and Border Glow Color."
+msgstr "Thumbnail Background and Border Glow Colour."
+
+msgid "Fade In/Out Duration"
+msgstr "Fade In/Out Duration"
+
+msgid "Fade In/Out Duration in seconds."
+msgstr "Fade In/Out Duration in seconds."
+
+msgid "Taskbar"
+msgstr "Taskbar"
+
+msgid "Taskbar Shows Only Windows of Current Viewport"
+msgstr "Taskbar Shows Only Windows of Current Viewport"
+
+msgid "Set it if the Taskbar shows only Windows of Current Viewport."
+msgstr "Set it if the Taskbar shows only Windows of Current Viewport."
+
+msgid "Thumbnails Always on Top"
+msgstr "Thumbnails Always on Top"
+
+msgid "Paint Thumbnails Always on Top."
+msgstr "Paint Thumbnails Always on Top."
+
+msgid "Paint Window Like Background"
+msgstr "Paint Window Like Background"
+
+msgid "Paint Window Like Background instead of Glow."
+msgstr "Paint Window Like Background instead of Glow."
+
+msgid "Generate Mipmaps"
+msgstr "Generate Mipmaps"
+
+msgid "Generate mipmaps when possible for higher quality scaling."
+msgstr "Generate mipmaps when possible for higher quality scaling."
+
+msgid "Window title"
+msgstr "Window title"
+
+msgid "Enable Titles"
+msgstr "Enable Titles"
+
+msgid "Show Window Title in Thumbnail."
+msgstr "Show Window Title in Thumbnail."
+
+msgid "Should be the window title Bold."
+msgstr "Should be the window title Bold."
+
+msgid "Window title Font Size."
+msgstr "Window title Font Size."
+
+msgid "Window title Font Color."
+msgstr "Window title Font Colour."
+
+msgid "Title Bar Info"
+msgstr "Title Bar Info"
+
+msgid "Shows additional information in the window title bar"
+msgstr "Shows additional information in the window title bar"
+
+msgid "Show Remote Machine Name"
+msgstr "Show Remote Machine Name"
+
+msgid ""
+"Show name of remote machine if a certain application is executed remotely."
+msgstr ""
+"Show name of a remote machine if a certain application is executed remotely."
+
+msgid "Show Root"
+msgstr "Show Root"
+
+msgid "Show marker if you're logged in as root."
+msgstr "Show a marker if you're logged in as root."
+
+msgid "Viewport Switcher"
+msgstr "Viewport Switcher"
+
+msgid "Initiate viewport changes through several events"
+msgstr "Initiate viewport changes through several events"
+
+msgid "Number-Based Viewport Switching"
+msgstr "Number-Based Viewport Switching"
+
+msgid "Begin Viewport Switch"
+msgstr "Begin Viewport Switch"
+
+msgid "Begin entering viewport number"
+msgstr "Begin entering viewport number"
+
+msgid "Go to specific viewport"
+msgstr "Go to specific viewport"
+
+msgid "Switch to Viewport 1"
+msgstr "Switch to Viewport 1"
+
+msgid "Switch to viewport 1"
+msgstr "Switch to viewport 1"
+
+msgid "Switch to Viewport 2"
+msgstr "Switch to Viewport 2"
+
+msgid "Switch to viewport 2"
+msgstr "Switch to viewport 2"
+
+msgid "Switch to Viewport 3"
+msgstr "Switch to Viewport 3"
+
+msgid "Switch to viewport 3"
+msgstr "Switch to viewport 3"
+
+msgid "Switch to Viewport 4"
+msgstr "Switch to Viewport 4"
+
+msgid "Switch to viewport 4"
+msgstr "Switch to viewport 4"
+
+msgid "Switch to Viewport 5"
+msgstr "Switch to Viewport 5"
+
+msgid "Switch to viewport 5"
+msgstr "Switch to viewport 5"
+
+msgid "Switch to Viewport 6"
+msgstr "Switch to Viewport 6"
+
+msgid "Switch to viewport 6"
+msgstr "Switch to viewport 6"
+
+msgid "Switch to Viewport 7"
+msgstr "Switch to Viewport 7"
+
+msgid "Switch to viewport 7"
+msgstr "Switch to viewport 7"
+
+msgid "Switch to Viewport 8"
+msgstr "Switch to Viewport 8"
+
+msgid "Switch to viewport 8"
+msgstr "Switch to viewport 8"
+
+msgid "Switch to Viewport 9"
+msgstr "Switch to Viewport 9"
+
+msgid "Switch to viewport 9"
+msgstr "Switch to viewport 9"
+
+msgid "Switch to Viewport 10"
+msgstr "Switch to Viewport 10"
+
+msgid "Switch to viewport 10"
+msgstr "Switch to viewport 10"
+
+msgid "Switch to Viewport 11"
+msgstr "Switch to Viewport 11"
+
+msgid "Switch to viewport 11"
+msgstr "Switch to viewport 11"
+
+msgid "Switch to Viewport 12"
+msgstr "Switch to Viewport 12"
+
+msgid "Switch to viewport 12"
+msgstr "Switch to viewport 12"
+
+msgid "Desktop-based Viewport Switching"
+msgstr "Desktop-based Viewport Switching"
+
+msgid "Move Left"
+msgstr "Move Left"
+
+msgid "Move to the left"
+msgstr "Move to the left"
+
+msgid "Move Right"
+msgstr "Move Right"
+
+msgid "Move to the right"
+msgstr "Move to the right"
+
+msgid "Move Up"
+msgstr "Move Up"
+
+msgid "Move up"
+msgstr "Move up"
+
+msgid "Move Down"
+msgstr "Move Down"
+
+msgid "Move down"
+msgstr "Move down"
+
+msgid "Move Next"
+msgstr "Move Next"
+
+msgid "Move to the next viewport"
+msgstr "Move to the next viewport"
+
+msgid "Move Prev"
+msgstr "Move Prev"
+
+msgid "Move to the previous viewport"
+msgstr "Move to the previous viewport"
+
+msgid "Initiate plugin action"
+msgstr "Initiate plugin action"
+
+msgid "Initiate/Terminate the selected plugin action"
+msgstr "Initiate/Terminate the selected plugin action"
+
+msgid "Plugin for initiate action"
+msgstr "Plugin for initiate action"
+
+msgid "Plugin for initiate/action action"
+msgstr "Plugin for initiate/action action"
+
+msgid "Action name for initiate"
+msgstr "Action name for initiate"
+
+msgid "Action name for initiate/terminate"
+msgstr "Action name for initiate/terminate"
+
+msgid "Window Rules"
+msgstr "Window Rules"
+
+msgid "Set windows rules"
+msgstr "Set windows rules"
+
+msgid "Matches"
+msgstr "Matches"
+
+msgid "Skip taskbar"
+msgstr "Skip taskbar"
+
+msgid "Don't show application in taskbar"
+msgstr "Don't show application in taskbar"
+
+msgid "Skip pager"
+msgstr "Skip pager"
+
+msgid "Don't show application in pager"
+msgstr "Don't show application in pager"
+
+msgid "Above others windows"
+msgstr "Above others windows"
+
+msgid "Below others windows"
+msgstr "Below others windows"
+
+msgid "Sticky"
+msgstr "Sticky"
+
+msgid "Sticky windows"
+msgstr "Sticky windows"
+
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
+msgid "Fullscreen windows"
+msgstr "Fullscreen windows"
+
+msgid "Maximized"
+msgstr "Maximised"
+
+msgid "Maximized windows"
+msgstr "Maximised windows"
+
+msgid "No ARGB visuals"
+msgstr "No ARGB visuals"
+
+msgid "Windows that should be treated as not supporting transparency"
+msgstr "Windows that should be treated as not supporting transparency"
+
+msgid "Non movable windows"
+msgstr "Non-movable windows"
+
+msgid "Set window as non movable"
+msgstr "Set window as non-movable"
+
+msgid "Non resizable windows"
+msgstr "Non-resizable windows"
+
+msgid "Set window as non resizable"
+msgstr "Set window as non-resizable"
+
+msgid "Non minimizable windows"
+msgstr "Non-minimisable windows"
+
+msgid "Set window as non minimizable"
+msgstr "Set window as non-minimisable"
+
+msgid "Non maximizable windows"
+msgstr "Non-maximisable windows"
+
+msgid "Set window as non maximizable"
+msgstr "Set window as non-maximisable"
+
+msgid "Non closable windows"
+msgstr "Non-closable windows"
+
+msgid "Set window as non closable"
+msgstr "Set window as non-closable"
+
+msgid "No focus"
+msgstr "No focus"
+
+msgid "Windows will not have focus"
+msgstr "Windows will not have focus"
+
+msgid "Size rules"
+msgstr "Size rules"
+
+msgid "Fixed Size Windows"
+msgstr "Fixed Size Windows"
+
+msgid "Sized Windows"
+msgstr "Sized Windows"
+
+msgid "Windows that should be resized by default"
+msgstr "Windows that should be resized by default"
+
+msgid "Width values"
+msgstr "Width values"
+
+msgid "Height values"
+msgstr "Height values"
+
+msgid "Workarounds"
+msgstr "Workarounds"
+
+msgid "Marco-like workarounds."
+msgstr "Marco-like workarounds."
+
+msgid "Legacy Fullscreen Support"
+msgstr "Legacy Fullscreen Support"
+
+msgid "Make Wine and legacy applications fullscreen properly."
+msgstr "Make Wine and legacy applications fullscreen properly."
+
+msgid "Firefox Menu Fix"
+msgstr "Firefox Menu Fix"
+
+msgid "Fix window type of Firefox and Thunderbird menus."
+msgstr "Fix window type of Firefox and Thunderbird menus."
+
+msgid "OpenOffice.org Menu Fix"
+msgstr "OpenOffice.org Menu Fix"
+
+msgid "Fix window type of OpenOffice.org menus."
+msgstr "Fix window type of OpenOffice.org menus."
+
+msgid "Notification Daemon Fix"
+msgstr "Notification Daemon Fix"
+
+msgid "Fix window type of notification daemon windows."
+msgstr "Fix window type of notification daemon windows."
+
+msgid "Java Window Fix"
+msgstr "Java Window Fix"
+
+msgid "Fix window type of various Java windows."
+msgstr "Fix window type of various Java windows."
+
+msgid "Java Taskbar Fix"
+msgstr "Java Taskbar Fix"
+
+msgid "Fix Java windows disappearing from the taskbar."
+msgstr "Fix Java windows disappearing from the task bar."
+
+msgid "Qt Window Fix"
+msgstr "Qt Window Fix"
+
+msgid "Fix window type of various Qt windows."
+msgstr "Fix window type of various Qt windows."
+
+msgid "Convert Urgency to Demands Attention"
+msgstr "Convert Urgency to Demands Attention"
+
+msgid "Make \"urgent\" windows also \"demand attention\"."
+msgstr "Make \"urgent\" windows also \"demand attention\"."
+
+msgid "AIGLX Fragment Parameter Fix"
+msgstr "AIGLX Fragment Parameter Fix"
+
+msgid "Fix broken glProgramEnvParameter4f implementation."
+msgstr "Fix broken glProgramEnvParameter4f implementation."
+
+msgid "Fix screen updates in XGL with fglrx."
+msgstr "Fix screen updates in XGL with fglrx."
+
+msgid "Fix for broken GLX_MESA_copy_sub_buffer on XGL in fglrx."
+msgstr "Fix for broken GLX_MESA_copy_sub_buffer on XGL in fglrx."
+
+msgid "Force synchronization between X and GLX"
+msgstr "Force synchronisation between X and GLX"
+
+msgid ""
+"Force synchronization between X and GLX, which may help for window parts not "
+"redrawing correctly when using Nvidia drivers, but also may decrease "
+"performance."
+msgstr ""
+"Force synchronisation between X and GLX, which may help for window parts not "
+"redrawing correctly when using Nvidia drivers, but also may decrease "
+"performance."
+
+msgid "Window stickyness"
+msgstr "Window stickyness"
+
+msgid "Make \"on all desktops\" windows \"sticky\""
+msgstr "Make \"on all desktops\" windows \"sticky\""
+
+msgid ""
+"Make \"on all desktops\" windows sticky. Sticky windows are visible on all "
+"viewports."
+msgstr ""
+"Make \"on all desktops\" windows sticky. Sticky windows are visible on all "
+"viewports."
+
+msgid "\"On all desktops\" sticky match"
+msgstr "\"On all desktops\" sticky match"
+
+msgid "Windows on all desktops that should be made sticky"
+msgstr "Windows on all desktops that should be made sticky"

@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<compiz>
+  <plugin name="resizeinfo" useBcop="true">
+    <_short>Resize Info</_short>
+    <_long>Display info on resize similar to marco</_long>
+	<category>Utility</category>
+	<deps>
+		<relation type="after">
+			<plugin>resize</plugin>
+		</relation>
+	</deps>
+    <display>
+		<group>
+	<option name="fade_time" type="int">
+	  <_short>Fade Time</_short>
+	  <_long>Fade time (in ms) for popup window</_long>
+	  <default>500</default>
+	  <min>10</min>
+	  <max>5000</max>
+	</option>
+	<option name="always_show" type="bool">
+	  <_short> Show resize info for all windows. </_short>
+	  <_long> Show resize info for all windows as opposed to just
+	  windows with a resize increment of greater than 1. </_long>
+	  <default>true</default>
+	</option>
+	<option name="text_family" type="string">
+	  <_short>Font family</_short>
+	  <_long>Name of the font to display resize info.</_long>
+	  <hints>family;</hints>
+	  <default>Sans</default>
+	</option>
+	<option name="title_size" type="int">
+	  <_short>Font Size</_short>
+	  <_long>Font size for resize info display</_long>
+	  <min>6</min>
+	  <max>48</max>
+	  <default>12</default>
+	</option>
+	<option name="title_bold" type="bool">
+	  <_short>Bold Font</_short>
+	  <_long>Use bold font for window title display</_long>
+	  <default>true</default>
+	</option>
+	<option name="text_color" type="color">
+	  <_short> Text color. </_short>
+	  <_long> Color of text on resize popup. </_long>
+	  <default>
+	    <red> 0x0000 </red>
+	    <blue> 0x0000 </blue>
+	    <green> 0x0000 </green>
+	    <alpha> 0xffff </alpha>
+	  </default>
+	</option>
+	<option name="gradient_1" type="color">
+	  <_short> Gradient Color 1 </_short>
+	  <_long> Color 1 of the gradient background. </_long>
+	  <default>
+	    <red> 0xcccc </red>
+	    <green> 0xcccc </green>
+	    <blue> 0xe665 </blue>
+	    <alpha> 0xcccc </alpha>
+	  </default>
+	</option>
+	<option name="gradient_2" type="color">
+	  <_short> Gradient Color 2 </_short>
+	  <_long> Color 2 of the gradient background. </_long>
+	  <default>
+	    <red> 0xf332 </red>
+	    <green> 0xf332 </green>
+	    <blue> 0xf332 </blue>
+	    <alpha> 0xcccc </alpha>
+	  </default>
+	</option>
+	<option name="gradient_3" type="color">
+	  <_short> Gradient Color 3 </_short>
+	  <_long> Color 3 of the gradient background. </_long>
+	  <default>
+	    <red> 0xd998 </red>
+	    <green> 0xd998 </green>
+	    <blue> 0xd998 </blue>
+	    <alpha> 0xcccc </alpha>
+	  </default>
+	</option>
+	<option name="border_color" type="color">
+	  <_short> Border </_short>
+	  <_long> Border color of the gradient background. </_long>
+	  <default>
+	    <red> 0xe57f </red>
+	    <green> 0xe57f </green>
+	    <blue> 0xe57f </blue>
+	    <alpha> 0xffff </alpha>
+	  </default>
+	</option>
+
+      </group>
+    </display>
+  </plugin>
+</compiz>

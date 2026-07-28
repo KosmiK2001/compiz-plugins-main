@@ -1,0 +1,2798 @@
+# Catalan translation for compiz-plugins-main
+# Copyright (C) 2007 launchpad.net/compiz
+# This file is distributed under the same license as the compiz-plugins-main package.
+# Gustau L. Castells (Karasu) <gustaucastells@gmail.com>, 2007.
+# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: compiz-plugins-main\n"
+"Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-plugins-main/"
+"issues\n"
+"POT-Creation-Date: 2017-01-12 18:19+0300\n"
+"PO-Revision-Date: 2017-03-07 20:24+0100\n"
+"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
+"Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.8.12\n"
+
+msgid "Animations"
+msgstr "Animacions"
+
+msgid "Use various animations as window effects"
+msgstr "Utilitza diverses animacions com ara els efectes de la finestra"
+
+msgid "Open Animation"
+msgstr "Animació d'obriment"
+
+msgid "Animation Selection"
+msgstr "Selecció de l'animació"
+
+msgid "Open Effect"
+msgstr "Efecte d'obriment"
+
+msgid "The animation effect shown when creating a window."
+msgstr "L'efecte d'animació mostrat quan es crea una finestra."
+
+msgid "Duration"
+msgstr "Durada"
+
+msgid "Animation duration in milliseconds for open effect."
+msgstr "La durada de l'animació en mil·lisegons per a l'efecte d'obriment."
+
+msgid "Window Match"
+msgstr "Concordances de les finestres"
+
+msgid "The windows that will be animated."
+msgstr "Les finestres que tindran un efecte d'animació."
+
+msgid "Options"
+msgstr "Opcions"
+
+msgid ""
+"Comma separated list of option value assignments to override effect "
+"settings, e.g.: fire_color=#0080ffff, fire_particles=700, fire_smoke=1"
+msgstr ""
+"Llista d'opcions separada per comes per tal de sobreescriure els paràmetres "
+"dels efectes, per exemple: fire_color=#0080ffff, fire_particles=700, "
+"fire_smoke=1"
+
+msgid "Random Effects"
+msgstr "Efectes aleatoris"
+
+msgid "Pool"
+msgstr "Conjunt"
+
+msgid ""
+"Pool of effects to be chosen from if Random effect is selected. Click reset "
+"to use all effects."
+msgstr ""
+"La reserva dels efectes des d'on elegir els efectes si se selecciona "
+"l'efecte aleatori. Feu clic a restablir per utilitzar tots els efectes."
+
+msgid "Close Animation"
+msgstr "Animació de tancament"
+
+msgid "Close Effect"
+msgstr "Efecte de tancament"
+
+msgid "The animation effect shown when closing a window."
+msgstr "L'efecte d'animació mostrat quan es tanca una finestra."
+
+msgid "Animation duration in milliseconds for close effect."
+msgstr "La durada de l'animació en mil·lisegons per a l'efecte de tancament."
+
+msgid "Minimize Animation"
+msgstr "Animació de minimització"
+
+msgid "Minimize Effect"
+msgstr "Efecte de minimització"
+
+msgid "The animation effect shown when minimizing a window."
+msgstr "L'efecte d'animació mostrat quan es minimitza una finestra."
+
+msgid "Animation duration in milliseconds for minimize effect."
+msgstr ""
+"La durada de l'animació en mil·lisegons per a l'efecte de minimització."
+
+msgid "Shade Animation"
+msgstr "Animació d'ombreig"
+
+msgid "Shade Effect"
+msgstr "Efecte d'ombreig"
+
+msgid "The animation effect shown when shading a window."
+msgstr "L'efecte d'animació que es mostra quan s'ombreja una finestra."
+
+msgid "Animation duration in milliseconds for shade effect."
+msgstr "La durada de l'animació en mil·lisegons per a l'efecte d'ombreig."
+
+msgid "Window that should animate with this effect when shaded."
+msgstr "Finestres que s'han d'animar amb aquest efecte quan s'ombregin."
+
+msgid "Focus Animation"
+msgstr "Animació del focus"
+
+msgid "Focus Effect"
+msgstr "Efecte del focus"
+
+msgid "The animation effect shown when focusing a window."
+msgstr ""
+"L'efecte d'animació que es mostra quan es dóna el focus a una finestra."
+
+msgid "Animation duration in milliseconds for focus effect."
+msgstr "La durada de l'animació en mil·lisegons per a l'efecte de focus."
+
+msgid "Window that should animate with this effect when focused."
+msgstr "Finestres que s'han d'animar amb aquest efecte quan tinguin el focus."
+
+msgid "Effect Settings"
+msgstr "Ajusts dels efectes"
+
+msgid "Curved Fold"
+msgstr "Plegament amb corba"
+
+msgid "Curved Fold Amplitude Multiplier"
+msgstr "Multiplicador de l'amplitud del plegament amb corba"
+
+msgid ""
+"Fold amplitude (size) is multiplied by this number. Negative values fold "
+"outward."
+msgstr ""
+"L'amplitud del plegament (mida) es multiplica amb aquest número. Els valors "
+"negatius la dobleguen cap a l'exterior."
+
+msgid "Zoom to TaskBar on Minimize"
+msgstr "Fes zoom a la barra de tasques amb la minimització"
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Curved Fold "
+"effect."
+msgstr ""
+"Si la finestra hauria de fer zoom a la barra de tasques quan es minimitzi "
+"amb l'efecte de plegament amb corba."
+
+msgid "Dodge"
+msgstr "Esquivament"
+
+msgid "Dodge Gap Ratio"
+msgstr "Relació de separació de l'esquivament"
+
+msgid "Ratio of gaps between dodge start times to focus duration."
+msgstr ""
+"Relació de separació entre els temps d'inici de l'esquivament i la durada "
+"del focus."
+
+msgid "Dream"
+msgstr "Somni"
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Dream effect."
+msgstr ""
+"Si la finestra hauria de fer zoom a la barra de tasques quan es minimitzi "
+"amb l'efecte de somni."
+
+msgid "Glide 1"
+msgstr "Planatge 1"
+
+msgid "Away Position"
+msgstr "Posició d'allunyament"
+
+msgid ""
+"Closeness of window to camera at the end of the animation (1.0: Close to "
+"camera, -2.0: Away from camera)."
+msgstr ""
+"Proximitat de la finestra a la càmera a l'acabament de l'animació (1,0: A "
+"prop de la càmera, -2,0: Lluny de la càmera)."
+
+msgid "Away Angle"
+msgstr "Angle d'allunyament"
+
+msgid "Angle of window at the end of the animation."
+msgstr "Angle de la finestra a l'acabament de l'animació."
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Glide 1 effect."
+msgstr ""
+"Si la finestra hauria de fer zoom a la barra de tasques quan es minimitzi "
+"amb l'efecte de planatge 1."
+
+msgid "Glide 2"
+msgstr "Planatge 2"
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Glide 2 effect."
+msgstr ""
+"Si la finestra hauria de fer zoom a la barra de tasques quan es minimitzi "
+"amb l'efecte de planatge 2."
+
+msgid "Horizontal Folds"
+msgstr "Plecs horitzontals"
+
+msgid "Horizontal Folds Amplitude Multiplier"
+msgstr "Multiplicador de l'amplitud dels plecs horitzontals"
+
+msgid "Number of Horizontal Folds"
+msgstr "Nombre de plecs horitzontals"
+
+msgid ""
+"The number of horizontal folds that occur in the Horizontal Fold animation."
+msgstr ""
+"El nombre de plecs horitzontals que es produeixen en l'animació de plegament "
+"horitzontal."
+
+msgid ""
+"Whether the window should zoom to taskbar when minimized with Horizontal "
+"Folds effect."
+msgstr ""
+"Si la finestra hauria de fer zoom a la barra de tasques quan es minimitzi "
+"amb l'efecte de plecs horitzontals."
+
+msgid "Magic Lamp"
+msgstr "Llàntia màgica"
+
+msgid "Magic Lamp Open/Close Moving End"
+msgstr "Acabament del moviment de l'obriment/tancament de la llàntia màgica"
+
+msgid "On open/close, move magic lamp ending point with the mouse pointer."
+msgstr ""
+"Amb l'obriment/tancament, mou el punt final de la llàntia màgica amb el "
+"punter del ratolí."
+
+msgid "Magic Lamp Grid Y Resolution"
+msgstr "Resolució de la quadrícula Y de la llàntia màgica"
+
+msgid ""
+"Vertex grid resolution for Magic Lamp (Y dimension only). This is the number "
+"of points used to define the curves. The higher the number, the smoother the "
+"curves. However there will be a loss of performance (CPU usage increases)."
+msgstr ""
+"La resolució de la quadrícula del vèrtex per a la llàntia màgica (només la "
+"dimensió Y). Aquest és el nombre de punts que s'utilitza per definir les "
+"corbes. Com més gran sigui el nombre, més suaus seran les corbes. No obstant "
+"això, hi haurà una pèrdua de rendiment (incrementa l'ús de la CPU)."
+
+msgid "Magic Lamp Max Waves"
+msgstr "Màxim d'ones de la llàntia màgica"
+
+msgid "The maximum number of waves for Magic Lamp."
+msgstr "El nombre màxim d'ones per a la llàntia màgica."
+
+msgid "Magic Lamp Min Wave Amplitude"
+msgstr "Amplitud d'ona mínima de la llàntia màgica"
+
+msgid "The minimum amplitude (size of the waves) Magic Lamp will have."
+msgstr "L'amplada mínima (mida de les ones) que tindrà la llàntia màgica."
+
+msgid "Magic Lamp Max Wave Amplitude"
+msgstr "Amplitud d'ona màxima de la llàntia màgica"
+
+msgid "The maximum amplitude (size of the waves) Magic Lamp will have."
+msgstr "L'amplada màxima (mida de les ones) que tindrà la Llàntia Màgica."
+
+msgid "Magic Lamp Open Start Width"
+msgstr "Amplada inicial d'obriment de la llàntia màgica"
+
+msgid ""
+"Starting width of open effect and ending width of close effect for Magic "
+"Lamp."
+msgstr ""
+"Amplada inicial de l'efecte d'obriment i amplada final de l'efecte de "
+"tancament per a la llàntia màgica."
+
+msgid "Roll Up"
+msgstr "Enrotlla cap a dalt"
+
+msgid "Rollup Fixed Interior"
+msgstr "Interior fix de l'enrotllament cap a dalt"
+
+msgid "Fixed window interior during the Rollup animation."
+msgstr ""
+"Interior de la finestra fix durant l'animació d'enrotllament cap a dalt."
+
+msgid "Sidekick"
+msgstr "Acompanyant"
+
+msgid "Sidekick Number of Rotations"
+msgstr "Nombre de girs de l'acompanyant"
+
+#, no-c-format
+msgid "Number of rotations for Sidekick (plus or minus 10% for randomness)."
+msgstr ""
+"El nombre de girs de l'acompanyant (més o menys un 10% per a l'aleatorietat)."
+
+msgid "Sidekick Springiness"
+msgstr "Elasticitat de l'acompanyant"
+
+msgid "How spring-like the Sidekick animation should be."
+msgstr "Com de similar a l'elasticitat ha de ser l'animació de l'acompanyant."
+
+msgid "Zoom from Center"
+msgstr "Zoom des del centre"
+
+msgid "Zoom from center when playing the Sidekick animation."
+msgstr "Zoom des del centre quan es reprodueix l'animació de l'acompanyant."
+
+msgid "Off"
+msgstr "Apagat"
+
+msgid "Minimize/Unminimize Only"
+msgstr "Només minimitza/desminimitza"
+
+msgid "Open/Close Only"
+msgstr "Només obrir/tancar"
+
+msgid "On"
+msgstr "Engegat"
+
+msgid "Vacuum"
+msgstr "Aspirador"
+
+msgid "Vacuum Open/Close Moving End"
+msgstr "Fi del moviment d'obriment/tancament de l'aspirador"
+
+msgid "On open/close, move vacuum ending point with the mouse pointer."
+msgstr ""
+"Amb l'obriment/tancament, mou el punt final de l'aspirador amb el punter del "
+"ratolí."
+
+msgid "Vacuum Grid Y Resolution"
+msgstr "Resolució de la quadrícula Y de l'aspirador"
+
+msgid ""
+"Vertex grid resolution for Vacuum (Y dimension only). This is the number of "
+"points used to define the curves. The higher the number, the smoother the "
+"curves. However there will be a loss of performance (CPU usage increases)."
+msgstr ""
+"La resolució de la quadrícula del vèrtex per a l'aspirador (només la "
+"dimensió Y). Aquest és el nombre de punts que s'utilitza per definir les "
+"corbes. Com més gran sigui el nombre, més suaus seran les corbes. No obstant "
+"això, hi haurà una pèrdua de rendiment (increment de l'ús de la CPU)."
+
+msgid "Vacuum Open Start Width"
+msgstr "Amplada inicial d'obertura de l'aspirador"
+
+msgid ""
+"Starting width of open effect and ending width of close effect for Vacuum."
+msgstr ""
+"Amplada inicial de l'efecte d'obriment i amplada final de l'efecte de "
+"tancament per a l'aspirador."
+
+msgid "Wave"
+msgstr "Ona"
+
+msgid "Wave Width"
+msgstr "Amplada de l'ona"
+
+msgid "The width of the wave relative to the window height."
+msgstr "L'amplada de l'ona amb relació a l'alçada de la finestra."
+
+msgid "Wave Amplitude Multiplier"
+msgstr "Multiplicador de l'amplitud de l'ona"
+
+msgid ""
+"Wave amplitude (size) is multiplied by this number. Negative values fold "
+"outward."
+msgstr ""
+"L'amplitud de l'ona (mida) es multiplica amb aquest número. Els valors "
+"negatius la dobleguen cap a l'exterior."
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Zoom from center when playing the Zoom animation."
+msgstr "Zoom des del centre quan es reprodueix l'animació de zoom."
+
+msgid "Zoom Springiness"
+msgstr "Elasticitat del zoom"
+
+msgid "How spring-like the Zoom animation should be."
+msgstr "Com de similar a l'elasticitat ha de ser l'animació de zoom."
+
+msgid "Random Animations For All Events"
+msgstr "Animacions aleatòries per a tots els efectes"
+
+msgid ""
+"All effects are chosen randomly, ignoring the selected effect. If None is "
+"selected for an event, that event won't be animated."
+msgstr ""
+"Tots els efectes es trien aleatòriament, s'ignora l'efecte que s'ha "
+"seleccionat. Si se selecciona Cap per a l'esdeveniment, no s'animarà aquest "
+"esdeveniment."
+
+msgid "Animation Time Step"
+msgstr "Animació gradual"
+
+msgid ""
+"The amount of time in milliseconds between each render of the animation. The "
+"higher the number, the jerkier the movements become."
+msgstr ""
+"La quantitat de temps en mil·lisegons entre cada renderitzat de l'animació. "
+"Els moviments seran més bruscos com més alt sigui el nombre."
+
+msgid "None"
+msgstr "Cap"
+
+msgid "Random"
+msgstr "Aleatori"
+
+msgid "Fade"
+msgstr "Esvaïment"
+
+msgid "Color filter"
+msgstr "Filtre de colors"
+
+msgid "Filter colors for accessibility purposes"
+msgstr "Filtra els colors per facilitar l'accessibilitat"
+
+msgid "Toggle window filtering"
+msgstr "Commuta el filtratge de la finestra"
+
+msgid "Toggle filtering for currently focused window."
+msgstr "Commuta el filtratge per la finestra que té actualment el focus."
+
+msgid "Toggle screen filtering"
+msgstr "Commuta el filtratge de la pantalla"
+
+msgid "Toggle filtering for every window on the screen."
+msgstr "Commuta el filtratge per a cadascuna de les finestres en pantalla."
+
+msgid "Switch filter"
+msgstr "Canvia de filtre"
+
+msgid ""
+"Select filter to use from filters list : either apply all filters or only "
+"one specific filter (triggering this action switches filters one by one and "
+"eventually comes back to the \"all filters\" mode)."
+msgstr ""
+"Seleccioneu el filtre a utilitzar de la llista dels filtres: aplica tots els "
+"filtres o bé aplica únicament un d'específic (l'activació d'aquesta opció "
+"canvia els filtres un per un i finalment torna al mode \"tots els filtres\")."
+
+msgid "Filter window decorations"
+msgstr "Filtra les decoracions de les finestres"
+
+msgid ""
+"Window decorations (borders and titlebar) will be filtered as well as window "
+"contents if enabled."
+msgstr ""
+"Si s'habilita, les decoracions de la finestra (els contorns i la barra de "
+"títol) seran filtrades així com els continguts de la finestra."
+
+msgid "Filtered windows"
+msgstr "Finestres filtrades"
+
+msgid "Windows to be filtered by default."
+msgstr "Finestres que seran filtrades per defecte."
+
+msgid "Exclude windows"
+msgstr "Exclou les finestres"
+
+msgid "Windows to exclude from filtering."
+msgstr "Finestres que no es filtraran."
+
+msgid "Filters files"
+msgstr "Fitxers dels filtres"
+
+msgid ""
+"List of plain text filter files that should be applied when filtering "
+"windows or screen."
+msgstr ""
+"Llista dels fitxers de text de filtratge que s'han d'aplicar quan es filtren "
+"les finestres o la pantalla."
+
+msgid "Expo"
+msgstr "Exposició"
+
+msgid "Expo Plugin"
+msgstr "Connector d'exposició"
+
+msgid "Bindings"
+msgstr "Vinculacions"
+
+msgid "Expo key"
+msgstr "Tecla de l'exposició"
+
+msgid "Engage wall expo mode key binding"
+msgstr "Reserva l'exposició del mur a la vinculació de tecles"
+
+msgid "Expo button"
+msgstr "Botó de l'exposició"
+
+msgid "Engage wall expo mode button binding"
+msgstr "Reserva l'exposició del mur a la vinculació de botó"
+
+msgid "Expo edge"
+msgstr "Vora de l'exposició"
+
+msgid "Engage wall expo mode edge binding"
+msgstr "Reserva l'exposició del mur a la vinculació de la vora"
+
+msgid "Double click time"
+msgstr "Temps de doble clic"
+
+msgid "Timeframe to execute a double click"
+msgstr "Marge de temps per executar un doble clic"
+
+msgid "Drag&amp;drop"
+msgstr "Arrossega i deixa anar"
+
+msgid "Button binding for drag &amp; drop of windows"
+msgstr "Vinculació del botó per arrossegar i deixar anar finestres"
+
+msgid "Exit expo"
+msgstr "Surt de l'exposició"
+
+msgid "Button binding to exit expo"
+msgstr "Vinculació de botó per sortir de l'exposició"
+
+msgid "Next viewport"
+msgstr "Àrea de visualització següent"
+
+msgid "Button binding to switch to next viewport in expo"
+msgstr ""
+"Vinculació de botó per canviar a la següent àrea de visualització en "
+"l'exposició"
+
+msgid "Previous viewport"
+msgstr "Àrea de visualització anterior"
+
+msgid "Behaviour"
+msgstr "Comportament"
+
+msgid "Zoom time"
+msgstr "Temps de zoom"
+
+msgid "Duration of the zoomout animation"
+msgstr "Durada de l'animació de la reducció del zoom"
+
+msgid "Immediate moves"
+msgstr "Moviments immediats"
+
+msgid ""
+"Selects if windows movements in expo mode should be immediate - this among "
+"other things disables wobbliness"
+msgstr ""
+"Selecciona si els moviments de les finestres al mode d'exposició han de ser "
+"immediats, això entre altres coses inhabilita el trontollament de les "
+"finestres."
+
+msgid "Expo Animation"
+msgstr "Animació de l'exposició"
+
+msgid "Animation used when switching to expo mode"
+msgstr "Animació que s'utilitza quan es canvia al mode d'exposició"
+
+msgid "Fade + Zoom"
+msgstr "Esvaïment + zoom"
+
+msgid "Vortex"
+msgstr "Vòrtex"
+
+msgid "Appearance"
+msgstr "Aparença"
+
+msgid "Deformation"
+msgstr "Deformació"
+
+msgid "Deformation of the expo wall"
+msgstr "La deformació del mur d'exposició"
+
+msgid "Tilt"
+msgstr "Inclinació"
+
+msgid "Curve"
+msgstr "Corba"
+
+msgid "Distance"
+msgstr "Distància"
+
+msgid "Distance of the expo wall"
+msgstr "La distància del mur d'exposició"
+
+msgid "Viewport distance"
+msgstr "Distància de l'àrea de visualització"
+
+msgid "Distance between viewports"
+msgstr "La distància entre les àrees de visualització"
+
+msgid "Aspect Ratio"
+msgstr "Relació d'aspecte"
+
+msgid "Expo mode aspect ratio"
+msgstr "La relació d'aspecte del mode d'exposició"
+
+msgid "Curve strength"
+msgstr "Intensitat de la corba"
+
+msgid "Strength of the deformation in curve mode"
+msgstr "La intensitat de la deformació al mode de corba"
+
+msgid "Hide panels/docks in expo"
+msgstr "Oculta els plafons/acobladors a l'exposició"
+
+msgid "Hide panels/docks in expo."
+msgstr "Oculta els plafons/acobladors a l'exposició."
+
+msgid "Mipmaps"
+msgstr "Mipmaps"
+
+msgid "Generate mipmaps in expo mode"
+msgstr "Genera els mipmaps al mode d'exposició"
+
+msgid "Multi Output Mode"
+msgstr "Mode de sortida múltiple"
+
+msgid ""
+"Selects how the expo wall is displayed if multiple output devices are used."
+msgstr ""
+"Seleccioneu com es mostra el mur d'exposició si s'utilitzen múltiples "
+"dispositius de sortida."
+
+msgid "One big wall"
+msgstr "Un mur gran"
+
+msgid "One wall per output"
+msgstr "Un mur per sortida"
+
+msgid "Brightness"
+msgstr "Brillantor"
+
+msgid "Inactive viewport brightness."
+msgstr "La brillantor de l'àrea de visualització inactiva."
+
+msgid "Saturation"
+msgstr "Saturació"
+
+msgid "Inactive viewport saturation."
+msgstr "La saturació de l'àrea de visualització inactiva."
+
+msgid "Reflection"
+msgstr "Reflexió"
+
+msgid "Show a reflection of the viewports on the ground"
+msgstr "Mostra una reflexió de les àrees de visualització al terra"
+
+msgid "Ground color(near)"
+msgstr "Color del terra (a prop)"
+
+msgid "Color of the ground (near)."
+msgstr "El color del terra (a prop)."
+
+msgid "Ground color(far)"
+msgstr "Color del terra (lluny)"
+
+msgid "Color of the ground (far)."
+msgstr "El color del terra (lluny)."
+
+msgid "Reflection ground size"
+msgstr "Mida del terra en la reflexió"
+
+msgid "Reflection ground size."
+msgstr "La mida del terra en la reflexió."
+
+msgid "Reflection Scale"
+msgstr "Escalament de la reflexió"
+
+msgid "Scale factor of the expo wall reflection"
+msgstr "Factor d'escalament de la reflexió del mur d'exposició"
+
+msgid "Enhanced Zoom Desktop"
+msgstr "Zoom de l'escriptori millorat"
+
+msgid "Enhanced zoom functions for the visually impaired and other users"
+msgstr ""
+"Funcions millorades de zoom per als usuaris amb problemes de vista i per als "
+"altres usuaris"
+
+msgid "Zoom In/Out"
+msgstr "Amplia/redueix el zoom"
+
+msgid "Zoom In"
+msgstr "Amplia el zoom"
+
+msgid "Zoom Out"
+msgstr "Redueix el zoom"
+
+msgid "Zoom Box"
+msgstr "Requadre de zoom"
+
+msgid "Zoom in on a boxed area"
+msgstr "Amplia del zoom a l'interior d'una àrea enquadrada"
+
+msgid "Mouse Behaviour"
+msgstr "Comportament del ratolí"
+
+msgid "Center the mouse"
+msgstr "Centra el ratolí"
+
+msgid "Puts the mouse in the middle of the screen (Regardless of zoom level)"
+msgstr ""
+"Posa el ratolí al mig de la pantalla (independentment del nivell de zoom)"
+
+msgid "Specific Zoom"
+msgstr "Zoom específic"
+
+msgid "Zoom Specific Level 1"
+msgstr "Nivell específic de zoom 1"
+
+msgid "Zoom to the specific zoom level 1"
+msgstr "Zoom al nivell específic de zoom 1"
+
+msgid "Specific zoom factor 1"
+msgstr "Factor de zoom específic 1"
+
+msgid "Zoom level to go to when triggering hotkey 1"
+msgstr "Nivell de zoom quan s'activa la drecera 1"
+
+msgid "Zoom Specific Level 2"
+msgstr "Nivell específic de zoom 2"
+
+msgid "Zoom to the specific zoom level 2"
+msgstr "Zoom al nivell específic de zoom 2"
+
+msgid "Specific zoom factor 2"
+msgstr "Factor de zoom específic 2"
+
+msgid "Zoom level to go to when triggering hotkey 2"
+msgstr "Nivell de zoom quan s'activa la drecera 2"
+
+msgid "Zoom Specific Level 3"
+msgstr "Nivell específic de zoom 3"
+
+msgid "Zoom to the specific zoom level 3"
+msgstr "Zoom al nivell específic de zoom 3"
+
+msgid "Specific zoom factor 3"
+msgstr "Factor de zoom específic 3"
+
+msgid "Zoom level to go to when triggering hotkey 3"
+msgstr "Nivell de zoom quan s'activa la drecera 3"
+
+msgid "Target Focused Window on Specific level"
+msgstr "Finestra amb focus assenyalada al nivell específic"
+
+msgid ""
+"Enable this to target the focused window when jumping to a specific zoom "
+"level. Disable to target mouse."
+msgstr ""
+"Habiliteu-ho per assenyalar la finestra amb focus quan salta a un determinat "
+"nivell de zoom. Inhabiliteu-ho per assenyalar amb el ratolí."
+
+msgid "Zoom Area Movement"
+msgstr "Moviment de l'àrea de zoom"
+
+msgid "Toggle zoom area lock"
+msgstr "Commuta el bloqueig de l'àrea de zoom"
+
+msgid "Toggles a lock on the zoom area so it doesn't change on various events"
+msgstr ""
+"Commuta un bloqueig en l'àrea de zoom per la qual cosa no canvia en diversos "
+"esdeveniments"
+
+msgid "Panning"
+msgstr "Enquadrament"
+
+msgid "Pan Zoom Left"
+msgstr "Enquadra el zoom a l'esquerra"
+
+msgid "Pan (move) the zoom area left"
+msgstr "Enquadra (mou) l'àrea de zoom a l'esquerra"
+
+msgid "Pan Zoom Right"
+msgstr "Enquadra el zoom a la dreta"
+
+msgid "Pan (move) the zoom area right"
+msgstr "Enquadra (mou) l'àrea de zoom a la dreta"
+
+msgid "Pan Zoom Up"
+msgstr "Enquadra el zoom a dalt"
+
+msgid "Pan (move) the zoom area up"
+msgstr "Enquadra (mou) l'àrea de zoom a dalt"
+
+msgid "Pan Zoom Down"
+msgstr "Enquadra el zoom a baix"
+
+msgid "Pan (move) the zoom area down"
+msgstr "Enquadra (mou) l'àrea de zoom a baix"
+
+msgid "Fitting"
+msgstr "Ajustament"
+
+msgid "Fit the window to the zoom level"
+msgstr "Ajusta la finestra al nivell de zoom"
+
+msgid "Resize the window so it matches the current zoom level."
+msgstr ""
+"Redimensiona la finestra de manera que concordi amb el nivell de zoom actual."
+
+msgid "Fit zoomed area to window"
+msgstr "Ajusta l'àrea de zoom a la finestra"
+
+msgid ""
+"Zooms in/out so the focused window is zoomed to the maximum while still "
+"being fully visible."
+msgstr ""
+"Augmenta/disminueix el zoom per tal que la finestra amb focus té el zoom al "
+"màxim mentre continua sent totalment visible."
+
+msgid "Zoom factor"
+msgstr "Factor de zoom"
+
+msgid "Zoom in/out by this factor. Higher value means quicker zooming."
+msgstr ""
+"Amplia/redueix el zoom segons aquest factor. Un valor gran provoca un zoom "
+"més ràpid."
+
+msgid "Minimum zoom factor"
+msgstr "Factor de zoom mínim"
+
+msgid ""
+"The minimum allowed zoom factor. A value of 0.5 equals 2x zoom, a value of "
+"0.25 equals 4x zoom."
+msgstr ""
+"El factor de zoom mínim permès. Un valor de 0,5 equival a un zoom 2x i un "
+"valor de 0,25 equival a un zoom 4x."
+
+msgid "Sync Mouse"
+msgstr "Sincronitza el ratolí"
+
+msgid ""
+"Always keep the zoomed area in sync with where the mouse is, and vice versa. "
+"Use this if you don't intend to draw a scaled pointer or hide the original "
+"pointer. The zoomed area will move as you move your mouse."
+msgstr ""
+"Mantén sempre l'àrea amb zoom en sincronia amb el lloc on està el ratolí, i "
+"viceversa. Utilitzeu aquesta opció si no teniu la intenció de dibuixar un "
+"punter escalat o ocultar el punter original. L'àrea amb zoom es mourà a "
+"mesura que mogueu el punter del vostre ratolí."
+
+msgid "Scale the mouse pointer"
+msgstr "Escala el punter del ratolí"
+
+msgid "Enable this to get a gradually larger mouse pointer as you zoom in"
+msgstr ""
+"Habiliteu-ho per obtenir un punter del ratolí cada cop més gran a mesura que "
+"amplieu el zoom"
+
+msgid "Dynamic mouse pointer scale"
+msgstr "Escalament dinàmic del punter del ratolí"
+
+msgid ""
+"When scaling the mouse pointer, this option makes the scale adjust according "
+"to the current level of zoom."
+msgstr ""
+"Quan s'escali el punter del ratolí, aquesta opció fa que l'escalament "
+"s'ajusti d'acord amb el nivell actual de zoom."
+
+msgid "Static mouse pointer scale"
+msgstr "Escalament estàtic del punter del ratolí"
+
+msgid ""
+"When not using a dynamic mouse pointer scale, this is the scale factor for "
+"the mouse pointer."
+msgstr ""
+"Quan no s'utilitzi un escalament dinàmic del punter del ratolí, aquest és el "
+"factor d'escalament per al punter del ratolí."
+
+msgid "Hide original mouse pointer"
+msgstr "Oculta el punter original del ratolí"
+
+msgid "Hides the original mouse pointer when zoomed in and scaling the mouse"
+msgstr ""
+"Oculta el punter de ratolí original quan s'augmenta el zoom i s'escala el "
+"ratolí"
+
+msgid "Restrain the mouse to the zoom area"
+msgstr "Restringeix el ratolí a l'àrea de zoom"
+
+msgid ""
+"Attempt to keep the zoomed mouse visible by warping it when it is moved "
+"outside the zoom area."
+msgstr ""
+"Intenta mantenir visible el ratolí amb zoom embolicant-lo quan es mou fora "
+"de l'àrea de zoom."
+
+msgid "Mouse panning"
+msgstr "Enquadrament del ratolí"
+
+msgid "Pan the zoom area when the mouse cursor moves outside the visible area."
+msgstr ""
+"Enquadra l'àrea de zoom quan el cursor del ratolí surt de l'àrea visible."
+
+msgid "Mouse Restrain Margin"
+msgstr "Marge de restricció del ratolí"
+
+msgid "The size of the margin to add when attempting to restrain the mouse."
+msgstr "La mida del marge a afegir quan volem restringir el ratolí."
+
+msgid "Pan Factor"
+msgstr "Factor d'enquadrament"
+
+msgid ""
+"Move the zoomed area this much whenever you pan the zoomed area with keys."
+msgstr ""
+"Mou l'àrea de zoom amb aquesta quantitat cada vegada que s'enquadri l'àrea "
+"amb zoom amb les tecles."
+
+msgid "Focus Tracking"
+msgstr "Seguiment del focus"
+
+msgid "Enable focus tracking"
+msgstr "Habilita el seguiment del focus"
+
+msgid "Move the zoom area when focus changes."
+msgstr "Mou l'àrea de zoom quan canviï el focus."
+
+msgid "Fit zoom level to window on focus change"
+msgstr "Ajusta el nivell de zoom a la finestra amb el canvi de focus"
+
+msgid ""
+"Fit the zoomed area to the window when the zoomed area moves as a result of "
+"focus tracking."
+msgstr ""
+"Ajusta l'àrea amb zoom a la finestra quan l'àrea amb zoom es mou com a "
+"resultat del seguiment del focus."
+
+msgid "Autoscale threshold"
+msgstr "Llindar de l'escalament automàtic"
+
+msgid ""
+"Only change zoom level (scale) on focus change if the target value is higher "
+"than this. Prevents zooming too far in on small popups etc."
+msgstr ""
+"Únicament canvia el nivell de zoom (escala) amb el canvi del focus si el "
+"valor assenyalat és superior a aquest. Evita fer zoom massa lluny en "
+"components emergents petits, etc."
+
+msgid "Always fit to window on focus track"
+msgstr "Ajusta sempre a la finestra amb seguiment del focus"
+
+msgid ""
+"Fit the zoomed area to the window when the zoomed area moves as a result of "
+"focus tracking. Even when not initially zoomed in."
+msgstr ""
+"Ajusta l'àrea amb zoom a la finestra quan l'àrea amb zoom es mou com a "
+"resultat del seguiment del focus. Fins i tot quan inicialment no ampliï el "
+"zoom."
+
+msgid "Follow Focus Delay"
+msgstr "Retard en el seguiment del focus"
+
+msgid ""
+"Only attempt to center newly focused windows if the mouse hasn't moved in "
+"this amount of seconds. Use this to avoid jumping when using sloppy focus."
+msgstr ""
+"Únicament intenta centrar les finestres recentment amb focus si el ratolí no "
+"s'ha mogut aquest nombre de segons. Utilitzeu-ho per evitar salts quan "
+"s'utilitzi el focus despreocupat."
+
+msgid "Animation"
+msgstr "Animació"
+
+msgid "Speed"
+msgstr "Velocitat"
+
+msgid "Zoom Speed"
+msgstr "Velocitat del zoom"
+
+msgid "Timestep"
+msgstr "Gradual"
+
+msgid "Zoom Timestep"
+msgstr "Zoom gradual"
+
+msgid "Filter Linear"
+msgstr "Filtre lineal"
+
+msgid "Use linear filter when zoomed in"
+msgstr "Utilitza el filtre lineal quan s'ampliï el zoom"
+
+msgid "JPEG"
+msgstr "JPEG"
+
+msgid "JPEG image format plugin"
+msgstr "Connector del format d'imatge JPEG"
+
+msgid "Compression Quality"
+msgstr "Qualitat de la compressió"
+
+msgid "Quality of compression when saving JPEG images"
+msgstr "La qualitat de la compressió quan es desen imatges JPEG"
+
+msgid "Magnifier"
+msgstr "Magnificador"
+
+msgid "Magnifier box"
+msgstr "Requadre del magnificador"
+
+msgid "Initiate"
+msgstr "Inicia"
+
+msgid "General"
+msgstr "General"
+
+msgid "Mode"
+msgstr "Mode"
+
+msgid "Mode."
+msgstr "El mode."
+
+msgid "Simple"
+msgstr "Senzill"
+
+msgid "Image overlay"
+msgstr "Superposició d'imatges"
+
+msgid "Fisheye"
+msgstr "Ull de peix"
+
+msgid "Zoom factor for keyboard initiated magnifier."
+msgstr "El factor de zoom per al magnificador iniciat amb el teclat."
+
+msgid "Keep fully on screen"
+msgstr "Mantén totalment en pantalla"
+
+msgid "Keep fully on screen."
+msgstr "Mantén totalment en pantalla."
+
+msgid "Width"
+msgstr "Amplada"
+
+msgid "Box width."
+msgstr "L'amplada del requadre."
+
+msgid "Height"
+msgstr "Alçada"
+
+msgid "Box height."
+msgstr "L'alçada del requadre."
+
+msgid "Border width"
+msgstr "Amplada del contorn"
+
+msgid "Border widtht."
+msgstr "L'amplada del contorn."
+
+msgid "Border color"
+msgstr "Color del contorn"
+
+msgid "Magnifier image"
+msgstr "Imatge del magnificador"
+
+msgid "Magnifier image."
+msgstr "La imatge del magnificador."
+
+msgid "Clip mask"
+msgstr "Màscara del retall"
+
+msgid "Clip mask."
+msgstr "La màscara del retall."
+
+msgid "X offset of the cursor"
+msgstr "Desplaçament X del cursor"
+
+msgid "X offset of the cursor."
+msgstr "El desplaçament X del cursor."
+
+msgid "Y offset of the cursor"
+msgstr "Desplaçament Y del cursor"
+
+msgid "Y offset of the cursor."
+msgstr "El desplaçament Y del cursor."
+
+msgid "Radius"
+msgstr "Radi"
+
+msgid "Radius of the magnification area."
+msgstr "El radi de l'àrea de magnificació."
+
+msgid "Mouse position polling"
+msgstr "Consulta de la posició del ratolí"
+
+msgid "Updates the mouse pointer position from the xserver"
+msgstr "Actualitza la posició del punter del ratolí des de xserver"
+
+msgid "Misc"
+msgstr "Misc"
+
+msgid "Mouse Poll Interval"
+msgstr "Interval de consulta del ratolí"
+
+msgid ""
+"How often to poll the mouse position, in miliseconds. Reduce this to reduce "
+"choppy behavior."
+msgstr ""
+"Amb quina freqüència es consultarà la posició del ratolí en mil·lisegons. Si "
+"es redueix, pot reduir el comportament agitat."
+
+msgid "Negative"
+msgstr "Negatiu"
+
+msgid "Used to set a window or screen negative"
+msgstr "S'utilitza per establir el negatiu d'una finestra o d'una pantalla"
+
+msgid "Toggle Window Negative"
+msgstr "Commuta el negatiu de la finestra"
+
+msgid "Toggle active window negative"
+msgstr "Commuta el negatiu de la finestra activa"
+
+msgid "Toggle Screen Negative"
+msgstr "Commuta el negatiu de la pantalla"
+
+msgid "Toggle screen negative"
+msgstr "Commuta el negatiu de la pantalla"
+
+msgid "Neg Windows"
+msgstr "Negatiu de les finestres"
+
+msgid "Windows to be negative by default"
+msgstr "Finestres predeterminades a estar en negatiu"
+
+msgid "Exclude Windows"
+msgstr "Exclou les finestres"
+
+msgid "Windows to exclude from negating"
+msgstr "Finestres a excloure del negatiu"
+
+msgid "Opacify"
+msgstr "Conversió a opac"
+
+msgid "Make windows easily visible by hovering the mouse over them"
+msgstr ""
+"Fa que les finestres siguin fàcilment visibles en passar el punter del "
+"ratolí per sobre d'elles"
+
+msgid "Toggle Opacify"
+msgstr "Commuta la conversió a opac"
+
+msgid ""
+"Use this to enable/disable Opacify on the fly. Previously opacified windows "
+"will not be reset once you disable it like this."
+msgstr ""
+"Utilitzeu aquesta opció per a habilitar/inhabilitar la conversió a opac "
+"sobre la marxa. Les finestres convertides anteriorment a opaques no es "
+"restabliran un cop ho inhabiliteu."
+
+msgid "Misc. Options"
+msgstr "Altres opcions"
+
+msgid "Reset opacity to original values when toggling"
+msgstr "Restableix l'opacitat als valors originals en commutar"
+
+msgid ""
+"Reset the opacity of all windows modified by opacify when toggling Opacify "
+"with the defined key-combination."
+msgstr ""
+"Restableix l'opacitat de totes les finestres modificades per la conversió a "
+"opac quan es commuti l'opacitat amb la combinació de tecles definida."
+
+msgid "Delay until Opacification"
+msgstr "Retard fins a la conversió a opac"
+
+msgid ""
+"The delay (in ms) before Opacify changes opacity after the active window has "
+"changed."
+msgstr ""
+"El retard (en ms) abans que la conversió a opac canviï l'opacitat un cop "
+"hagi canviat la finestra activa."
+
+msgid "Toggle Opacify on by default"
+msgstr "Activa per defecte la conversió a opac"
+
+msgid ""
+"With this enabled, opacify will be on when you load Opacify, which is "
+"usually when you start Compiz."
+msgstr ""
+"Amb aquesta opció habilitada, la conversió a opac s'engegarà quan es carregi "
+"la conversió a opac, que normalment és quan s'inicia Compiz."
+
+msgid "Only increase opacity if a window is blocking"
+msgstr "Només incrementa l'opacitat si una finestra està bloquejant"
+
+msgid ""
+"Only increase the opacity on the targeted window if it has one or more "
+"windows blocking it from view."
+msgstr ""
+"Només incrementa l'opacitat en la finestra assenyalada si té una o més "
+"finestres que estan bloquejant-la de la vista."
+
+msgid "Bypass delay when the new active window is the focused window."
+msgstr ""
+"Evita el retard quan la finestra activa nova sigui la finestra amb focus."
+
+msgid ""
+"Do not wait if the window we are hovering is the focused window. This allows "
+"us to instantly see the focused window. You probably want to disable this if "
+"you are not using 'Click to Focus'."
+msgstr ""
+"Evita el retard si la finestra en la qual estem passant el cursor per sobre "
+"és la finestra amb focus. Això ens permet veure a l'instant la finestra amb "
+"focus. És possible que vulgueu inhabilitar-ho si no s'està utilitzant «En "
+"fer clic es passa el focus»."
+
+msgid ""
+"Bypass delay when Opacify is reducing the opacity on one or more windows "
+"already."
+msgstr ""
+"Evita el retard quan la conversió a opac ja estigui reduint l'opacitat en "
+"una o en més finestres."
+
+msgid ""
+"This enables you to let Opacify instantly opacify new windows when you're "
+"already making one or more windows invisible. Makes for faster behavior "
+"while looking through layers of hidden windows."
+msgstr ""
+"Això permet que el canvi a opac canviï instantàniament a opac les finestres "
+"noves mentre ja estigueu convertint a invisible una o més finestres. Fa que "
+"el comportament sigui més ràpid, mentre es treballa a través de les capes de "
+"les finestres ocultes."
+
+msgid "Windows that should be opacified."
+msgstr "Finestres que s'han de convertir a opaques."
+
+msgid "Opacity Levels"
+msgstr "Nivells d'opacitat"
+
+msgid "Active Opacity"
+msgstr "Opacitat activa"
+
+msgid ""
+"The minimum opacity percentage to ensure a targeted window has. A target "
+"window will have either this opacity or the preset opacity, whichever is "
+"higher."
+msgstr ""
+"El percentatge mínim d'opacitat que podria tenir una finestra assenyalada. "
+"Una finestra assenyalada tindrà aquesta opacitat o bé l'opacitat "
+"preestablerta, allò que sigui superior."
+
+msgid "Passive Opacity"
+msgstr "Opacitat passiva"
+
+msgid ""
+"The maximum opacity percentage a window blocking the current targeted window "
+"can have. A blocking window will have either this opacity or the preset "
+"opacity, whichever is lower."
+msgstr ""
+"El percentatge màxim d'opacitat que pot tenir una finestra que bloquegi la "
+"finestra actualment assenyalada. Una finestra que bloquegi tindrà ja aquesta "
+"opacitat o bé l'opacitat preestablerta, allò que sigui menor."
+
+msgid "Put"
+msgstr "Posada"
+
+msgid "Put window"
+msgstr "Posa la finestra"
+
+msgid "Put On Viewport"
+msgstr "Posa a l'àrea de visualització"
+
+msgid "Move window to a certain viewport"
+msgstr "Mou la finestra a una àrea de visualització determinada"
+
+msgid "Put to arbitrary viewport"
+msgstr "Posa a una àrea de visualització arbitrària"
+
+msgid "Put On Viewport 1"
+msgstr "Posa a l'àrea de visualització 1"
+
+msgid "Move window to viewport 1"
+msgstr "Mou la finestra a l'àrea de visualització 1"
+
+msgid "Put On Viewport 2"
+msgstr "Posa a l'àrea de visualització 2"
+
+msgid "Move window to viewport 2"
+msgstr "Mou la finestra a l'àrea de visualització 2"
+
+msgid "Put On Viewport 3"
+msgstr "Posa a l'àrea de visualització 3"
+
+msgid "Move window to viewport 3"
+msgstr "Mou la finestra a l'àrea de visualització 3"
+
+msgid "Put On Viewport 4"
+msgstr "Posa a l'àrea de visualització 4"
+
+msgid "Move window to viewport 4"
+msgstr "Mou la finestra a l'àrea de visualització 4"
+
+msgid "Put On Viewport 5"
+msgstr "Posa a l'àrea de visualització 5"
+
+msgid "Move window to viewport 5"
+msgstr "Mou la finestra a l'àrea de visualització 5"
+
+msgid "Put On Viewport 6"
+msgstr "Posa a l'àrea de visualització 6"
+
+msgid "Move window to viewport 6"
+msgstr "Mou la finestra a l'àrea de visualització 6"
+
+msgid "Put On Viewport 7"
+msgstr "Posa a l'àrea de visualització 7"
+
+msgid "Move window to viewport 7"
+msgstr "Mou la finestra a l'àrea de visualització 7"
+
+msgid "Put On Viewport 8"
+msgstr "Posa a l'àrea de visualització 8"
+
+msgid "Move window to viewport 8"
+msgstr "Mou la finestra a l'àrea de visualització 8"
+
+msgid "Put On Viewport 9"
+msgstr "Posa a l'àrea de visualització 9"
+
+msgid "Move window to viewport 9"
+msgstr "Mou la finestra a l'àrea de visualització 9"
+
+msgid "Put On Viewport 10"
+msgstr "Posa a l'àrea de visualització 10"
+
+msgid "Move window to viewport 10"
+msgstr "Mou la finestra a l'àrea de visualització 10"
+
+msgid "Put On Viewport 11"
+msgstr "Posa a l'àrea de visualització 11"
+
+msgid "Move window to viewport 11"
+msgstr "Mou la finestra a l'àrea de visualització 11"
+
+msgid "Put On Viewport 12"
+msgstr "Posa a l'àrea de visualització 12"
+
+msgid "Move window to viewport 12"
+msgstr "Mou la finestra a l'àrea de visualització 12"
+
+msgid "Put to adjacent viewport"
+msgstr "Posa a l'àrea de visualització adjacent"
+
+msgid "Viewport Left"
+msgstr "Àrea de visualització esquerra"
+
+msgid "Move window to the viewport on the left"
+msgstr "Mou la finestra a l'àrea de visualització de l'esquerra"
+
+msgid "Viewport Right"
+msgstr "Àrea de visualització dreta"
+
+msgid "Move window to the viewport on the right"
+msgstr "Mou la finestra a l'àrea de visualització de la dreta"
+
+msgid "Viewport Top"
+msgstr "Àrea de visualització superior"
+
+msgid "Move window to the viewport on the top"
+msgstr "Mou la finestra a l'àrea de visualització de dalt"
+
+msgid "Viewport Bottom"
+msgstr "Àrea de visualització inferior"
+
+msgid "Move window to the viewport on the bottom"
+msgstr "Mou la finestra a l'àrea de visualització de baix"
+
+msgid "Put within viewport"
+msgstr "Posa dins de l'àrea de visualització"
+
+msgid "Put Center"
+msgstr "Posa al centre"
+
+msgid "Move window to the center"
+msgstr "Mou la finestra al centre"
+
+msgid "Put Left"
+msgstr "Posa a l'esquerra"
+
+msgid "Move window to the left edge"
+msgstr "Mou la finestra a la vora de l'esquerra"
+
+msgid "Put Right"
+msgstr "Posa a la dreta"
+
+msgid "Move window to the right edge"
+msgstr "Mou la finestra a la vora de la dreta"
+
+msgid "Put Top"
+msgstr "Posa a dalt"
+
+msgid "Move window to the top edge"
+msgstr "Mou la finestra a la vora superior"
+
+msgid "Put Bottom"
+msgstr "Posa a baix"
+
+msgid "Move window to the bottom edge"
+msgstr "Mou la finestra a la vora inferior"
+
+msgid "Put Top Left"
+msgstr "Posa a dalt a l'esquerra"
+
+msgid "Move window to the top left corner"
+msgstr "Mou la finestra a la cantonada superior de l'esquerra"
+
+msgid "Put Top Right"
+msgstr "Posa a dalt a la dreta"
+
+msgid "Move window to the top right corner"
+msgstr "Mou la finestra a la cantonada superior de la dreta"
+
+msgid "Put Bottom Left"
+msgstr "Posa a baix a l'esquerra"
+
+msgid "Move window to the bottom left corner"
+msgstr "Mou la finestra a la cantonada inferior de l'esquerra"
+
+msgid "Put Bottom Right"
+msgstr "Posa a baix a la dreta"
+
+msgid "Move window to the bottom right corner"
+msgstr "Mou la finestra a la cantonada inferior de la dreta"
+
+msgid "Restore Position"
+msgstr "Restaura la posició"
+
+msgid "Move window to the last position"
+msgstr "Mou la finestra a l'última posició"
+
+msgid "Put Pointer"
+msgstr "Posa al punter"
+
+msgid "Move window to the pointer position"
+msgstr "Mou la finestra a la posició del punter"
+
+msgid "Put To Next Output"
+msgstr "Posa a la sortida següent"
+
+msgid "Move window to the next output device"
+msgstr "Mou la finestra al següent dispositiu de sortida"
+
+msgid "Move window arbitrarily by passing x, y and type."
+msgstr "Mou la finestra arbitràriament amb el pas dels valors x, y i tipus."
+
+msgid "Padding"
+msgstr "Separació"
+
+msgid "Pad Left"
+msgstr "Separació esquerra"
+
+msgid "Number of pixels from the left edge where the window will come to rest"
+msgstr "Nombre de píxels des de la vora esquerra on descansarà la finestra"
+
+msgid "Pad Right"
+msgstr "Separació dreta"
+
+msgid "Number of pixels from the right edge where the window will come to rest"
+msgstr "Nombre de píxels des de la vora dreta on descansarà la finestra"
+
+msgid "Pad Top"
+msgstr "Separació superior"
+
+msgid "Number of pixels from the top edge where the window will come to rest"
+msgstr "Nombre de píxels des de la vora superior on descansarà la finestra"
+
+msgid "Pad Bottom"
+msgstr "Separació inferior"
+
+msgid ""
+"Number of pixels from the bottom edge where the window will come to rest"
+msgstr "Nombre de píxels des de la vora inferior on descansarà la finestra"
+
+msgid "Unfocus Window"
+msgstr "Treu el focus de la finestra"
+
+msgid "Unfocus windows that are moved off the viewport"
+msgstr ""
+"Treu el focus de les finestres que es mouen fora de l'àrea de visualització"
+
+msgid "Window Center"
+msgstr "Centra la finestra"
+
+msgid "Put pointer uses the center of the window"
+msgstr "Posa al punter utilitza el centre de la finestra"
+
+msgid "Avoid Offscreen"
+msgstr "Evita que surti de la pantalla"
+
+msgid "Avoids putting window borders offscreen"
+msgstr "Evita que es posin els contorns de la finestra fora de la pantalla"
+
+msgid "Animation speed"
+msgstr "Velocitat d'animació"
+
+msgid "Animation timestep"
+msgstr "Animació gradual"
+
+msgid "Resize Info"
+msgstr "Informació del redimensionament"
+
+msgid "Display info on resize similar to marco"
+msgstr "Mostra la informació en redimensionar d'una manera similar a Marco"
+
+msgid "Fade Time"
+msgstr "Temps d'esvaïment"
+
+msgid "Fade time (in ms) for popup window"
+msgstr "Temps d'esvaïment (en ms) per a la finestra emergent"
+
+msgid "Show resize info for all windows."
+msgstr "Mostra la informació del redimensionament per a totes les finestres."
+
+msgid ""
+"Show resize info for all windows as opposed to just windows with a resize "
+"increment of greater than 1."
+msgstr ""
+"Mostra la informació del redimensionament per a totes les finestres, en "
+"contrast a tan sols les finestres amb un increment de redimensionament més "
+"gran que 1."
+
+msgid "Font family"
+msgstr "Família del tipus de lletra"
+
+msgid "Name of the font to display resize info."
+msgstr ""
+"El nom del tipus de lletra per mostrar la informació del redimensionament."
+
+msgid "Text color."
+msgstr "Color del text."
+
+msgid "Color of text on resize popup."
+msgstr "El color del text amb el redimensionament emergent."
+
+msgid "Gradient Color 1"
+msgstr "Color del degradat 1"
+
+msgid "Color 1 of the gradient background."
+msgstr "El color 1 del degradat de fons."
+
+msgid "Gradient Color 2"
+msgstr "Color del degradat 2"
+
+msgid "Color 2 of the gradient background."
+msgstr "El color 2 del degradat de fons."
+
+msgid "Gradient Color 3"
+msgstr "Color del degradat 3"
+
+msgid "Color 3 of the gradient background."
+msgstr "El color 3 del degradat de fons."
+
+msgid "Border"
+msgstr "Contorn"
+
+msgid "Border color of the gradient background."
+msgstr "El color del contorn del degradat de fons."
+
+msgid "Ring Switcher"
+msgstr "Anell commutador"
+
+msgid "Key bindings"
+msgstr "Vinculacions de tecles"
+
+msgid "Next Window"
+msgstr "Finestra següent"
+
+msgid "Show switcher if not visible and select next window."
+msgstr ""
+"Mostra el commutador si no estigués visible i selecciona la següent finestra."
+
+msgid "Previous Window"
+msgstr "Finestra anterior"
+
+msgid "Show switcher if not visible and select previous window."
+msgstr ""
+"Mostra el commutador si no estigués visible i selecciona la finestra "
+"anterior."
+
+msgid "Next Window (All Workspaces)"
+msgstr "Finestra següent (tots els espais de treball)"
+
+msgid "Show switcher if not visible and select next window out of all windows."
+msgstr ""
+"Mostra el commutador si no estigués visible i selecciona la següent finestra "
+"d'entre totes les finestres."
+
+msgid "Previous Window (All Workspaces)"
+msgstr "Finestra anterior (tots els espais de treball)"
+
+msgid ""
+"Show switcher if not visible and select previous window out of all windows."
+msgstr ""
+"Mostra el commutador si no estigués visible i selecciona la finestra "
+"anterior d'entre totes les finestres."
+
+msgid "Next Window (Group)"
+msgstr "Finestra següent (grup)"
+
+msgid ""
+"Show switcher if not visible and select next window of the current "
+"application."
+msgstr ""
+"Mostra el commutador si no estigués visible i selecciona la finestra següent "
+"de l'aplicació actual."
+
+msgid "Previous Window (Group)"
+msgstr "Finestra anterior (grup)"
+
+msgid ""
+"Show switcher if not visible and select previous window of the current "
+"application."
+msgstr ""
+"Mostra el commutador si no estigués visible i selecciona la finestra "
+"anterior de l'aplicació actual."
+
+msgid "Ring speed"
+msgstr "Velocitat de l'anell"
+
+msgid "Ring timestep"
+msgstr "Anell gradual"
+
+msgid "Inactive Window Opacity"
+msgstr "Opacitat de la finestra inactiva"
+
+msgid ""
+"Amount of opacity (in percent) for windows in the ring which are not selected"
+msgstr ""
+"Quantitat d'opacitat (en percentatge) per a les finestres en l'anell que no "
+"estiguin seleccionats"
+
+msgid "Ring Windows"
+msgstr "Finestres en anell"
+
+msgid "Windows that should be shown in ring"
+msgstr "Finestres que es mostraran en l'anell"
+
+msgid "Overlay Icon"
+msgstr "Superposa la icona"
+
+msgid "Overlay an icon on windows in the ring"
+msgstr "Superposa una icona sobre les finestres a l'anell"
+
+msgid "Emblem"
+msgstr "Emblema"
+
+msgid "Big"
+msgstr "Gran"
+
+msgid "Darken Background"
+msgstr "Enfosqueix el fons"
+
+msgid "Darken background when showing the ring"
+msgstr "Enfosqueix el fons quan es mostra l'anell"
+
+msgid "Show Minimized"
+msgstr "Mostra les minimitzades"
+
+msgid "Show windows that are minimized, shaded or in show desktop mode."
+msgstr ""
+"Mostra les finestres que estan minimitzades, ombrejades o al mode mostra "
+"l'escriptori."
+
+msgid "Allow Mouse Selection"
+msgstr "Permet la selecció del ratolí"
+
+msgid ""
+"Allow the selection of windows by just clicking on them while the switcher "
+"is active."
+msgstr ""
+"Permet la selecció de finestres només amb un clic mentre el commutador està "
+"actiu."
+
+msgid "Ring appearance"
+msgstr "Aspecte de l'anell"
+
+msgid "Rotate Ring Clockwise on Next"
+msgstr "Gira l'anell en sentit horari amb següent"
+
+msgid "Rotate ring clockwise for next window instead of counterclockwise"
+msgstr ""
+"Gira l'anell en sentit horari per a la següent finestra en lloc del sentit "
+"antihorari"
+
+msgid "Ring Width"
+msgstr "Amplada de l'anell"
+
+msgid "Ring width (in percent of the screen width)"
+msgstr ""
+"Amplada de l'anell (en percentatge respecte a l'amplada de la pantalla)"
+
+msgid "Ring Height"
+msgstr "Alçada de l'anell"
+
+msgid "Ring height (in percent of the screen height)"
+msgstr "Alçada de l'anell (en percentatge respecte a l'alçada de la pantalla)"
+
+msgid "Thumbnail Width"
+msgstr "Amplada de la miniatura"
+
+msgid "Maximum horizontal size of a thumbnail in the ring"
+msgstr "Màxima mida horitzontal d'una miniatura en l'anell"
+
+msgid "Thumbnail Height"
+msgstr "Alçada de la miniatura"
+
+msgid "Maximum vertical size of a thumbnail in the ring"
+msgstr "Màxima mida vertical d'una miniatura en l'anell"
+
+msgid "Minimum Brightness Factor"
+msgstr "Factor de brillantor mínim"
+
+msgid ""
+"Changes the minimum brightness factor for windows in the ring. The farer "
+"away windows are, the less bright are they."
+msgstr ""
+"Canvia el factor mínim de brillantor per a les finestres en l'anell. Les "
+"finestres tenen menys brillantor en estar més allunyades."
+
+msgid "Minimum Scale Factor"
+msgstr "Factor d'escalament mínim"
+
+msgid ""
+"Changes the minimum scale factor for windows in the ring. The farer away "
+"windows are, the smaller are they."
+msgstr ""
+"Canvia el factor mínim d'escalament per a les finestres en l'anell. Les "
+"finestres són més petites quan estan més allunyades."
+
+msgid "Window title display"
+msgstr "Mostra el títol de la finestra"
+
+msgid "Show Window Title"
+msgstr "Mostra el títol de la finestra"
+
+msgid "Show window title of currently selected window."
+msgstr "Mostra el títol de la finestra seleccionada."
+
+msgid "Name of the font to display title."
+msgstr "El nom del tipus de lletra per mostrar el títol."
+
+msgid "Bold Font"
+msgstr "Text en negreta"
+
+msgid "Selects if the window title should be displayed in bold font or not."
+msgstr "Selecciona si el títol de la finestra s'ha de mostrar en negreta."
+
+msgid "Font Size"
+msgstr "Mida de la lletra"
+
+msgid "Font size for the window title"
+msgstr "La mida de la lletra per al títol de la finestra"
+
+msgid "Background Color"
+msgstr "Color del fons"
+
+msgid "Background color for the window title"
+msgstr "El color del fons per al títol de la finestra"
+
+msgid "Font Color"
+msgstr "Color de la lletra"
+
+msgid "Font color for the window title"
+msgstr "El color del tipus de lletra per al títol de la finestra"
+
+msgid "Text Placement"
+msgstr "Ubicació del text"
+
+msgid "Selects where to place the window title."
+msgstr "Seleccioneu on ubicar el títol de la finestra."
+
+msgid "Centered on screen"
+msgstr "Centrat a la pantalla"
+
+msgid "Above ring"
+msgstr "Per sobre de l'anell"
+
+msgid "Below ring"
+msgstr "Per sota de l'anell"
+
+msgid "Scale Addons"
+msgstr "Afegits de l'escalament"
+
+msgid "Some useful additions to the scale plugin"
+msgstr "Alguns afegits útils al connector de l'escalament"
+
+msgid "Close Window"
+msgstr "Tanca la finestra"
+
+msgid "Close windows while in scale mode"
+msgstr "Tanca les finestres mentre estiguin al mode d'escalament"
+
+msgid "Close window while in scale mode"
+msgstr "Tanca la finestra mentre estigui al mode d'escalament"
+
+msgid "Pull Window"
+msgstr "Atreu la finestra"
+
+msgid "Pull window to current viewport while in scale mode"
+msgstr ""
+"Atreu la finestra a l'àrea de visualització actual mentre estigui al mode "
+"d'escalament"
+
+msgid "Zoom Window"
+msgstr "Zoom de la finestra"
+
+msgid "Zoom window while in scale mode"
+msgstr "Zoom de la finestra mentre estigui al mode d'escalament"
+
+msgid "Window Title"
+msgstr "Títol de la finestra"
+
+msgid "Window Title Display"
+msgstr "Mostra el títol de la finestra"
+
+msgid "Window title display in scale mode"
+msgstr "Mostra el títol de la finestra mentre estigui al mode d'escalament"
+
+msgid "No display"
+msgstr "Sense pantalla"
+
+msgid "Highlighted window only"
+msgstr "Només la finestra ressaltada"
+
+msgid "All windows"
+msgstr "Totes les finestres"
+
+msgid "Use bold font for window title display"
+msgstr "Utilitza la lletra en negreta per mostrar el títol de la finestra"
+
+msgid "Font size for window title display"
+msgstr "Mida de la lletra per mostrar el títol de la finestra"
+
+msgid "Title Border Size"
+msgstr "Mida del contorn del títol"
+
+msgid "Size of the border around the window title"
+msgstr "Mida del contorn al voltant del títol de la finestra"
+
+msgid "Font color of the window title"
+msgstr "Color de la lletra del títol de la finestra"
+
+msgid "Background color of the window title"
+msgstr "Color del fons del títol de la finestra"
+
+msgid "Window Highlight"
+msgstr "Ressaltament de la finestra"
+
+msgid "Draw Window Highlight"
+msgstr "Dibuixa el ressaltament de la finestra"
+
+msgid "Highlights the hovered window with the given color"
+msgstr "Ressalta la finestra en passar per sobre d'ella amb el color indicat"
+
+msgid "Highlight Color"
+msgstr "Color de ressaltament"
+
+msgid "Color used for highlighting the hovered window"
+msgstr ""
+"El color que s'utilitza per ressaltar la finestra en passar per sobre d'ella"
+
+msgid "Window Layout Mode"
+msgstr "Mode de disposició de la finestra"
+
+msgid "Selects the mode to layout the windows in scale mode"
+msgstr "Selecciona el mode per col·locar les finestres al mode d'escalament"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Organic - EXPERIMENTAL"
+msgstr "Orgànic - EXPERIMENTAL"
+
+msgid "Window Pull"
+msgstr "Atraïment de les finestres"
+
+msgid "Constrain Pull To Screen"
+msgstr "Restringeix l'atraïment a la pantalla"
+
+msgid ""
+"Make sure windows are fully visible after pulling them to another viewport"
+msgstr ""
+"Comprova que les finestres estiguin totalment visibles després d'atreure-les "
+"a una altra àrea de visualització"
+
+msgid "Exit Scale On Pull"
+msgstr "Surt de l'escalament amb l'atraïment"
+
+msgid "Exit scale mode after a window has been pulled."
+msgstr "Surt del mode d'escalament després que una finestra hagi estat atreta."
+
+msgid "Session Management"
+msgstr "Gestió de la sessió"
+
+msgid "Talk to session manager and save/load window state"
+msgstr "Parla amb el gestor de sessions i desa/carrega l'estat de la finestra"
+
+msgid "Save Legacy Apps"
+msgstr "Desa les aplicacions antigues"
+
+msgid ""
+"Also try to save and restore legacy apps that don't support the X session "
+"management protocol. This setting only should be used in KDE, as only KDE's "
+"session manager also saves those applications."
+msgstr ""
+"Intenta també desar i restaurar les aplicacions antigues que no siguin "
+"compatibles amb el protocol de gestió de sessions de les X. Aquest ajust "
+"només s'ha d'utilitzar en KDE, ja que només el gestor de sessions de KDE "
+"també desa aquestes aplicacions."
+
+msgid "Windows to ignore"
+msgstr "Finestres a ignorar"
+
+msgid "Matching windows will not be handled by the session plugin"
+msgstr ""
+"Les finestres que coincideixin no es gestionaran amb el connector de sessió"
+
+msgid "Shift Switcher"
+msgstr "Commutador de canvi"
+
+msgid "Shift Switcher Plugin"
+msgstr "Connector del commutador de canvi"
+
+msgid "Initiate switcher."
+msgstr "Inicia el commutador."
+
+msgid "Initiate (All Workspaces)"
+msgstr "Inicia (tots els espais de treball)"
+
+msgid "Initiate switcher (All Workspaces)."
+msgstr "Inicia el commutador (tots els espais de treball)."
+
+msgid "Terminate"
+msgstr "Finalitza"
+
+msgid "Terminate switcher."
+msgstr "Finalitza el commutador."
+
+msgid "Fade speed"
+msgstr "Velocitat d'esvaïment"
+
+msgid "Fade in/out speed"
+msgstr "Velocitat d'entrada/sortida de l'esvaïment"
+
+msgid "Shift speed"
+msgstr "Velocitat del canvi"
+
+msgid "Shift animation speed"
+msgstr "La velocitat de l'animació de canvi"
+
+msgid "Shift timestep"
+msgstr "Canvi gradual"
+
+msgid "Shift Windows"
+msgstr "Finestres de canvi"
+
+msgid "Windows that should be shown in the shift switcher"
+msgstr "Finestres que s'han de mostrar al commutador de canvi"
+
+msgid "Mouse speed"
+msgstr "Velocitat del ratolí"
+
+msgid "Mouse movement speed"
+msgstr "La velocitat del moviment del ratolí"
+
+msgid "Click duration"
+msgstr "Durada del clic"
+
+msgid "Maximum click duration in miliseconds."
+msgstr "La durada màxima d'un clic en mil·lisegons."
+
+msgid "Switcher mode"
+msgstr "Mode del commutador"
+
+msgid "Switcher mode."
+msgstr "El mode del commutador."
+
+msgid "Cover"
+msgstr "Cobrir"
+
+msgid "Flip"
+msgstr "Invertir"
+
+msgid "Max window size"
+msgstr "Mida màxima de finestra"
+
+msgid "Maximum window size (in percent of the screen width)"
+msgstr ""
+"La mida màxima de la finestra (en percentatge respecte a l'amplada de "
+"pantalla)"
+
+msgid "Background intensity"
+msgstr "Intensitat del fons"
+
+msgid "Background intensity."
+msgstr "La intensitat del fons."
+
+msgid "Hide non Desktop windows"
+msgstr "Amaga les finestres que no són de l'escriptori"
+
+msgid "Hide all non Desktop windows during switching"
+msgstr ""
+"Oculta totes les finestres que no siguin de l'escriptori mentre es canvia"
+
+msgid "Intensity"
+msgstr "Intensitat"
+
+msgid "Reflection intensity"
+msgstr "Intensitat de la reflexió"
+
+msgid "Flip angle"
+msgstr "Angle d'inversió"
+
+msgid "Rotation angle of the flip animation"
+msgstr "Angle de gir de l'animació d'inversió"
+
+msgid "Cover offset"
+msgstr "Desplaçament de la coberta"
+
+msgid "Cover movement offset."
+msgstr "El desplaçament del moviment de la coberta."
+
+msgid "Overlay an icon on windows in the shift switcher"
+msgstr "Superposa una icona en les finestres al commutador de canvi"
+
+msgid "Generate mipmaps"
+msgstr "Genera els mipmaps"
+
+msgid ""
+"Selects how the switcher is displayed if multiple output devices are used."
+msgstr "Com es mostra el commutador si s'usen diversos dispositius de sortida."
+
+msgid "Disabled"
+msgstr "Inhabilitat"
+
+msgid "On activated output"
+msgstr "Amb la sortida activa"
+
+msgid "One big switcher"
+msgstr "Un gran commutador"
+
+msgid "Above"
+msgstr "Per damunt"
+
+msgid "Below"
+msgstr "Per sota"
+
+msgid "Snapping Windows"
+msgstr "Forçament de les finestres"
+
+msgid "Enables windows edges resistance"
+msgstr "Habilita la resistència de les vores de les finestres"
+
+msgid "Avoid Snap Modifier"
+msgstr "Evita el modificador de forçament"
+
+msgid "Use this bindings to avoid snapping."
+msgstr "Utilitzeu aquestes vinculacions per evitar el forçament."
+
+msgid "Shift"
+msgstr "Majúscules"
+
+msgid "Alt"
+msgstr "Alt"
+
+msgid "Control"
+msgstr "Control"
+
+msgid "Meta"
+msgstr "Meta"
+
+msgid "Super"
+msgstr "Súper"
+
+msgid "Hyper"
+msgstr ""
+
+msgid "Snap Type"
+msgstr "Tipus de forçament"
+
+msgid "Choose 'Resistance', 'Attraction' or 'Full Mode'."
+msgstr "Tria 'Resistència', 'Atracció' o 'Mode complet'."
+
+msgid "Edge resistance"
+msgstr "Resistència de les vores"
+
+msgid "Edge attraction"
+msgstr "Atracció de vores"
+
+msgid "Edges"
+msgstr "Vores"
+
+msgid "Snap to 'Screen Edges', 'Windows Edges' or 'Both'."
+msgstr ""
+"Força a les «vores de la pantalla», les «vores de les finestres» o «ambdós»."
+
+msgid "Screen edges"
+msgstr "Vores de la pantalla"
+
+msgid "Window edges"
+msgstr "Vores de la finestra"
+
+msgid "Edge Resistance Distance"
+msgstr "Distància de resistència de la vora"
+
+msgid "The distance until edge resistance takes place."
+msgstr "La distància fins que la resistència de la vora es posa al lloc."
+
+msgid "Edge Attraction Distance"
+msgstr "Distància d'atracció de la vora"
+
+msgid "The distance until edge attraction takes place."
+msgstr "La distància fins que l'atracció de la vora es posa al lloc."
+
+msgid "Static Application Switcher"
+msgstr "Commutador estàtic d'aplicacions"
+
+msgid "Next window"
+msgstr "Finestra següent"
+
+msgid "Popup switcher if not visible and select next window"
+msgstr ""
+"Fes que aparegui el commutador si aquest no estigués visible i selecciona la "
+"finestra següent"
+
+msgid "Prev window"
+msgstr "Finestra anterior"
+
+msgid "Popup switcher if not visible and select previous window"
+msgstr ""
+"Fes que aparegui el commutador si aquest no estigués visible i selecciona la "
+"finestra anterior"
+
+msgid "Next window (All windows)"
+msgstr "Finestra següent (totes les finestres)"
+
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Fes que aparegui el commutador si aquest no estigués visible i selecciona la "
+"finestra següent de totes les finestres"
+
+msgid "Prev window (All windows)"
+msgstr "Finestra anterior (totes les finestres)"
+
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Fes que aparegui el commutador si aquest no estigués visible i selecciona la "
+"finestra anterior de totes les finestres"
+
+msgid "Next window (Group)"
+msgstr "Finestra següent (grup)"
+
+msgid ""
+"Popup switcher if not visible and select next window of the current "
+"application."
+msgstr ""
+"Mostra el commutador si no estigués visible i selecciona la finestra següent "
+"de l'aplicació actual."
+
+msgid "Prev window (Group)"
+msgstr "Finestra anterior (grup)"
+
+msgid ""
+"Popup switcher if not visible and select previous window of the current "
+"application."
+msgstr ""
+"Mostra el commutador si no estigués visible i selecciona la finestra "
+"anterior de l'aplicació actual."
+
+msgid "Next window (No popup)"
+msgstr "Finestra següent (no emergent)"
+
+msgid "Select next window without showing the popup window."
+msgstr "Selecciona la finestra següent sense mostrar la finestra emergent."
+
+msgid "Prev window (No popup)"
+msgstr "Finestra anterior (no emergent)"
+
+msgid "Select previous window without showing the popup window."
+msgstr "Selecciona la finestra anterior sense mostrar la finestra emergent."
+
+msgid "Next Panel"
+msgstr "Següent plafó"
+
+msgid "Select next panel type window."
+msgstr "Selecciona la següent finestra de tipus plafó."
+
+msgid "Prev Panel"
+msgstr "Plafó anterior"
+
+msgid "Select previous panel type window."
+msgstr "Selecciona l'anterior finestra de tipus plafó."
+
+msgid "Switcher speed"
+msgstr "Velocitat del commutador"
+
+msgid "Switcher timestep"
+msgstr "Commutador gradual"
+
+msgid "Switcher windows"
+msgstr "Finestres del commutador"
+
+msgid "Windows that should be shown in switcher"
+msgstr "Finestres que s'han de mostrar al commutador"
+
+msgid "Show minimized windows"
+msgstr "Mostra les finestres minimitzades"
+
+msgid "Auto Change Viewport"
+msgstr "Canvia automàticament l'àrea de visualització"
+
+msgid "Change to the viewport of the selected window while switching"
+msgstr ""
+"Canvia a l'àrea de visualització de la finestra seleccionada mentre es "
+"commuta"
+
+msgid "Popup Window Delay"
+msgstr "Retard de la finestra emergent"
+
+msgid "Time (in s) the popup window should be delayed before appearing"
+msgstr ""
+"Temps (en s) que s'ha de retardar la finestra emergent abans d'aparèixer"
+
+msgid "Allow selection of windows from the switcher window with the mouse"
+msgstr ""
+"Permet la selecció de les finestres des de la finestra del commutador amb el "
+"ratolí"
+
+msgid "Amount of saturation in percent"
+msgstr "Quantitat de saturació en percentatge"
+
+msgid "Amount of brightness in percent"
+msgstr "Quantitat de brillantor en percentatge"
+
+msgid "Opacity"
+msgstr "Opacitat"
+
+msgid "Amount of opacity in percent"
+msgstr "Quantitat d'opacitat en percentatge"
+
+msgid "Icon"
+msgstr "Icona"
+
+msgid "Show icon next to thumbnail"
+msgstr "Mostra la icona al costat de la miniatura"
+
+msgid "Mipmap"
+msgstr "Mipmap"
+
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+"Genera els mipmaps sempre que sigui possible per a un escalament de millor "
+"qualitat"
+
+msgid "Row Alignment"
+msgstr "Alineació de la fila"
+
+msgid "Alignment for rows that are not fully filled"
+msgstr "Alineació per a les files que no s'omplen totalment"
+
+msgid "Left"
+msgstr "Esquerra"
+
+msgid "Centered"
+msgstr "Centrat"
+
+msgid "Right"
+msgstr "Dreta"
+
+msgid "Selected Window Highlight"
+msgstr "Ressaltament de la finestra seleccionada"
+
+msgid "Highlight Mode"
+msgstr "Mode de ressaltament"
+
+msgid "Mode for highlighting the currently selected window"
+msgstr "Mode per il·luminar la finestra actualment seleccionada"
+
+msgid "Bring Selected To Front"
+msgstr "Porta els seleccionats al davant"
+
+msgid "Show Rectangle"
+msgstr "Mostra el rectangle"
+
+msgid "Minimized Window Highlight Rectangle"
+msgstr "Rectangle de ressaltament de la finestra minimitzada"
+
+msgid "Where to draw highlight rectangle for minimized windows"
+msgstr ""
+"On es dibuixa el rectangle de ressaltament per a les finestres minimitzades"
+
+msgid "Taskbar Entry"
+msgstr "Entrada de la barra de tasques"
+
+msgid "Original Window Position"
+msgstr "Posició original de la finestra"
+
+msgid "Color of highlight rectangle"
+msgstr "Color del rectangle de ressaltament"
+
+msgid "Highlight Border Color"
+msgstr "Color del contorn del ressaltament"
+
+msgid "Color of highlight rectangle border"
+msgstr "Color del contorn del rectangle de ressaltament"
+
+msgid "Highlight Border Inlay Color"
+msgstr "Color de la incrustació del contorn de ressaltament"
+
+msgid "Color of inlay in highlight rectangle border"
+msgstr "Color de la incrustació al contorn del rectangle de ressaltament"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Render text to texture"
+msgstr "Renderitza el text a la textura"
+
+msgid "Window Previews"
+msgstr "Vistes prèvies de les finestres"
+
+msgid "Window thumbnails at the taskbar"
+msgstr "Miniatures de les finestres a la barra de tasques"
+
+msgid "Settings"
+msgstr "Ajusts"
+
+msgid "Thumbnail Window Size"
+msgstr "Mida de la miniatura de la finestra"
+
+msgid "Thumbnail window size."
+msgstr "La mida de la miniatura de la finestra."
+
+msgid "Show Delay"
+msgstr "Retard per mostrar"
+
+msgid "Time (in ms) before Thumbnail is shown."
+msgstr "El temps (en ms) abans que es mostri la miniatura."
+
+msgid "Thumbnail Border Size"
+msgstr "Mida del contorn de la miniatura"
+
+msgid "Size of Thumbnail Border."
+msgstr "Mida del contorn de la miniatura."
+
+msgid "Thumbnail Border Glow Color"
+msgstr "Color de la resplendor del contorn de la miniatura"
+
+msgid "Thumbnail Background and Border Glow Color."
+msgstr "El fons de la miniatura i el color de la resplendor del contorn."
+
+msgid "Fade In/Out Duration"
+msgstr "Durada de l'entrada/sortida de l'esvaïment"
+
+msgid "Fade In/Out Duration in seconds."
+msgstr "La durada de l'entrada/sortida de l'esvaïment en segons."
+
+msgid "Taskbar"
+msgstr "Barra de tasques"
+
+msgid "Taskbar Shows Only Windows of Current Viewport"
+msgstr ""
+"La barra de tasques només mostra les finestres de l'àrea de visualització "
+"actual"
+
+msgid "Set it if the Taskbar shows only Windows of Current Viewport."
+msgstr ""
+"Establiu-ho si la barra de tasques només mostra les finestres de l'àrea de "
+"visualització actual."
+
+msgid "Thumbnails Always on Top"
+msgstr "Les miniatures sempre per damunt"
+
+msgid "Paint Thumbnails Always on Top."
+msgstr "Mostra les miniatures sempre per damunt."
+
+msgid "Paint Window Like Background"
+msgstr "Pinta la finestra com el fons"
+
+msgid "Paint Window Like Background instead of Glow."
+msgstr ""
+"Dibuixa la finestra com el fons en lloc de dibuixar-la amb la resplendor."
+
+msgid "Generate Mipmaps"
+msgstr "Genera els mipmaps"
+
+msgid "Generate mipmaps when possible for higher quality scaling."
+msgstr ""
+"Genera els mipmaps quan es pugui per a l'obtenció d'un escalament de millor "
+"qualitat."
+
+msgid "Window title"
+msgstr "Títol de la finestra"
+
+msgid "Enable Titles"
+msgstr "Habilita els títols"
+
+msgid "Show Window Title in Thumbnail."
+msgstr "Mostra el títol de la finestra en la miniatura."
+
+msgid "Should be the window title Bold."
+msgstr "S'ha de dibuixar el títol de la finestra en negreta."
+
+msgid "Window title Font Size."
+msgstr "La mida del text del títol de la finestra."
+
+msgid "Window title Font Color."
+msgstr "El color del text del títol de la finestra."
+
+msgid "Title Bar Info"
+msgstr "Informació de la barra de títol"
+
+msgid "Shows additional information in the window title bar"
+msgstr "Mostra informació addicional a la barra de títol de la finestra"
+
+msgid "Show Remote Machine Name"
+msgstr "Mostra el nom de la màquina remota"
+
+msgid ""
+"Show name of remote machine if a certain application is executed remotely."
+msgstr ""
+"Mostra el nom de la màquina remota si una determinada aplicació s'executa de "
+"forma remota."
+
+msgid "Show Root"
+msgstr "Mostra Root"
+
+msgid "Show marker if you're logged in as root."
+msgstr "Mostra una marca si esteu registrat com a root."
+
+msgid "Viewport Switcher"
+msgstr "Commutador de l'àrea de visualització"
+
+msgid "Initiate viewport changes through several events"
+msgstr ""
+"Inicia els canvis d'àrea de visualització a través de diversos esdeveniments"
+
+msgid "Number-Based Viewport Switching"
+msgstr "Commutació de les àrees de visualització basada amb nombres"
+
+msgid "Begin Viewport Switch"
+msgstr "Inicia el commutador de vistes"
+
+msgid "Begin entering viewport number"
+msgstr "Comença la introducció del número de l'àrea de visualització"
+
+msgid "Go to specific viewport"
+msgstr "Vés a una àrea de visualització específica"
+
+msgid "Switch to Viewport 1"
+msgstr "Canvia a l'àrea de visualització 1"
+
+msgid "Switch to viewport 1"
+msgstr "Canvia a l'àrea de visualització 1"
+
+msgid "Switch to Viewport 2"
+msgstr "Canvia a l'àrea de visualització 2"
+
+msgid "Switch to viewport 2"
+msgstr "Canvia a l'àrea de visualització 2"
+
+msgid "Switch to Viewport 3"
+msgstr "Canvia a l'àrea de visualització 3"
+
+msgid "Switch to viewport 3"
+msgstr "Canvia a l'àrea de visualització 3"
+
+msgid "Switch to Viewport 4"
+msgstr "Canvia a l'àrea de visualització 4"
+
+msgid "Switch to viewport 4"
+msgstr "Canvia a l'àrea de visualització 4"
+
+msgid "Switch to Viewport 5"
+msgstr "Canvia a l'àrea de visualització 5"
+
+msgid "Switch to viewport 5"
+msgstr "Canvia a l'àrea de visualització 5"
+
+msgid "Switch to Viewport 6"
+msgstr "Canvia a l'àrea de visualització 6"
+
+msgid "Switch to viewport 6"
+msgstr "Canvia a l'àrea de visualització 6"
+
+msgid "Switch to Viewport 7"
+msgstr "Canvia a l'àrea de visualització 7"
+
+msgid "Switch to viewport 7"
+msgstr "Canvia a l'àrea de visualització 7"
+
+msgid "Switch to Viewport 8"
+msgstr "Canvia a l'àrea de visualització 8"
+
+msgid "Switch to viewport 8"
+msgstr "Canvia a l'àrea de visualització 8"
+
+msgid "Switch to Viewport 9"
+msgstr "Canvia a l'àrea de visualització 9"
+
+msgid "Switch to viewport 9"
+msgstr "Canvia a l'àrea de visualització 9"
+
+msgid "Switch to Viewport 10"
+msgstr "Canvia a l'àrea de visualització 10"
+
+msgid "Switch to viewport 10"
+msgstr "Canvia a l'àrea de visualització 10"
+
+msgid "Switch to Viewport 11"
+msgstr "Canvia a l'àrea de visualització 11"
+
+msgid "Switch to viewport 11"
+msgstr "Canvia a l'àrea de visualització 11"
+
+msgid "Switch to Viewport 12"
+msgstr "Canvia a l'àrea de visualització 12"
+
+msgid "Switch to viewport 12"
+msgstr "Canvia a l'àrea de visualització 12"
+
+msgid "Desktop-based Viewport Switching"
+msgstr "Commutació de les àrees de visualització basada amb l'escriptori"
+
+msgid "Move Left"
+msgstr "Mou cap a l'esquerra"
+
+msgid "Move to the left"
+msgstr "Mou cap a l'esquerra"
+
+msgid "Move Right"
+msgstr "Mou cap a la dreta"
+
+msgid "Move to the right"
+msgstr "Mou cap a la dreta"
+
+msgid "Move Up"
+msgstr "Mou cap a dalt"
+
+msgid "Move up"
+msgstr "Mou cap a dalt"
+
+msgid "Move Down"
+msgstr "Mou cap a baix"
+
+msgid "Move down"
+msgstr "Mou cap a baix"
+
+msgid "Move Next"
+msgstr "Mou a la següent"
+
+msgid "Move to the next viewport"
+msgstr "Mou a l'àrea de visualització següent"
+
+msgid "Move Prev"
+msgstr "Mou a l'anterior"
+
+msgid "Move to the previous viewport"
+msgstr "Mou a l'àrea de visualització anterior"
+
+msgid "Initiate plugin action"
+msgstr "Inicia l'acció del connector"
+
+msgid "Initiate/Terminate the selected plugin action"
+msgstr "Inicia/finalitza l'acció del connector seleccionat"
+
+msgid "Plugin for initiate action"
+msgstr "Connector per a l'acció inicia"
+
+msgid "Plugin for initiate/action action"
+msgstr "Connector per a l'acció inicia/acció"
+
+msgid "Action name for initiate"
+msgstr "Nom de l'acció per a inicia"
+
+msgid "Action name for initiate/terminate"
+msgstr "Nom de l'acció per a inicia/finalitza"
+
+msgid "Window Rules"
+msgstr "Regles de les finestres"
+
+msgid "Set windows rules"
+msgstr "Estableix les regles de les finestres"
+
+msgid "Matches"
+msgstr "Concordances"
+
+msgid "Skip taskbar"
+msgstr "Omet la barra de tasques"
+
+msgid "Don't show application in taskbar"
+msgstr "No mostris l'aplicació a la barra de tasques"
+
+msgid "Skip pager"
+msgstr "Omet el paginador"
+
+msgid "Don't show application in pager"
+msgstr "No mostris l'aplicació al paginador"
+
+msgid "Above others windows"
+msgstr "Per damunt les altres fines"
+
+msgid "Below others windows"
+msgstr "Per sota les altres finestres"
+
+msgid "Sticky"
+msgstr "Apegaloses"
+
+msgid "Sticky windows"
+msgstr "Finestres apegaloses"
+
+msgid "Fullscreen"
+msgstr "Pantalla completa"
+
+msgid "Fullscreen windows"
+msgstr "Finestres a pantalla completa"
+
+msgid "Maximized"
+msgstr "Maximitzades"
+
+msgid "Maximized windows"
+msgstr "Finestres minimitzades"
+
+msgid "No ARGB visuals"
+msgstr "Sense il·lustracions ARGB"
+
+msgid "Windows that should be treated as not supporting transparency"
+msgstr ""
+"Finestres que s'haurien de tractar com si no suportessin transparències"
+
+msgid "Non movable windows"
+msgstr "Finestres que no es poden moure"
+
+msgid "Set window as non movable"
+msgstr "Fes que la finestra no es pugui moure"
+
+msgid "Non resizable windows"
+msgstr "Finestres que no es poden redimensionar"
+
+msgid "Set window as non resizable"
+msgstr "Fes que la finestra no es pugui redimensionar"
+
+msgid "Non minimizable windows"
+msgstr "Finestres que no es poden minimitzar"
+
+msgid "Set window as non minimizable"
+msgstr "Fes que la finestra no es pugui minimitzar"
+
+msgid "Non maximizable windows"
+msgstr "Finestres que no es poden maximitzar"
+
+msgid "Set window as non maximizable"
+msgstr "Fes que la finestra no es pugui maximitzar"
+
+msgid "Non closable windows"
+msgstr "Finestres que no es poden tancar"
+
+msgid "Set window as non closable"
+msgstr "Fes que la finestra no es pugui tancar"
+
+msgid "No focus"
+msgstr "Sense focus"
+
+msgid "Windows will not have focus"
+msgstr "Finestres que no tindran focus"
+
+msgid "Size rules"
+msgstr "Regles de les mides"
+
+msgid "Fixed Size Windows"
+msgstr "Finestres de mida fixa"
+
+msgid "Sized Windows"
+msgstr "Finestres amb mides"
+
+msgid "Windows that should be resized by default"
+msgstr "Finestres que s'haurien de dimensionar per defecte"
+
+msgid "Width values"
+msgstr "Valors de l'amplada"
+
+msgid "Height values"
+msgstr "Valors de l'alçada"
+
+msgid "Workarounds"
+msgstr "Reparacions"
+
+msgid "Marco-like workarounds."
+msgstr "Reparacions a l'estil de Marco."
+
+msgid "Legacy Fullscreen Support"
+msgstr "Suport antic de pantalla completa"
+
+msgid "Make Wine and legacy applications fullscreen properly."
+msgstr ""
+"Fes que les aplicacions antigues i les aplicacions de Wine funcionin "
+"correctament a pantalla completa."
+
+msgid "Firefox Menu Fix"
+msgstr "Correcció del menú de Firefox"
+
+msgid "Fix window type of Firefox and Thunderbird menus."
+msgstr ""
+"Correcció del tipus de finestra dels menús de Firefox i de Thunderbird."
+
+msgid "OpenOffice.org Menu Fix"
+msgstr "Correcció del menú d'OpenOffice.org"
+
+msgid "Fix window type of OpenOffice.org menus."
+msgstr "Corregeix el tipus de finestra dels menús d'OpenOffice.org."
+
+msgid "Notification Daemon Fix"
+msgstr "Correcció del dimoni de notificació"
+
+msgid "Fix window type of notification daemon windows."
+msgstr ""
+"Corregeix el tipus de finestra de les finestres del dimoni de notificació."
+
+msgid "Java Window Fix"
+msgstr "Correcció de les finestres de Java"
+
+msgid "Fix window type of various Java windows."
+msgstr "Corregeix el tipus de finestra de diverses finestres de Java."
+
+msgid "Java Taskbar Fix"
+msgstr "Correcció de la barra de tasques de Java"
+
+msgid "Fix Java windows disappearing from the taskbar."
+msgstr "Correcció de les finestres que desapareixen de la barra de tasques."
+
+msgid "Qt Window Fix"
+msgstr "Correcció de les finestres de Qt"
+
+msgid "Fix window type of various Qt windows."
+msgstr "Corregeix el tipus de finestra de diverses finestres de Qt."
+
+msgid "Convert Urgency to Demands Attention"
+msgstr "Converteix les urgències a requereix atenció"
+
+msgid "Make \"urgent\" windows also \"demand attention\"."
+msgstr "Fes que les finestres \"urgent\" siguin també \"requereix atenció\"."
+
+msgid "AIGLX Fragment Parameter Fix"
+msgstr "Correcció del paràmetre Fragment d'AIGLX"
+
+msgid "Fix broken glProgramEnvParameter4f implementation."
+msgstr "Corregeix la implementació trencada de glProgramEnvParameter4f."
+
+msgid "Fix screen updates in XGL with fglrx."
+msgstr "Corregeix les actualitzacions a XGL amb fglrx."
+
+msgid "Fix for broken GLX_MESA_copy_sub_buffer on XGL in fglrx."
+msgstr "Correcció per a GLX_MESA_copy_sub_buffer trencat sobre XGL a fglrx."
+
+msgid "Force synchronization between X and GLX"
+msgstr "Forçament de la sincronització entre les X i GLX"
+
+msgid ""
+"Force synchronization between X and GLX, which may help for window parts not "
+"redrawing correctly when using Nvidia drivers, but also may decrease "
+"performance."
+msgstr ""
+"Força la sincronització entre les X i GLX, això pot ajudar aquelles parts de "
+"les finestres que no es dibuixen de nou correctament quan s'utilitzen "
+"controladors de Nvidia, però també pot reduir el rendiment."
+
+msgid "Window stickyness"
+msgstr "Fer apegaloses les finestres"
+
+msgid "Make \"on all desktops\" windows \"sticky\""
+msgstr "Fes apegaloses les finestres que estiguin \"en tots els escriptoris\"."
+
+msgid ""
+"Make \"on all desktops\" windows sticky. Sticky windows are visible on all "
+"viewports."
+msgstr ""
+"Fes apegaloses les finestres que estiguin \"en tots els escriptoris\". Les "
+"finestres apegaloses són visibles en totes les àrees de visualització."
+
+msgid "\"On all desktops\" sticky match"
+msgstr "Coincidència d'apegalós \"en tots els escriptoris\""
+
+msgid "Windows on all desktops that should be made sticky"
+msgstr "Finestres en tots els escriptoris que han de ser apegaloses"
