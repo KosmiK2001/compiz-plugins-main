@@ -25,7 +25,6 @@
 
 #define _GNU_SOURCE
 #include <X11/Xatom.h>
-#include <stdlib.h>
 #include <X11/SM/SM.h>
 
 #include <compiz-core.h>

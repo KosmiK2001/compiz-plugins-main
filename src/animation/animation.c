@@ -81,7 +81,6 @@
  */
 
 #include <GL/glu.h>
-#include <stdlib.h>
 #include "animation-internal.h"
 
 

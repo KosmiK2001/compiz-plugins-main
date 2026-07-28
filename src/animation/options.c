@@ -26,7 +26,6 @@
  */
 
 #include "animation-internal.h"
-#include <stdlib.h>
 
 extern ExtensionPluginInfo animExtensionPluginInfo;
 extern AnimBaseFunctions animBaseFunctions;

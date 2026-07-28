@@ -21,7 +21,6 @@
  */
 
 #include <compiz-core.h>
-#include <stdlib.h>
 
 #include "compiz-mousepoll.h"
 

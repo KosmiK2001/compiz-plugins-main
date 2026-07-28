@@ -27,7 +27,6 @@
  */
 
 #include <compiz-core.h>
-#include <stdlib.h>
 #include <string.h>
 #include <X11/keysymdef.h>
 #include "vpswitch_options.h"

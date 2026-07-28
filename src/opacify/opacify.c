@@ -22,7 +22,6 @@
  */
 
 #include <compiz-core.h>
-#include <stdlib.h>
 #include "opacify_options.h"
 
 #define GET_OPACIFY_DISPLAY(d)                            \

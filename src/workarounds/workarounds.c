@@ -21,7 +21,6 @@
  */
 
 #include <string.h>
-#include <stdlib.h>
 #include <limits.h>
 
 #include <compiz-core.h>
